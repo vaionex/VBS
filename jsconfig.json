@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["src/components/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/redux/*": ["src/redux/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/images/*": ["public/images/*"],
+      "@/firebase/*": ["src/firebase/*"],
+      "@/utils/*": ["src/utils/*"]
+    }
+  }
+}
