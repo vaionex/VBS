@@ -1,12 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable @next/next/no-img-element */
 
-import { firebaseLogin } from '@/firebase/utils'
+import { firebaseRegister } from '@/firebase/utils'
 import { useState } from 'react'
 
 import { FormInput } from '@/components/ui'
 
 const inputAttributes = [
+  {
+    type: 'text',
+    placeholder: 'First Name',
+    name: 'firstname',
+    label: 'First Name',
+  },
+  {
+    type: 'text',
+    placeholder: 'Last Name',
+    name: 'lastname',
+    label: 'Last Name',
+  },
   {
     type: 'email',
     placeholder: 'Email',
@@ -21,7 +33,7 @@ const inputAttributes = [
   },
 ]
 
-function LoginForm() {
+function RegisterForm() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -34,7 +46,7 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    firebaseLogin(formData)
+    firebaseRegister(formData)
   }
 
   return (
@@ -46,7 +58,7 @@ function LoginForm() {
           alt="Workflow"
         />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign in to your account
+          Register
         </h2>
       </div>
 
@@ -175,4 +187,4 @@ function LoginForm() {
   )
 }
 
-export default LoginForm
+export default RegisterForm
