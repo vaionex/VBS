@@ -25,18 +25,18 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 
 const solutions = [
   {
-    name: 'Analytics',
+    name: 'Wallet',
     description: 'Get a better understanding of where your traffic is coming from.',
     href: '#',
     icon: ChartBarIcon,
   },
   {
-    name: 'Engagement',
+    name: 'Minting',
     description: 'Speak directly to your customers in a more meaningful way.',
     href: '#',
     icon: CursorClickIcon,
   },
-  { name: 'Security', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
+  { name: 'Data Push', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
   {
     name: 'Integrations',
     description: "Connect with third-party tools that you're already using.",
@@ -50,11 +50,11 @@ const callsToAction = [
   { name: 'Contact Sales', href: '#', icon: PhoneIcon },
 ]
 const company = [
-  { name: 'About', href: '#', icon: InformationCircleIcon },
-  { name: 'Customers', href: '#', icon: OfficeBuildingIcon },
-  { name: 'Press', href: '#', icon: NewspaperIcon },
-  { name: 'Careers', href: '#', icon: BriefcaseIcon },
-  { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
+  { name: 'Heros', href: '#', icon: InformationCircleIcon },
+  { name: 'Forms', href: '#', icon: OfficeBuildingIcon },
+  { name: 'Footers', href: '#', icon: NewspaperIcon },
+  { name: 'Incentives', href: '#', icon: BriefcaseIcon },
+  { name: 'Testimonials', href: '#', icon: ShieldCheckIcon },
 ]
 const resources = [
   { name: 'Community', href: '#', icon: UserGroupIcon },
@@ -108,6 +108,9 @@ export default function Example() {
             </Popover.Button>
           </div>
           <div className="hidden md:flex-1 md:flex md:items-center md:justify-between">
+          <a href="https://docs.relysia.com" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                Docs
+              </a>
             <Popover.Group as="nav" className="flex space-x-10">
               <Popover>
                 {({ open }) => (
@@ -118,7 +121,7 @@ export default function Example() {
                         'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                       )}
                     >
-                      <span>Solutions</span>
+                      <span>Features</span>
                       <ChevronDownIcon
                         className={classNames(
                           open ? 'text-gray-600' : 'text-gray-400',
@@ -137,6 +140,7 @@ export default function Example() {
                       leaveFrom="opacity-100 translate-y-0"
                       leaveTo="opacity-0 -translate-y-1"
                     >
+
                       <Popover.Panel className="hidden md:block absolute z-10 top-full inset-x-0 transform shadow-lg bg-white">
                         <div className="max-w-7xl mx-auto grid gap-y-6 px-4 py-6 sm:grid-cols-2 sm:gap-8 sm:px-6 sm:py-8 lg:grid-cols-4 lg:px-8 lg:py-12 xl:py-16">
                           {solutions.map((item) => (
@@ -184,12 +188,7 @@ export default function Example() {
                   </>
                 )}
               </Popover>
-              <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                Pricing
-              </a>
-              <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                Docs
-              </a>
+             
               <Popover>
                 {({ open }) => (
                   <>
