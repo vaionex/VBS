@@ -1,11 +1,11 @@
 const config = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.firebaseapp.com`,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.appspot.com`,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyCwU65QLue_37MZIWDza4rWOUX-iogaKu8",
+  authDomain: "vaionexbasestack.firebaseapp.com",
+  projectId: "vaionexbasestack",
+  storageBucket: "vaionexbasestack.appspot.com",
+  messagingSenderId: "797660239996",
+  appId: "1:797660239996:web:79ceaf1183e55b1ad091f9",
+  measurementId: "G-N1VZBJKYF4"
 }
 
 export default config
