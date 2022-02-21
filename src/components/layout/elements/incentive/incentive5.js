@@ -2,9 +2,21 @@
 import { CalendarIcon, RefreshIcon, TruckIcon } from '@heroicons/react/outline'
 
 const perks = [
-  { name: '10-year all-inclusive warranty', description: 'We’ll replace it with a new one', icon: CalendarIcon },
-  { name: 'Free shipping on returns', description: 'Send it back for free', icon: RefreshIcon },
-  { name: 'Free, contactless delivery', description: 'The shipping is on us', icon: TruckIcon },
+  {
+    name: '10-year all-inclusive warranty',
+    description: 'We’ll replace it with a new one',
+    icon: CalendarIcon,
+  },
+  {
+    name: 'Free shipping on returns',
+    description: 'Send it back for free',
+    icon: RefreshIcon,
+  },
+  {
+    name: 'Free, contactless delivery',
+    description: 'The shipping is on us',
+    icon: TruckIcon,
+  },
 ]
 
 export default function Incentive() {
@@ -30,8 +42,12 @@ export default function Incentive() {
               />
             </svg>
             <div className="ml-4 flex-auto flex flex-col-reverse">
-              <h3 className="font-medium text-gray-900">10-year all-inclusive warranty</h3>
-              <p className="text-sm text-gray-500">We’ll replace it with a new one</p>
+              <h3 className="font-medium text-gray-900">
+                10-year all-inclusive warranty
+              </h3>
+              <p className="text-sm text-gray-500">
+                We’ll replace it with a new one
+              </p>
             </div>
           </div>
         </div>
@@ -53,7 +69,9 @@ export default function Incentive() {
               />
             </svg>
             <div className="ml-4 flex-auto flex flex-col-reverse">
-              <h3 className="font-medium text-gray-900">Free shipping on returns</h3>
+              <h3 className="font-medium text-gray-900">
+                Free shipping on returns
+              </h3>
               <p className="text-sm text-gray-500">Send it back for free</p>
             </div>
           </div>
@@ -80,7 +98,9 @@ export default function Incentive() {
               />
             </svg>
             <div className="ml-4 flex-auto flex flex-col-reverse">
-              <h3 className="font-medium text-gray-900">Free, contactless delivery</h3>
+              <h3 className="font-medium text-gray-900">
+                Free, contactless delivery
+              </h3>
               <p className="text-sm text-gray-500">The shipping is on us</p>
             </div>
           </div>

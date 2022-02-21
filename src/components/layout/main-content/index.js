@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import Footer from '../elements/footer/footer1.jsx'
-import ContentSection from '../elements/contentSection/contentSection2.jsx'
-import Testimonial from '../elements/testimonial/testimonial4.jsx'
-import Incentive from '../elements/incentive/incentive6.jsx'
-import Hero from '../elements/hero/hero1.jsx'
+import Footer from '../elements/footer/footer1'
+import ContentSection from '../elements/contentSection/contentSection2'
+import Testimonial from '../elements/testimonial/testimonial4'
+import Incentive from '../elements/incentive/incentive6'
+import Hero from '../elements/hero/hero1'
 
 const MainContent = ({ children }) => {
   return (

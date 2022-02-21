@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
     "module": "es2015",
     "moduleResolution": "node",
     "target": "es5",
