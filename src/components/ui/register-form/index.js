@@ -3,8 +3,11 @@
 
 import { firebaseRegister } from '@/firebase/utils'
 import { useState } from 'react'
-
 import { FormInput } from '@/components/ui'
+import { createwallet } from '../../../services/relysia-queries'
+import apiConfig from '../../../config/relysiaApi'
+import { firebaseAuth } from '@/firebase/init'
+import { useDispatch } from 'react-redux'
 
 const inputAttributes = [
   {
@@ -34,6 +37,8 @@ const inputAttributes = [
 ]
 
 function RegisterForm() {
+  const dispatch = useDispatch()
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -44,9 +49,17 @@ function RegisterForm() {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    firebaseRegister(formData)
+    let userRes = await firebaseRegister(formData)
+    let user = firebaseAuth.currentUser
+    if (user) {
+      user.getIdToken().then((token) => {
+        apiConfig.defaults.headers.common['authToken'] = token
+        console.log('token', token)
+        createwallet('default', dispatch)
+      })
+    }
   }
 
   return (
