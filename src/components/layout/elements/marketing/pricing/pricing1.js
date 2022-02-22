@@ -52,7 +52,7 @@ const tiers = [
   },
 ]
 
-export default function PricingSelection() {
+export default function Example() {
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
