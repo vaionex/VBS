@@ -38,14 +38,14 @@ export default function Example() {
   return (
     <div className="bg-white">
       {/* Background color split screen for large screens */}
-      <div
+      {/* <div
         className="hidden lg:block fixed top-0 left-0 w-1/2 h-full bg-white"
         aria-hidden="true"
       />
       <div
         className="hidden lg:block fixed top-0 right-0 w-1/2 h-full bg-gray-50"
         aria-hidden="true"
-      />
+      /> */}
 
       <div className="relative grid grid-cols-1 gap-x-16 max-w-7xl mx-auto lg:px-8 lg:grid-cols-2 xl:gap-x-48">
         <h1 className="sr-only">Order information</h1>
