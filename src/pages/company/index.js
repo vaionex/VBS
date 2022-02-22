@@ -1,62 +1,85 @@
 import React from 'react'
 
-import {
-  BriefcaseIcon,
-  InformationCircleIcon,
-  NewspaperIcon,
-  OfficeBuildingIcon,
-  ShieldCheckIcon,
-} from '@heroicons/react/outline'
+import { BriefcaseIcon } from '@heroicons/react/outline'
 
 import Header from '../../components/layout/header/index'
 
 const marketing = [
   {
     name: 'Hero Sections',
-    href: '/company/heros',
+    href: '/company/marketing/hero',
     icon: BriefcaseIcon,
   },
   {
     name: 'Feature Sections',
-    href: '/company/forms',
+    href: '/company/marketing/feature',
     icon: BriefcaseIcon,
   },
-  { name: 'CTA Sections', href: '/company/footers', icon: BriefcaseIcon },
+  {
+    name: 'CTA Sections',
+    href: '/company/marketing/cta',
+    icon: BriefcaseIcon,
+  },
   {
     name: 'Pricing Sections',
-    href: '/company/incentives',
+    href: '/company/marketing/pricing',
     icon: BriefcaseIcon,
   },
   {
     name: 'Header Sections',
-    href: '/company/testimonials',
+    href: '/company/marketing/header',
     icon: BriefcaseIcon,
   },
-  { name: 'FAQs', href: '/company/incentives', icon: BriefcaseIcon },
+  { name: 'FAQs', href: '/company/marketing/faqs', icon: BriefcaseIcon },
   {
     name: 'Newsletter Sections',
-    href: '/company/incentives',
+    href: '/company/marketing/newsletter',
     icon: BriefcaseIcon,
   },
-  { name: 'Stats', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Testimonials', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Blog Sections', href: '/company/incentives', icon: BriefcaseIcon },
+  { name: 'Stats', href: '/company/marketing/stats', icon: BriefcaseIcon },
+  {
+    name: 'Testimonials',
+    href: '/company/marketing/testimonials',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Blog Sections',
+    href: '/company/marketing/blog',
+    icon: BriefcaseIcon,
+  },
   {
     name: 'Contact Sections',
-    href: '/company/incentives',
+    href: '/company/marketing/contact',
     icon: BriefcaseIcon,
   },
-  { name: 'Team Sections', href: '/company/incentives', icon: BriefcaseIcon },
+  {
+    name: 'Team Sections',
+    href: '/company/marketing/team',
+    icon: BriefcaseIcon,
+  },
   {
     name: 'Content Sections',
-    href: '/company/incentives',
+    href: '/company/marketing/content',
     icon: BriefcaseIcon,
   },
-  { name: 'Footers', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Headers', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Banners', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Flyout Menus', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: '404 Pages', href: '/company/incentives', icon: BriefcaseIcon },
+  {
+    name: 'Logo Clouds',
+    href: '/company/marketing/logoclouds',
+    icon: BriefcaseIcon,
+  },
+  { name: 'Footers', href: '/company/marketing/footer', icon: BriefcaseIcon },
+  { name: 'Headers', href: '/company/marketing/headers', icon: BriefcaseIcon },
+  { name: 'Banners', href: '/company/marketing/banners', icon: BriefcaseIcon },
+  {
+    name: 'Flyout Menus',
+    href: '/company/marketing/flyoutmenus',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: '404 Pages',
+    href: '/company/marketing/pages404',
+    icon: BriefcaseIcon,
+  },
 ]
 const applicationUi = [
   { name: 'Page Headings', href: '/company/incentives', icon: BriefcaseIcon },
