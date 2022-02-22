@@ -3,7 +3,7 @@ import Footer from '../elements/footer/footer1'
 import ContentSection from '../elements/contentSection/contentSection2'
 import Testimonial from '../elements/testimonial/testimonial4'
 import Incentive from '../elements/incentive/incentive6'
-import Hero from '../elements/hero/hero1'
+import Hero from '../elements/marketing/hero/hero1'
 
 const MainContent = ({ children }) => {
   return (
