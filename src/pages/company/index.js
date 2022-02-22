@@ -299,20 +299,76 @@ const applicationUi = [
   },
 ]
 const ecommerce = [
-  { name: 'Product Overviews', href: '#', icon: BriefcaseIcon },
-  { name: 'Product Lists', href: '#', icon: BriefcaseIcon },
-  { name: 'Category Previews', href: '#', icon: BriefcaseIcon },
-  { name: 'Shopping Carts', href: '#', icon: BriefcaseIcon },
-  { name: 'Category Filters', href: '#', icon: BriefcaseIcon },
-  { name: 'Product Quickviews', href: '#', icon: BriefcaseIcon },
-  { name: 'Product Features', href: '#', icon: BriefcaseIcon },
-  { name: 'Store Navigation', href: '#', icon: BriefcaseIcon },
-  { name: 'Promo Sections', href: '#', icon: BriefcaseIcon },
-  { name: 'Checkout Forms', href: '#', icon: BriefcaseIcon },
-  { name: 'Reviews', href: '#', icon: BriefcaseIcon },
-  { name: 'Order Summaries', href: '#', icon: BriefcaseIcon },
-  { name: 'Order History', href: '#', icon: BriefcaseIcon },
-  { name: 'Incentives', href: '#', icon: BriefcaseIcon },
+  {
+    name: 'Product Overviews',
+    href: '/company/ecommerce/productoverviews',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Product Lists',
+    href: '/company/ecommerce/productlists',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Category Previews',
+    href: '/company/ecommerce/categorypreviews',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Shopping Carts',
+    href: '/company/ecommerce/shoppingcarts',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Category Filters',
+    href: '/company/ecommerce/categoryfilters',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Product Quickviews',
+    href: '/company/ecommerce/productquickviews',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Product Features',
+    href: '/company/ecommerce/productfeatures',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Store Navigation',
+    href: '/company/ecommerce/storenavigation',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Promo Sections',
+    href: '/company/ecommerce/promosections',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Checkout Forms',
+    href: '/company/ecommerce/checkoutforms',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Reviews',
+    href: '/company/ecommerce/reviews',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Order Summaries',
+    href: '/company/ecommerce/ordersummaries',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Order History',
+    href: '/company/ecommerce/orderhistory',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Incentives',
+    href: '/company/ecommerce/incentives',
+    icon: BriefcaseIcon,
+  },
 ]
 
 export default function Footers() {
