@@ -1,6 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
-import NextLink from 'next/link'
 import { Popover, Transition } from '@headlessui/react'
 import {
   BookmarkAltIcon,
@@ -25,20 +24,20 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 
 const solutions = [
   {
-    name: 'Wallet',
+    name: 'Analytics',
     description:
       'Get a better understanding of where your traffic is coming from.',
     href: '#',
     icon: ChartBarIcon,
   },
   {
-    name: 'Minting',
+    name: 'Engagement',
     description: 'Speak directly to your customers in a more meaningful way.',
     href: '#',
     icon: CursorClickIcon,
   },
   {
-    name: 'Data Push',
+    name: 'Security',
     description: "Your customers' data will be safe and secure.",
     href: '#',
     icon: ShieldCheckIcon,
@@ -55,175 +54,12 @@ const callsToAction = [
   { name: 'View All Products', href: '#', icon: CheckCircleIcon },
   { name: 'Contact Sales', href: '#', icon: PhoneIcon },
 ]
-const marketing = [
-  {
-    name: 'Hero Sections',
-    href: '/company/marketing/hero',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Feature Sections',
-    href: '/company/marketing/feature',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'CTA Sections',
-    href: '/company/marketing/cta',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Pricing Sections',
-    href: '/company/marketing/pricing',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Header Sections',
-    href: '/company/marketing/header',
-    icon: BriefcaseIcon,
-  },
-  { name: 'FAQs', href: '/company/marketing/faqs', icon: BriefcaseIcon },
-  {
-    name: 'Newsletter Sections',
-    href: '/company/marketing/newsletter',
-    icon: BriefcaseIcon,
-  },
-  { name: 'Stats', href: '/company/marketing/stats', icon: BriefcaseIcon },
-  {
-    name: 'Testimonials',
-    href: '/company/marketing/testimonials',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Blog Sections',
-    href: '/company/marketing/blog',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Contact Sections',
-    href: '/company/marketing/contact',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Team Sections',
-    href: '/company/marketing/team',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Content Sections',
-    href: '/company/marketing/content',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Logo Clouds',
-    href: '/company/marketing/logoclouds',
-    icon: BriefcaseIcon,
-  },
-  { name: 'Footers', href: '/company/marketing/footer', icon: BriefcaseIcon },
-  { name: 'Headers', href: '/company/marketing/headers', icon: BriefcaseIcon },
-  { name: 'Banners', href: '/company/marketing/banners', icon: BriefcaseIcon },
-  {
-    name: 'Flyout Menus',
-    href: '/company/marketing/flyoutmenus',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: '404 Pages',
-    href: '/company/marketing/pages404',
-    icon: BriefcaseIcon,
-  },
-]
-const applicationUi = [
-  {
-    name: 'Page Headings',
-    href: '/company/marketing/hero',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Card Headings',
-    href: '/company/marketing/hero',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Section Headings',
-    href: '/company/incentives',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Description Lists',
-    href: '/company/incentives',
-    icon: BriefcaseIcon,
-  },
-  { name: 'Stats', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Calendars', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Tables', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Stacked Lists', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Grid Lists', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Feeds', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Form Layouts', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Input Groups', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Select Menus', href: '/company/incentives', icon: BriefcaseIcon },
-  {
-    name: 'Sign-in and Registration',
-    href: '/company/incentives',
-    icon: BriefcaseIcon,
-  },
-  { name: 'Textareas', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Radio Groups', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Checkboxes', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Toggles', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Action Panels', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Comboboxes', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Alerts', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Empty States', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Navbars', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Pagination', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Tabs', href: '/company/incentives', icon: BriefcaseIcon },
-  {
-    name: 'Vertical Navigation',
-    href: '/company/incentives',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Sidebar Navigation',
-    href: '/company/incentives',
-    icon: BriefcaseIcon,
-  },
-  { name: 'Breadcrumbs', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Steps', href: '/company/incentives', icon: BriefcaseIcon },
-  {
-    name: 'Command Palettes',
-    href: '/company/incentives',
-    icon: BriefcaseIcon,
-  },
-  { name: 'Modals', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Slide-overs', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Notifications', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Avatars', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Dropdowns', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Badges', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Buttons', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Button Groups', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Containers', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Panels', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'List containers', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Media Objects', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Dividers', href: '/company/incentives', icon: BriefcaseIcon },
-]
-const ecommerce = [
-  { name: 'Product Overviews', href: '#', icon: BriefcaseIcon },
-  { name: 'Product Lists', href: '#', icon: BriefcaseIcon },
-  { name: 'Category Previews', href: '#', icon: BriefcaseIcon },
-  { name: 'Shopping Carts', href: '#', icon: BriefcaseIcon },
-  { name: 'Category Filters', href: '#', icon: BriefcaseIcon },
-  { name: 'Product Quickviews', href: '#', icon: BriefcaseIcon },
-  { name: 'Product Features', href: '#', icon: BriefcaseIcon },
-  { name: 'Store Navigation', href: '#', icon: BriefcaseIcon },
-  { name: 'Promo Sections', href: '#', icon: BriefcaseIcon },
-  { name: 'Checkout Forms', href: '#', icon: BriefcaseIcon },
-  { name: 'Reviews', href: '#', icon: BriefcaseIcon },
-  { name: 'Order Summaries', href: '#', icon: BriefcaseIcon },
-  { name: 'Order History', href: '#', icon: BriefcaseIcon },
-  { name: 'Incentives', href: '#', icon: BriefcaseIcon },
+const company = [
+  { name: 'About', href: '#', icon: InformationCircleIcon },
+  { name: 'Customers', href: '#', icon: OfficeBuildingIcon },
+  { name: 'Press', href: '#', icon: NewspaperIcon },
+  { name: 'Careers', href: '#', icon: BriefcaseIcon },
+  { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
 ]
 const resources = [
   { name: 'Community', href: '#', icon: UserGroupIcon },
@@ -282,12 +118,6 @@ export default function Example() {
             </Popover.Button>
           </div>
           <div className="hidden md:flex-1 md:flex md:items-center md:justify-between">
-            <a
-              href="https://docs.relysia.com"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Docs
-            </a>
             <Popover.Group as="nav" className="flex space-x-10">
               <Popover>
                 {({ open }) => (
@@ -298,7 +128,7 @@ export default function Example() {
                         'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                       )}
                     >
-                      <span>Features</span>
+                      <span>Solutions</span>
                       <ChevronDownIcon
                         className={classNames(
                           open ? 'text-gray-600' : 'text-gray-400',
@@ -323,7 +153,7 @@ export default function Example() {
                             <a
                               key={item.name}
                               href={item.href}
-                              className="-m-3 p-2 flex flex-col justify-between rounded-lg hover:bg-gray-50"
+                              className="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50"
                             >
                               <div className="flex md:h-full lg:flex-col">
                                 <div className="flex-shrink-0">
@@ -358,7 +188,7 @@ export default function Example() {
                               <div key={item.name} className="flow-root">
                                 <a
                                   href={item.href}
-                                  className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+                                  className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
                                 >
                                   <item.icon
                                     className="flex-shrink-0 h-6 w-6 text-gray-400"
@@ -375,7 +205,18 @@ export default function Example() {
                   </>
                 )}
               </Popover>
-
+              <a
+                href="#"
+                className="text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                Pricing
+              </a>
+              <a
+                href="#"
+                className="text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                Docs
+              </a>
               <Popover>
                 {({ open }) => (
                   <>
@@ -385,7 +226,7 @@ export default function Example() {
                         'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                       )}
                     >
-                      <span>Elements</span>
+                      <span>More</span>
                       <ChevronDownIcon
                         className={classNames(
                           open ? 'text-gray-600' : 'text-gray-400',
@@ -406,21 +247,21 @@ export default function Example() {
                     >
                       <Popover.Panel className="hidden md:block absolute z-10 top-full inset-x-0 transform shadow-lg">
                         <div className="absolute inset-0 flex">
-                          <div className="bg-gray-50 w-full" />
-                          <div className="bg-gray-50 w-full" />
+                          <div className="bg-white w-1/2" />
+                          <div className="bg-gray-50 w-1/2" />
                         </div>
-                        <div className="relative max-w-7xl mx-auto grid grid-cols-1">
-                          <nav className="grid gap-y-10 px-4 justify-items-center bg-white md:grid-cols-2 lg:grid-cols-4 sm:gap-x-8 sm:py-2 sm:px-6 lg:px-8 xl:pr-12">
+                        <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2">
+                          <nav className="grid gap-y-10 px-4 py-8 bg-white sm:grid-cols-2 sm:gap-x-8 sm:py-12 sm:px-6 lg:px-8 xl:pr-12">
                             <div>
-                              <h3 className="text-base font-medium tracking-wide pt-3 text-center text-gray-500 uppercase">
-                                Marketing
+                              <h3 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+                                Company
                               </h3>
                               <ul role="list" className="mt-5 space-y-6">
-                                {marketing.slice(0, 10).map((item) => (
+                                {company.map((item) => (
                                   <li key={item.name} className="flow-root">
                                     <a
                                       href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
+                                      className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
                                       <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
@@ -433,120 +274,15 @@ export default function Example() {
                               </ul>
                             </div>
                             <div>
-                              <h3 className="text-base font-medium tracking-wide pt-3 text-center text-gray-500 uppercase">
-                                Marketing
+                              <h3 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+                                Resources
                               </h3>
                               <ul role="list" className="mt-5 space-y-6">
-                                {marketing.slice(10).map((item) => (
+                                {resources.map((item) => (
                                   <li key={item.name} className="flow-root">
                                     <a
                                       href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div>
-                              <h3 className="text-base font-medium tracking-wide pt-3 text-center text-gray-500 uppercase">
-                                Application UI
-                              </h3>
-                              <ul role="list" className="mt-5 space-y-6">
-                                {applicationUi.slice(0, 10).map((item) => (
-                                  <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div>
-                              <h3 className="text-base font-medium tracking-wide pt-3 text-center text-gray-500 uppercase">
-                                Application UI
-                              </h3>
-                              <ul role="list" className="mt-5 space-y-6">
-                                {applicationUi.slice(10, 20).map((item) => (
-                                  <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div>
-                              <h3 className="text-base font-medium tracking-wide pt-3 text-center text-gray-500 uppercase">
-                                Application UI
-                              </h3>
-                              <ul role="list" className="mt-5 space-y-6">
-                                {applicationUi.slice(20, 30).map((item) => (
-                                  <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div>
-                              <h3 className="text-base font-medium tracking-wide pt-3 text-center text-gray-500 uppercase">
-                                Application UI
-                              </h3>
-                              <ul role="list" className="mt-5 space-y-6">
-                                {applicationUi.slice(30).map((item) => (
-                                  <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div>
-                              <h3 className="text-base font-medium tracking-wide pt-3 text-center text-gray-500 uppercase">
-                                Ecommerce
-                              </h3>
-                              <ul role="list" className="mt-5 space-y-6">
-                                {ecommerce.map((item) => (
-                                  <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
+                                      className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
                                       <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
@@ -569,7 +305,7 @@ export default function Example() {
                                   <li key={post.id} className="flow-root">
                                     <a
                                       href={post.href}
-                                      className="-m-3 p-2 flex rounded-lg hover:bg-gray-100"
+                                      className="-m-3 p-3 flex rounded-lg hover:bg-gray-100"
                                     >
                                       <div className="hidden sm:block flex-shrink-0">
                                         <img
@@ -610,22 +346,18 @@ export default function Example() {
               </Popover>
             </Popover.Group>
             <div className="flex items-center md:ml-12">
-              <NextLink href="/register">
-                <a
-                  href="#"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  Sign in
-                </a>
-              </NextLink>
-              <NextLink href="/register">
-                <a
-                  href="#"
-                  className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                >
-                  Sign up
-                </a>
-              </NextLink>
+              <a
+                href="#"
+                className="text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                Sign in
+              </a>
+              <a
+                href="#"
+                className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+              >
+                Sign up
+              </a>
             </div>
           </div>
         </div>
@@ -708,7 +440,7 @@ export default function Example() {
                 </a>
 
                 <a
-                  href="/company"
+                  href="#"
                   className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
                 >
                   Company
@@ -736,18 +468,17 @@ export default function Example() {
                 </a>
               </div>
               <div className="mt-6">
-                <NextLink href="/register">
-                  <a className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                    Sign up
-                  </a>
-                </NextLink>
+                <a
+                  href="#"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                >
+                  Sign up
+                </a>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing customer?{' '}
-                  <NextLink href="/login">
-                    <a className="text-indigo-600 hover:text-indigo-500">
-                      Sign in
-                    </a>
-                  </NextLink>
+                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                    Sign in
+                  </a>
                 </p>
               </div>
             </div>
