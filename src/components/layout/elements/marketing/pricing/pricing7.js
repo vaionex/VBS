@@ -87,7 +87,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function PricingSelection() {
+export default function Example() {
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto bg-white py-16 sm:py-24 sm:px-6 lg:px-8">
