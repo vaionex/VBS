@@ -135,79 +135,219 @@ const marketing = [
 const applicationUi = [
   {
     name: 'Page Headings',
-    href: '/company/marketing/hero',
+    href: '/company/application-ui/pageheadings',
     icon: BriefcaseIcon,
   },
   {
     name: 'Card Headings',
-    href: '/company/marketing/hero',
+    href: '/company/application-ui/cardheadings',
     icon: BriefcaseIcon,
   },
   {
     name: 'Section Headings',
-    href: '/company/incentives',
+    href: '/company/application-ui/sectionheadings',
     icon: BriefcaseIcon,
   },
   {
     name: 'Description Lists',
-    href: '/company/incentives',
+    href: '/company/application-ui/descriptionlists',
     icon: BriefcaseIcon,
   },
-  { name: 'Stats', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Calendars', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Tables', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Stacked Lists', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Grid Lists', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Feeds', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Form Layouts', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Input Groups', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Select Menus', href: '/company/incentives', icon: BriefcaseIcon },
+  {
+    name: 'Stats',
+    href: '/company/application-ui/stats',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Calendars',
+    href: '/company/application-ui/calendars',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Tables',
+    href: '/company/application-ui/tables',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Stacked Lists',
+    href: '/company/application-ui/stackedlists',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Grid Lists',
+    href: '/company/application-ui/gridlists',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Feeds',
+    href: '/company/application-ui/feeds',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Form Layouts',
+    href: '/company/application-ui/formlayouts',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Input Groups',
+    href: '/company/application-ui/inputgroups',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Select Menus',
+    href: '/company/application-ui/selectmenus',
+    icon: BriefcaseIcon,
+  },
   {
     name: 'Sign-in and Registration',
-    href: '/company/incentives',
+    href: '/company/application-ui/signinregistrations',
     icon: BriefcaseIcon,
   },
-  { name: 'Textareas', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Radio Groups', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Checkboxes', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Toggles', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Action Panels', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Comboboxes', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Alerts', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Empty States', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Navbars', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Pagination', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Tabs', href: '/company/incentives', icon: BriefcaseIcon },
+  {
+    name: 'Textareas',
+    href: '/company/application-ui/textareas',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Radio Groups',
+    href: '/company/application-ui/radiogroups',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Checkboxes',
+    href: '/company/application-ui/checkboxes',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Toggles',
+    href: '/company/application-ui/toggles',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Action Panels',
+    href: '/company/application-ui/actionpanels',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Comboboxes',
+    href: '/company/application-ui/comboboxes',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Alerts',
+    href: '/company/application-ui/alerts',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Empty States',
+    href: '/company/application-ui/emptystates',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Navbars',
+    href: '/company/application-ui/navbars',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Pagination',
+    href: '/company/application-ui/pagination',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Tabs',
+    href: '/company/application-ui/tabs',
+    icon: BriefcaseIcon,
+  },
   {
     name: 'Vertical Navigation',
-    href: '/company/incentives',
+    href: '/company/application-ui/verticalnavigation',
     icon: BriefcaseIcon,
   },
   {
     name: 'Sidebar Navigation',
-    href: '/company/incentives',
+    href: '/company/application-ui/sidebarnavigation',
     icon: BriefcaseIcon,
   },
-  { name: 'Breadcrumbs', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Steps', href: '/company/incentives', icon: BriefcaseIcon },
+  {
+    name: 'Breadcrumbs',
+    href: '/company/application-ui/breadcrumbs',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Steps',
+    href: '/company/application-ui/steps',
+    icon: BriefcaseIcon,
+  },
   {
     name: 'Command Palettes',
-    href: '/company/incentives',
+    href: '/company/application-ui/commandpalet',
     icon: BriefcaseIcon,
   },
-  { name: 'Modals', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Slide-overs', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Notifications', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Avatars', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Dropdowns', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Badges', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Buttons', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Button Groups', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Containers', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Panels', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'List containers', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Media Objects', href: '/company/incentives', icon: BriefcaseIcon },
-  { name: 'Dividers', href: '/company/incentives', icon: BriefcaseIcon },
+  {
+    name: 'Modals',
+    href: '/company/application-ui/modals',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Slide-overs',
+    href: '/company/application-ui/slideovers',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Notifications',
+    href: '/company/application-ui/notifications',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Avatars',
+    href: '/company/application-ui/avatars',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Dropdowns',
+    href: '/company/application-ui/dropdowns',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Badges',
+    href: '/company/application-ui/badges',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Buttons',
+    href: '/company/application-ui/buttons',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Button Groups',
+    href: '/company/application-ui/buttongroups',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Containers',
+    href: '/company/application-ui/containers',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Panels',
+    href: '/company/application-ui/panels',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'List containers',
+    href: '/company/application-ui/listcontainers',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Media Objects',
+    href: '/company/application-ui/mediaobjects',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Dividers',
+    href: '/company/application-ui/dividers',
+    icon: BriefcaseIcon,
+  },
 ]
 const ecommerce = [
   { name: 'Product Overviews', href: '#', icon: BriefcaseIcon },
@@ -692,8 +832,8 @@ export default function Example() {
               </div>
             </div>
             <div className="py-6 px-5">
-              <div className="grid grid-cols-2 gap-4">
-                <a
+              <div className="grid grid-cols-1 gap-4">
+                {/* <a
                   href="#"
                   className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
                 >
@@ -705,16 +845,16 @@ export default function Example() {
                   className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
                 >
                   Docs
-                </a>
+                </a> */}
 
                 <a
                   href="/company"
-                  className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="rounded-md text-base font-medium py-2 bg-gray-200 hover:bg-gray-300 flex justify-center text-gray-900 hover:text-gray-700"
                 >
-                  Company
+                  Components
                 </a>
 
-                <a
+                {/* <a
                   href="#"
                   className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
                 >
@@ -733,7 +873,7 @@ export default function Example() {
                   className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
                 >
                   Contact Sales
-                </a>
+                </a> */}
               </div>
               <div className="mt-6">
                 <NextLink href="/register">

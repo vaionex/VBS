@@ -341,7 +341,10 @@ export default function Server({ slug }) {
       <Header />
       {Components.map((Component, index) => {
         return (
-          <div key={index}>
+          <div
+            className="min-w-full p-1 border-b border-gray-400 my-5 min-h-[400px] relative"
+            key={index}
+          >
             <h3 className="text-sm font-medium p-2 tracking-wide text-gray-500 uppercase">
               {Component.name}
             </h3>
