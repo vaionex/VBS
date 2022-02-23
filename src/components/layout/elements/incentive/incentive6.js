@@ -1,32 +1,32 @@
 /* This example requires Tailwind CSS v2.0+ */
 const perks = [
   {
-    name: 'Free delivery',
+    name: 'Connect 3rd Party Wallets',
     imageSrc:
       'https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg',
     description:
-      "Order now and you'll get delivery absolutely free. Well, it's not actually free, we just price it into the products. Someone's paying for it, and it's not us.",
+      'Skip the traditional login process by directly connecting a wallet to your application.',
   },
   {
-    name: '10-year warranty',
+    name: 'Publish Data to the Blockchain',
     imageSrc:
       'https://tailwindui.com/img/ecommerce/icons/icon-warranty-light.svg',
     description:
-      "We have a 10 year warranty with every product that you purchase, whether thats a new pen or organizer, you can be sure we'll stand behind it.",
+      'Give the ownership of data back to the user by allowing them to upload to the Bitcoin blockchain.',
   },
   {
-    name: 'Exchanges',
+    name: 'Mint Tokens & NFTs',
     imageSrc:
       'https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg',
     description:
-      'We understand that when your product arrives you might not particularly like it, or you ordered the wrong thing. Conditions apply here.',
+      'Easily create onchain digital assets, ranging from stablecoins, to luxury goods and tickets.',
   },
   {
-    name: 'For the planet',
+    name: 'Bitcoin micropayments',
     imageSrc:
       'https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg',
     description:
-      "Like you, we love the planet, and so we've pledged 1% of all sales to the preservation and restoration of the natural environment.",
+      'Integrate payments functionality to your application with a few lines of code.',
   },
 ]
 
