@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Header from '../../../components/layout/header/index'
+import Layout from '@/components/layout/elements'
 
 import CategoryFilter1 from '../../../components/layout/elements/ecommerce/categoryFilters/categoryFilter1'
 import CategoryFilter2 from '../../../components/layout/elements/ecommerce/categoryFilters/categoryFilter2'
@@ -286,8 +286,7 @@ const components = {
 export default function Server({ slug }) {
   const Components = components[slug]
   return (
-    <>
-      <Header />
+    <Layout>
       {Components.map((Component, index) => {
         return (
           <div
@@ -301,7 +300,7 @@ export default function Server({ slug }) {
           </div>
         )
       })}
-    </>
+    </Layout>
   )
 }
 

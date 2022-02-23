@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Header from '../../../components/layout/header/index'
+import Layout from '@/components/layout/elements'
 
 import ActionPanel1 from '../../../components/layout/elements/applicationUi/actionPanels/actionPanel1'
 import ActionPanel2 from '../../../components/layout/elements/applicationUi/actionPanels/actionPanel2'
@@ -843,8 +843,7 @@ const components = {
 export default function Server({ slug }) {
   const Components = components[slug]
   return (
-    <>
-      <Header />
+    <Layout>
       {Components.map((Component, index) => {
         return (
           <div
@@ -858,7 +857,7 @@ export default function Server({ slug }) {
           </div>
         )
       })}
-    </>
+    </Layout>
   )
 }
 
