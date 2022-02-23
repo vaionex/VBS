@@ -6,13 +6,35 @@ import { useEffect } from 'react'
 import { firebaseApp } from '@/firebase/init'
 import { getAnalytics, initializeAnalytics } from 'firebase/analytics'
 import GetCurrentUser from '../components/layout/elements/GetCurrentUser'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { setAuthenticated, setUserData } from '@/redux/slices/auth'
 
 function App({ Component, pageProps }) {
   useEffect(() => {
     //firebase setup
     initializeAnalytics(firebaseApp)
     getAnalytics(firebaseApp)
+    const auth = getAuth()
+    // eslint-disable-next-line no-undef
+    new Promise((resolve, reject) => {
+      resolve(auth.currentUser)
 
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (userData) => {
+          unsubscribe()
+          resolve(userData)
+          store.dispatch(setAuthenticated())
+          store.dispatch(setUserData(userData.displayName))
+        },
+        reject,
+      )
+    }).then((currentUser) => {
+      if (currentUser) {
+        store.dispatch(setAuthenticated())
+        store.dispatch(setUserData(currentUser.displayName))
+      }
+    })
     // const checkUser = localStorage.getItem('auth_user')
     // if (checkUser) {
     //   store.dispatch(setAuthenticated())

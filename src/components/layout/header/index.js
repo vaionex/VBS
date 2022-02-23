@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import NextLink from 'next/link'
 import { Popover, Transition } from '@headlessui/react'
 import {
@@ -20,6 +20,7 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
+import { useDispatch, useSelector } from 'react-redux'
 
 const solutions = [
   {
@@ -59,6 +60,9 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth)
+
   return (
     <Popover className="relative bg-white">
       <div

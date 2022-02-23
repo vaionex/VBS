@@ -1,9 +1,15 @@
-import { firebaseAuth, firebaseDb } from '@/firebase/init'
+import {
+  firebaseAuth,
+  firebaseDb,
+  firebaseGoogleProvider,
+} from '@/firebase/init'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth'
 import store from '@/redux/store'
 import { setUserData } from '@/redux/slices/auth'
@@ -73,9 +79,36 @@ const firebaseGetAuthorizedUser = () => {
   return fn
 }
 
+const firebaseLoginWithGoogle = async () => {
+  const { user, token, credential } = await signInWithPopup(
+    firebaseAuth,
+    firebaseGoogleProvider,
+  )
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result)
+      const token = credential?.accessToken
+      // The signed-in user info.
+      const user = result.user
+      return { credential, token, user }
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code
+      const errorMessage = error.message
+      // The email of the user's account used.
+      const email = error.email
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error)
+      console.error({ errorCode, errorMessage, email, credential })
+    })
+  return { user }
+}
+
 export {
   firebaseLogin,
   firebaseRegister,
   firebaseGetAuthorizedUser,
   firebaseLogout,
+  firebaseLoginWithGoogle,
 }
