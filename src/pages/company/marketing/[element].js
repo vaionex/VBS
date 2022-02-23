@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Header from '../../../components/layout/header/index'
+import Layout from '@/components/layout/elements'
 
 import Hero1 from '../../../components/layout/elements/marketing/hero/hero1'
 import Hero2 from '../../../components/layout/elements/marketing/hero/hero2'
@@ -337,8 +337,7 @@ const components = {
 export default function Server({ slug }) {
   const Components = components[slug]
   return (
-    <>
-      <Header />
+    <Layout>
       {Components.map((Component, index) => {
         return (
           <div
@@ -352,7 +351,7 @@ export default function Server({ slug }) {
           </div>
         )
       })}
-    </>
+    </Layout>
   )
 }
 

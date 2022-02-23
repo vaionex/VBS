@@ -421,12 +421,6 @@ const ecommerce = [
     icon: BriefcaseIcon,
   },
 ]
-const resources = [
-  { name: 'Community', href: '#', icon: UserGroupIcon },
-  { name: 'Partners', href: '#', icon: GlobeAltIcon },
-  { name: 'Guides', href: '#', icon: BookmarkAltIcon },
-  { name: 'Webinars', href: '#', icon: DesktopComputerIcon },
-]
 const blogPosts = [
   {
     id: 1,
@@ -462,7 +456,7 @@ export default function Example() {
       <div className="relative z-20">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10">
           <div>
-            <a href="#" className="flex">
+            <a href="/" className="flex">
               <span className="sr-only">Workflow</span>
               <img
                 className="h-8 w-auto sm:h-10"
@@ -606,7 +600,7 @@ export default function Example() {
                           <div className="bg-gray-50 w-full" />
                         </div>
                         <div className="relative max-w-7xl mx-auto grid grid-cols-1">
-                          <nav className="grid gap-y-10 px-4 justify-items-center bg-white md:grid-cols-2 lg:grid-cols-4 sm:gap-x-8 sm:py-2 sm:px-6 lg:px-8 xl:pr-12">
+                          <nav className="grid gap-y-10 px-4 justify-items-center bg-white md:grid-cols-2 lg:grid-cols-4 sm:gap-x-8 sm:py-4 sm:px-6 lg:px-8 xl:pr-12">
                             <div>
                               <h3 className="text-base font-medium tracking-wide pt-3 text-center text-gray-500 uppercase">
                                 Marketing
@@ -755,49 +749,6 @@ export default function Example() {
                               </ul>
                             </div>
                           </nav>
-                          <div className="bg-gray-50 px-4 py-8 sm:py-12 sm:px-6 lg:px-8 xl:pl-12">
-                            <div>
-                              <h3 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-                                From the blog
-                              </h3>
-                              <ul role="list" className="mt-6 space-y-6">
-                                {blogPosts.map((post) => (
-                                  <li key={post.id} className="flow-root">
-                                    <a
-                                      href={post.href}
-                                      className="-m-3 p-2 flex rounded-lg hover:bg-gray-100"
-                                    >
-                                      <div className="hidden sm:block flex-shrink-0">
-                                        <img
-                                          className="w-32 h-20 object-cover rounded-md"
-                                          src={post.imageUrl}
-                                          alt=""
-                                        />
-                                      </div>
-                                      <div className="w-0 flex-1 sm:ml-8">
-                                        <h4 className="text-base font-medium text-gray-900 truncate">
-                                          {post.name}
-                                        </h4>
-                                        <p className="mt-1 text-sm text-gray-500">
-                                          {post.preview}
-                                        </p>
-                                      </div>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="mt-6 text-sm font-medium">
-                              <a
-                                href="#"
-                                className="text-indigo-600 hover:text-indigo-500"
-                              >
-                                {' '}
-                                View all posts{' '}
-                                <span aria-hidden="true">&rarr;</span>
-                              </a>
-                            </div>
-                          </div>
                         </div>
                       </Popover.Panel>
                     </Transition>
