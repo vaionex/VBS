@@ -99,9 +99,9 @@ export const getwalletBal = async (walletid, dispatch) => {
     })
     .catch((err) => {
       console.log('metrics error', err, err.response)
-      if (err?.response?.data?.data?.msg?.includes("you don't have 00000000")) {
-        createwallet('default', dispatch)
-      }
+      // if (err?.response?.data?.data?.msg?.includes("you don't have 00000000")) {
+      //   createwallet('default', dispatch)
+      // }
       if (
         err?.response?.data?.data?.msg?.includes('user utxos does not exists')
       ) {
@@ -143,9 +143,9 @@ export const getwalletDetails = async (walletid, dispatch) => {
     })
     .catch((err) => {
       console.log('address error', err, err.response)
-      if (err?.response?.data?.data?.msg?.includes("you don't have 00000000")) {
-        createwallet('default', dispatch)
-      }
+      // if (err?.response?.data?.data?.msg?.includes("you don't have 00000000")) {
+      //   createwallet('default', dispatch)
+      // }
     })
 
   //wallet balance
@@ -165,9 +165,9 @@ export const getwalletDetails = async (walletid, dispatch) => {
     })
     .catch((err) => {
       console.log(err)
-      if (err?.response?.data?.data?.msg?.includes("you don't have 00000000")) {
-        createwallet('default', dispatch)
-      }
+      // if (err?.response?.data?.data?.msg?.includes("you don't have 00000000")) {
+      //   createwallet('default', dispatch)
+      // }
     })
 
   //wallet history
@@ -188,14 +188,14 @@ export const getwalletDetails = async (walletid, dispatch) => {
     })
     .catch((err) => {
       console.log(err)
-      if (err?.response?.data?.data?.msg?.includes("you don't have 00000000")) {
-        createwallet('default', dispatch)
-      }
+      // if (err?.response?.data?.data?.msg?.includes("you don't have 00000000")) {
+      //   createwallet('default', dispatch)
+      // }
     })
 }
 
 export const createwallet = async (name, dispatch) => {
-  console.log('ggg', apiConfig.defaults.headers)
+  console.log('creating wallet')
   apiConfig
     .get('/v1/createWallet', {
       headers: {
