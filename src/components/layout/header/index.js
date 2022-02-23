@@ -373,7 +373,7 @@ export default function Example() {
               </Popover>
             </Popover.Group>
             <div className="flex items-center md:ml-12">
-              <NextLink href="/register">
+              <NextLink href="/login">
                 <a
                   href="#"
                   className="text-base font-medium text-gray-500 hover:text-gray-900"
