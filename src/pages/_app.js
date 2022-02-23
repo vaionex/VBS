@@ -24,8 +24,10 @@ function App({ Component, pageProps }) {
         (userData) => {
           unsubscribe()
           resolve(userData)
-          store.dispatch(setAuthenticated())
-          store.dispatch(setUserData(userData.displayName))
+          if (userData) {
+            store.dispatch(setAuthenticated())
+            store.dispatch(setUserData(userData.displayName))
+          }
         },
         reject,
       )
