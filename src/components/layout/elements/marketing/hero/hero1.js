@@ -52,19 +52,20 @@ export default function Hero() {
                     <span className="block text-indigo-400">ship web apps</span>
                   </h1>
                   <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                    qui Lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                    occaecat fugiat.
+                    <br />
+                    Bitcoin SV development done the right way.
+                    <br />
+                    <br /> Firebase, Next.js and Tailwind CSS.
                   </p>
                   <div className="mt-10 sm:mt-12"></div>
                 </div>
               </div>
               <div className="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
                 <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
-                  {/* Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ */}
+                  {/* Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ https://tailwindui.com/img/component-images/cloud-illustration-indigo-400.svg*/}
                   <img
                     className="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                    src="https://tailwindui.com/img/component-images/cloud-illustration-indigo-400.svg"
+                    src="https://i.ibb.co/C24YX45/VBSHero.png"
                     alt=""
                   />
                 </div>
@@ -75,7 +76,7 @@ export default function Hero() {
         <div className="bg-gray-100">
           <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
             <p className="text-center text-sm font-semibold uppercase text-gray-500 tracking-wide">
-              Trusted by over 5 very average small businesses
+              The stack trusted by leading Bitcoin companies
             </p>
             <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
               <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
