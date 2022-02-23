@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  walletData: null,
   balance: 0,
   address: '',
   addressPath0: '',
@@ -15,14 +14,10 @@ const walletSlice = createSlice({
   name: 'wallet',
   initialState,
   reducers: {
-    updateWalletData: (state, action) => {
-      state.walletData = action.payload
-    },
     updateWalletHistory: (state, action) => {
       state.wallethistory = action.payload
     },
     clearWalletData: (state, action) => {
-      state.walletData = null
       state.balance = 0
       state.address = ''
       state.addressPath0 = ''
@@ -51,7 +46,6 @@ const walletSlice = createSlice({
 
 export default walletSlice
 export const {
-  updateWalletData,
   updateWalletHistory,
   clearWalletData,
   updateMnemonic,
