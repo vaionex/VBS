@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable @next/next/no-img-element */
 
-import { firebaseRegister } from '@/firebase/utils'
-import { useState } from 'react'
+import { firebaseRegister, firebaseLoginWithGoogle } from '@/firebase/utils'
+import { useState, useEffect } from 'react'
 import { FormInput } from '@/components/ui'
 import { createwallet } from '../../../services/relysia-queries'
 import apiConfig from '../../../config/relysiaApi'
 import { firebaseAuth } from '@/firebase/init'
 import { useDispatch } from 'react-redux'
+import { setUserData, setAuthenticated } from '@/redux/slices/auth'
 
 const inputAttributes = [
   {
@@ -52,6 +53,13 @@ function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     let userRes = await firebaseRegister(formData)
+  }
+
+  const handleGoogleAuth = async () => {
+    // eslint-disable-next-line no-undef
+    const { user } = await firebaseLoginWithGoogle()
+    dispatch(setUserData(user.displayName))
+    dispatch(setAuthenticated())
   }
 
   return (
@@ -132,6 +140,7 @@ function RegisterForm() {
                 <a
                   href="#"
                   className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                  onClick={() => handleGoogleAuth()}
                 >
                   <span className="sr-only">Sign in with Google</span>
                   <svg

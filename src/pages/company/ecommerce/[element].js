@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Layout from '@/components/layout/elements'
+import Layout from '@/components/layout'
 
 import CategoryFilter1 from '../../../components/layout/elements/ecommerce/categoryFilters/categoryFilter1'
 import CategoryFilter2 from '../../../components/layout/elements/ecommerce/categoryFilters/categoryFilter2'

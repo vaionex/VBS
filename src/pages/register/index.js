@@ -1,7 +1,7 @@
 import RegisterForm from '@/components/ui/register-form'
 import React from 'react'
 
-import Layout from '@/components/layout/elements'
+import Layout from '@/components/layout'
 
 const RegisterPage = () => {
   return (

@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from './header'
-import MainContent from './main-content'
 import PropTypes from 'prop-types'
 
 const Layout = ({ children }) => {
@@ -8,7 +7,7 @@ const Layout = ({ children }) => {
     <div>
       <div className="flex flex-col flex-1">
         <Header />
-        <MainContent>{children}</MainContent>
+        {children}
       </div>
     </div>
   )

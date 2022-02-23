@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Layout from '@/components/layout/elements'
+import Layout from '@/components/layout'
 
 import Hero1 from '../../../components/layout/elements/marketing/hero/hero1'
 import Hero2 from '../../../components/layout/elements/marketing/hero/hero2'

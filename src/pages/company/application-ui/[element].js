@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Layout from '@/components/layout/elements'
+import Layout from '@/components/layout'
 
 import ActionPanel1 from '../../../components/layout/elements/applicationUi/actionPanels/actionPanel1'
 import ActionPanel2 from '../../../components/layout/elements/applicationUi/actionPanels/actionPanel2'
