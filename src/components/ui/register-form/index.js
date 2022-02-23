@@ -52,14 +52,6 @@ function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     let userRes = await firebaseRegister(formData)
-    let user = firebaseAuth.currentUser
-    if (user) {
-      user.getIdToken().then((token) => {
-        apiConfig.defaults.headers.common['authToken'] = token
-        console.log('token', token)
-        createwallet('default', dispatch)
-      })
-    }
   }
 
   return (

@@ -6,9 +6,9 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>VBS</title>
         <meta name="description" content="" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/vbsLogo.ico" />
       </Head>
 
       <Layout>
