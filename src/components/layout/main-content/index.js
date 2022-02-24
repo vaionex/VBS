@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import Footer from '../elements/footer/footer1'
 import ContentSection from '../elements/contentSection/contentSection2'
 import Testimonial from '../elements/testimonial/testimonial4'
 import Incentive from '../elements/incentive/incentive6'
@@ -13,7 +12,6 @@ const MainContent = ({ children }) => {
         <Incentive />
         <ContentSection />
         <Testimonial />
-        <Footer />
       </div>
     </main>
   )
