@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useEffect } from 'react'
 import NextLink from 'next/link'
+import Image from 'next/image'
 import { Popover, Transition } from '@headlessui/react'
 import {
   marketing,
@@ -228,9 +229,15 @@ export default function Example() {
                                       href={item.href}
                                       className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
-                                      <item.icon
+                                      {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
+                                      /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
                                       />
                                       <span className="ml-4">{item.name}</span>
                                     </a>
@@ -249,9 +256,15 @@ export default function Example() {
                                       href={item.href}
                                       className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
-                                      <item.icon
+                                      {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
+                                      /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
                                       />
                                       <span className="ml-4">{item.name}</span>
                                     </a>
@@ -270,9 +283,15 @@ export default function Example() {
                                       href={item.href}
                                       className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
-                                      <item.icon
+                                      {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
+                                      /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
                                       />
                                       <span className="ml-4">{item.name}</span>
                                     </a>
@@ -291,9 +310,15 @@ export default function Example() {
                                       href={item.href}
                                       className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
-                                      <item.icon
+                                      {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
+                                      /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
                                       />
                                       <span className="ml-4">{item.name}</span>
                                     </a>
@@ -312,9 +337,15 @@ export default function Example() {
                                       href={item.href}
                                       className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
-                                      <item.icon
+                                      {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
+                                      /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
                                       />
                                       <span className="ml-4">{item.name}</span>
                                     </a>
@@ -333,9 +364,15 @@ export default function Example() {
                                       href={item.href}
                                       className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
-                                      <item.icon
+                                      {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
+                                      /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
                                       />
                                       <span className="ml-4">{item.name}</span>
                                     </a>
@@ -354,9 +391,15 @@ export default function Example() {
                                       href={item.href}
                                       className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                                     >
-                                      <item.icon
+                                      {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
+                                      /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
                                       />
                                       <span className="ml-4">{item.name}</span>
                                     </a>

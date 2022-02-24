@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import {
   marketing,
@@ -23,9 +24,15 @@ export default function Footers() {
                 href={item.href}
                 className=" p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
               >
-                <item.icon
+                {/* <item.icon
                   className="flex-shrink-0 h-6 w-6 text-gray-400"
                   aria-hidden="true"
+                /> */}
+                <Image
+                  src={'/img/vaionex-icon.png'}
+                  width={20}
+                  height={20}
+                  alt="element-icons"
                 />
                 <span className="ml-4">{item.name}</span>
               </a>
@@ -44,9 +51,15 @@ export default function Footers() {
                 href={item.href}
                 className=" p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
               >
-                <item.icon
+                {/* <item.icon
                   className="flex-shrink-0 h-6 w-6 text-gray-400"
                   aria-hidden="true"
+                /> */}
+                <Image
+                  src={'/img/vaionex-icon.png'}
+                  width={20}
+                  height={20}
+                  alt="element-icons"
                 />
                 <span className="ml-4">{item.name}</span>
               </a>
@@ -65,9 +78,15 @@ export default function Footers() {
                 href={item.href}
                 className=" p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
               >
-                <item.icon
+                {/* <item.icon
                   className="flex-shrink-0 h-6 w-6 text-gray-400"
                   aria-hidden="true"
+                /> */}
+                <Image
+                  src={'/img/vaionex-icon.png'}
+                  width={20}
+                  height={20}
+                  alt="element-icons"
                 />
                 <span className="ml-4">{item.name}</span>
               </a>
