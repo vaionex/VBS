@@ -68,9 +68,9 @@ function RegisterForm() {
     <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
-          className="mx-auto h-12 w-auto"
-          src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-          alt="Workflow"
+          className="h-12 w-auto mx-auto sm:h-10"
+          src="https://i.ibb.co/4jWbzz7/vbsLogo.png"
+          alt="vaionex-logo"
         />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Register

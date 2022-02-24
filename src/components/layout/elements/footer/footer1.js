@@ -89,7 +89,7 @@ export default function Footer() {
             <img
               className="h-8 w-auto sm:h-10"
               src="https://i.ibb.co/4jWbzz7/vbsLogo.png"
-              alt=""
+              alt="vaionex-logo"
             />
             <p className="text-gray-500 text-base">
               State of the Art Blockchain Platforms & Services based on
