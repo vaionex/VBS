@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable @next/next/no-img-element */
 
-import { firebaseRegister, firebaseLoginWithGoogle } from '@/firebase/utils'
 import { useState, useEffect } from 'react'
-import { FormInput } from '@/components/ui'
-import { createwallet } from '../../../services/relysia-queries'
-import apiConfig from '../../../config/relysiaApi'
-import { firebaseAuth } from '@/firebase/init'
+import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
+
+import { firebaseRegister, firebaseLoginWithGoogle } from '@/firebase/utils'
+import { FormInput } from '@/components/ui'
+import apiConfig from '../../../config/relysiaApi'
+import { createwallet } from '../../../services/relysia-queries'
+import { firebaseAuth } from '@/firebase/init'
 import { setUserData, setAuthenticated } from '@/redux/slices/auth'
 
 const inputAttributes = [
@@ -39,6 +41,7 @@ const inputAttributes = [
 
 function RegisterForm() {
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     email: '',
@@ -61,6 +64,7 @@ function RegisterForm() {
     if (userInfo) {
       dispatch(setUserData(userInfo.displayName))
       dispatch(setAuthenticated())
+      router.replace('/')
     }
   }
 

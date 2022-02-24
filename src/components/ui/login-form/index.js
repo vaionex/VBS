@@ -3,6 +3,7 @@
 
 import { firebaseLogin, firebaseLoginWithGoogle } from '@/firebase/utils'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import { FormInput } from '@/components/ui'
 
@@ -26,6 +27,7 @@ const inputAttributes = [
 
 function LoginForm() {
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     email: '',
@@ -48,6 +50,7 @@ function LoginForm() {
     if (userInfo) {
       dispatch(setUserData(userInfo.displayName))
       dispatch(setAuthenticated())
+      router.replace('/')
     }
   }
 
