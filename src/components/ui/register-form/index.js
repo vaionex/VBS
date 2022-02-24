@@ -57,9 +57,11 @@ function RegisterForm() {
 
   const handleGoogleAuth = async () => {
     // eslint-disable-next-line no-undef
-    const { user } = await firebaseLoginWithGoogle()
-    dispatch(setUserData(user.displayName))
-    dispatch(setAuthenticated())
+    const userInfo = await firebaseLoginWithGoogle()
+    if (userInfo) {
+      dispatch(setUserData(userInfo.displayName))
+      dispatch(setAuthenticated())
+    }
   }
 
   return (
