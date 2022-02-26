@@ -1,4 +1,4 @@
-import RegisterForm from '@/components/ui/register-form'
+import RegisterForm from '@/components/elements/ui/register-form'
 import React from 'react'
 
 import Layout from '@/components/layout'

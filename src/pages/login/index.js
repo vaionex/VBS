@@ -1,4 +1,4 @@
-import LoginForm from '@/components/ui/login-form'
+import LoginForm from '@/components/elements/ui/login-form'
 import Layout from '@/components/layout'
 
 export function LoginPage() {

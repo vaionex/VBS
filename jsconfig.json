@@ -9,6 +9,9 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["src/components/*"],
+      "@/config/*": ["src/config/*"],
+      "@/services/*": ["src/services/*"],
+      "@/constants/*": ["src/constants/*"],
       "@/pages/*": ["src/pages/*"],
       "@/redux/*": ["src/redux/*"],
       "@/styles/*": ["src/styles/*"],

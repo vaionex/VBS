@@ -1,4 +1,4 @@
-import apiConfig from '../config/relysiaApi'
+import apiConfig from '@/config/relysiaApi'
 import {
   updateAddress,
   updateAddressPath0,

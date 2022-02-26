@@ -3,13 +3,8 @@ import { Fragment, useEffect } from 'react'
 import NextLink from 'next/link'
 import Image from 'next/image'
 import { Popover, Transition } from '@headlessui/react'
+import { marketing, applicationUi, ecommerce } from '@/constants/navbarElements'
 import {
-  marketing,
-  applicationUi,
-  ecommerce,
-} from 'src/constants/navbarElements'
-import {
-  BriefcaseIcon,
   ChartBarIcon,
   CheckCircleIcon,
   CursorClickIcon,
@@ -499,12 +494,11 @@ export default function Example() {
             </div>
             <div className="py-6 px-5">
               <div className="grid grid-cols-1 gap-4">
-                <a
-                  href="/company"
-                  className="rounded-md text-base font-medium py-2 bg-gray-200 hover:bg-gray-300 flex justify-center text-gray-900 hover:text-gray-700"
-                >
-                  Components
-                </a>
+                <NextLink href="/components">
+                  <a className="rounded-md text-base font-medium py-2 bg-gray-200 hover:bg-gray-300 flex justify-center text-gray-900 hover:text-gray-700">
+                    Components
+                  </a>
+                </NextLink>
               </div>
               <div className="mt-6">
                 <NextLink href="/register">

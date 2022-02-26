@@ -5,7 +5,7 @@ import store from '@/redux/store'
 import { useEffect } from 'react'
 import { firebaseApp } from '@/firebase/init'
 import { getAnalytics, initializeAnalytics } from 'firebase/analytics'
-import GetCurrentUser from '../components/layout/elements/GetCurrentUser'
+import GetCurrentUser from '@/components/elements/GetCurrentUser'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { setAuthenticated, setUserData } from '@/redux/slices/auth'
 
