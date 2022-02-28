@@ -8,6 +8,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   user: null,
+  userPhotoURL: null,
   isPending: false,
   isError: false,
   isAuthenticated: false,
@@ -55,11 +56,26 @@ const authSlice = createSlice({
     setUserData: (state, action) => {
       state.user = action.payload
     },
+    setUserProfilePic: (state, action) => {
+      state.userPhotoURL = action.payload
+    },
     setAuthenticated: (state) => {
       state.isAuthenticated = true
+    },
+    setResetAuth: (state) => {
+      ;(state.user = null),
+        (state.userPhotoURL = null),
+        (state.isPending = false),
+        (state.isError = false),
+        (state.isAuthenticated = false)
     },
   },
 })
 
 export default authSlice
-export const { setUserData, setAuthenticated } = authSlice.actions
+export const {
+  setUserData,
+  setUserProfilePic,
+  setAuthenticated,
+  setResetAuth,
+} = authSlice.actions
