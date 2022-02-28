@@ -7,7 +7,11 @@ import { firebaseApp } from '@/firebase/init'
 import { getAnalytics, initializeAnalytics } from 'firebase/analytics'
 import GetCurrentUser from '@/components/elements/GetCurrentUser'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { setAuthenticated, setUserData } from '@/redux/slices/auth'
+import {
+  setAuthenticated,
+  setUserData,
+  setUserProfilePic,
+} from '@/redux/slices/auth'
 
 function App({ Component, pageProps }) {
   useEffect(() => {
@@ -18,15 +22,15 @@ function App({ Component, pageProps }) {
     // eslint-disable-next-line no-undef
     new Promise((resolve, reject) => {
       resolve(auth.currentUser)
-
       const unsubscribe = onAuthStateChanged(
         auth,
-        (userData) => {
+        (currentUser) => {
           unsubscribe()
-          resolve(userData)
-          if (userData) {
+          resolve(currentUser)
+          if (currentUser) {
             store.dispatch(setAuthenticated())
-            store.dispatch(setUserData(userData.displayName))
+            store.dispatch(setUserData(currentUser.displayName))
+            store.dispatch(setUserProfilePic(currentUser.photoURL))
           }
         },
         reject,
@@ -35,6 +39,7 @@ function App({ Component, pageProps }) {
       if (currentUser) {
         store.dispatch(setAuthenticated())
         store.dispatch(setUserData(currentUser.displayName))
+        store.dispatch(setUserProfilePic(currentUser.photoURL))
       }
     })
     // const checkUser = localStorage.getItem('auth_user')

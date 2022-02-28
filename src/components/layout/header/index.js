@@ -1,8 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 import NextLink from 'next/link'
 import Image from 'next/image'
-import { Popover, Transition } from '@headlessui/react'
+import { Popover, Transition, Menu } from '@headlessui/react'
 import { marketing, applicationUi, ecommerce } from '@/constants/navbarElements'
 import {
   ChartBarIcon,
@@ -17,6 +17,8 @@ import {
 } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
+import { setResetAuth } from '@/redux/slices/auth'
+import { fireBaseSignOut } from '@/firebase/init'
 
 const solutions = [
   {
@@ -58,6 +60,10 @@ function classNames(...classes) {
 export default function Example() {
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
+  const signOut = async () => {
+    await fireBaseSignOut()
+    dispatch(setResetAuth())
+  }
 
   return (
     <Popover className="relative bg-white">
@@ -410,23 +416,122 @@ export default function Example() {
                 )}
               </Popover>
             </Popover.Group>
-            <div className="flex items-center md:ml-12">
-              <NextLink href="/login">
-                <a
-                  href="#"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+            <div className="flex relative items-center md:ml-12">
+              {auth.user ? (
+                <Menu
+                  as="div"
+                  className=" h-10 w-10 rounded-full overflow-hidden bg-gray-100"
                 >
-                  Sign in
-                </a>
-              </NextLink>
-              <NextLink href="/register">
-                <a
-                  href="#"
-                  className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                >
-                  Sign up
-                </a>
-              </NextLink>
+                  <Menu.Button className="h-10 w-10 rounded-full overflow-hidden bg-gray-100">
+                    <span className="flex relative w-full h-full rounded-full overflow-hidden bg-gray-100">
+                      {auth.userPhotoURL ? (
+                        <Image
+                          src={auth.userPhotoURL}
+                          objectFit="cover"
+                          layout="fill"
+                          alt="profile-photo"
+                        />
+                      ) : (
+                        <svg
+                          className="h-full w-full text-gray-300"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      )}
+                    </span>
+                  </Menu.Button>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="py-1">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={classNames(
+                                active
+                                  ? 'bg-gray-100 text-gray-900'
+                                  : 'text-gray-700',
+                                'block px-4 py-2 text-sm',
+                              )}
+                            >
+                              Account settings
+                            </a>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={classNames(
+                                active
+                                  ? 'bg-gray-100 text-gray-900'
+                                  : 'text-gray-700',
+                                'block px-4 py-2 text-sm',
+                              )}
+                            >
+                              Support
+                            </a>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={classNames(
+                                active
+                                  ? 'bg-gray-100 text-gray-900'
+                                  : 'text-gray-700',
+                                'block px-4 py-2 text-sm',
+                              )}
+                            >
+                              License
+                            </a>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={() => signOut()}
+                              type="submit"
+                              className={classNames(
+                                active
+                                  ? 'bg-gray-100 text-gray-900'
+                                  : 'text-gray-700',
+                                'block w-full text-left px-4 py-2 text-sm',
+                              )}
+                            >
+                              Sign out
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </div>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+              ) : (
+                <>
+                  <NextLink href="/login">
+                    <a className="text-base font-medium text-gray-500 hover:text-gray-900">
+                      Sign in
+                    </a>
+                  </NextLink>
+                  <NextLink href="/register">
+                    <a className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                      Sign up
+                    </a>
+                  </NextLink>
+                </>
+              )}
             </div>
           </div>
         </div>

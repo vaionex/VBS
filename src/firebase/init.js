@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
-import { getAuth, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signOut } from 'firebase/auth'
 import { getStorage } from 'firebase/storage'
 import config from './config'
 
@@ -9,6 +9,7 @@ const firebaseDb = getFirestore(firebaseApp)
 const firebaseAuth = getAuth(firebaseApp)
 const firebaseStorage = getStorage(firebaseApp)
 const firebaseGoogleProvider = new GoogleAuthProvider()
+const fireBaseSignOut = async () => await signOut(firebaseAuth)
 
 export {
   firebaseApp,
@@ -16,4 +17,5 @@ export {
   firebaseDb,
   firebaseStorage,
   firebaseGoogleProvider,
+  fireBaseSignOut,
 }

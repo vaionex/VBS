@@ -8,7 +8,11 @@ import { useRouter } from 'next/router'
 import { FormInput } from '@/components/elements/ui'
 
 import { useDispatch } from 'react-redux'
-import { setUserData, setAuthenticated } from '@/redux/slices/auth'
+import {
+  setUserData,
+  setUserProfilePic,
+  setAuthenticated,
+} from '@/redux/slices/auth'
 
 const inputAttributes = [
   {
@@ -49,6 +53,7 @@ function LoginForm() {
     const userInfo = await firebaseLoginWithGoogle()
     if (userInfo) {
       dispatch(setUserData(userInfo.displayName))
+      dispatch(setUserProfilePic(userInfo.photoURL))
       dispatch(setAuthenticated())
       router.replace('/')
     }
