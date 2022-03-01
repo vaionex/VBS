@@ -67,7 +67,6 @@ export default function Example() {
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
 
-
   const signOut = async () => {
     await fireBaseSignOut()
     dispatch(setResetAuth())
@@ -425,16 +424,14 @@ export default function Example() {
               </Popover>
             </Popover.Group>
             <div className="flex  items-center md:ml-12">
-              {auth.user ? 
-              (
+              {auth.user ? (
                 <Menu as="div" className="ml-4 relative flex-shrink-0">
-                <div>
-                  <Menu.Button className="bg-white rounded-full overflow-hidden flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <span className="sr-only">Open user menu</span>
+                  <div>
+                    <Menu.Button className="bg-white rounded-full overflow-hidden flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                      <span className="sr-only">Open user menu</span>
                       {auth.userPhotoURL ? (
                         <Image
                           src={auth.userPhotoURL}
-                          
                           height={32}
                           width={32}
                           alt="profile-photo"
@@ -448,160 +445,156 @@ export default function Example() {
                           <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                       )}
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="origin-top-right absolute z-50 right-0 mt-5 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    {userNavigation.map((item) => (
-                      <Menu.Item key={item.name}>
-                        {({ active }) => {
-                          if(item.name === "Sign out") {
-                            return (
-                              <a
-                              href={item.href}
-                              onClick={() => signOut()}
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                            )
-                          } else {
-                            return (
-                              <a
-                              href={item.href}
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                            )
-                          }
-                        }
-                        }
-                      </Menu.Item>
-                    ))}
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            
-          
-              )
-              // (
-              //   <Menu
-              //     as="div"
-              //     className=" h-10 w-10 rounded-full overflow-hidden bg-gray-100"
-              //   >
-              //     <Menu.Button className="h-10 w-10 rounded-full overflow-hidden bg-gray-100">
-              //       <span className="flex relative w-full h-full rounded-full overflow-hidden bg-gray-100">
-              //         {auth.userPhotoURL ? (
-              //           <Image
-              //             src={auth.userPhotoURL}
-              //             objectFit="cover"
-              //             layout="fill"
-              //             alt="profile-photo"
-              //           />
-              //         ) : (
-              //           <svg
-              //             className="h-full w-full text-gray-300"
-              //             fill="currentColor"
-              //             viewBox="0 0 24 24"
-              //           >
-              //             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-              //           </svg>
-              //         )}
-              //       </span>
-              //     </Menu.Button>
-              //     <Transition
-              //       as={Fragment}
-              //       enter="transition ease-out duration-100"
-              //       enterFrom="transform opacity-0 scale-95"
-              //       enterTo="transform opacity-100 scale-100"
-              //       leave="transition ease-in duration-75"
-              //       leaveFrom="transform opacity-100 scale-100"
-              //       leaveTo="transform opacity-0 scale-95"
-              //     >
-              //       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-              //         <div className="py-1">
-              //           <Menu.Item>
-              //             {({ active }) => (
-              //               <a
-              //                 href="/user-profile"
-              //                 className={classNames(
-              //                   active
-              //                     ? 'bg-gray-100 text-gray-900'
-              //                     : 'text-gray-700',
-              //                   'block px-4 py-2 text-sm',
-              //                 )}
-              //               >
-              //                 Account settings
-              //               </a>
-              //             )}
-              //           </Menu.Item>
-              //           <Menu.Item>
-              //             {({ active }) => (
-              //               <a
-              //                 href="#"
-              //                 className={classNames(
-              //                   active
-              //                     ? 'bg-gray-100 text-gray-900'
-              //                     : 'text-gray-700',
-              //                   'block px-4 py-2 text-sm',
-              //                 )}
-              //               >
-              //                 Support
-              //               </a>
-              //             )}
-              //           </Menu.Item>
-              //           <Menu.Item>
-              //             {({ active }) => (
-              //               <a
-              //                 href="#"
-              //                 className={classNames(
-              //                   active
-              //                     ? 'bg-gray-100 text-gray-900'
-              //                     : 'text-gray-700',
-              //                   'block px-4 py-2 text-sm',
-              //                 )}
-              //               >
-              //                 License
-              //               </a>
-              //             )}
-              //           </Menu.Item>
-              //           <Menu.Item>
-              //             {({ active }) => (
-              //               <button
-              //                 onClick={() => signOut()}
-              //                 type="submit"
-              //                 className={classNames(
-              //                   active
-              //                     ? 'bg-gray-100 text-gray-900'
-              //                     : 'text-gray-700',
-              //                   'block w-full text-left px-4 py-2 text-sm',
-              //                 )}
-              //               >
-              //                 Sign out
-              //               </button>
-              //             )}
-              //           </Menu.Item>
-              //         </div>
-              //       </Menu.Items>
-              //     </Transition>
-              //   </Menu>
-              // ) 
-              : (
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="origin-top-right absolute z-50 right-0 mt-5 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      {userNavigation.map((item) => (
+                        <Menu.Item key={item.name}>
+                          {({ active }) => {
+                            if (item.name === 'Sign out') {
+                              return (
+                                <a
+                                  href={item.href}
+                                  onClick={() => signOut()}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700',
+                                  )}
+                                >
+                                  {item.name}
+                                </a>
+                              )
+                            } else {
+                              return (
+                                <a
+                                  href={item.href}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700',
+                                  )}
+                                >
+                                  {item.name}
+                                </a>
+                              )
+                            }
+                          }}
+                        </Menu.Item>
+                      ))}
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+              ) : (
+                // (
+                //   <Menu
+                //     as="div"
+                //     className=" h-10 w-10 rounded-full overflow-hidden bg-gray-100"
+                //   >
+                //     <Menu.Button className="h-10 w-10 rounded-full overflow-hidden bg-gray-100">
+                //       <span className="flex relative w-full h-full rounded-full overflow-hidden bg-gray-100">
+                //         {auth.userPhotoURL ? (
+                //           <Image
+                //             src={auth.userPhotoURL}
+                //             objectFit="cover"
+                //             layout="fill"
+                //             alt="profile-photo"
+                //           />
+                //         ) : (
+                //           <svg
+                //             className="h-full w-full text-gray-300"
+                //             fill="currentColor"
+                //             viewBox="0 0 24 24"
+                //           >
+                //             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                //           </svg>
+                //         )}
+                //       </span>
+                //     </Menu.Button>
+                //     <Transition
+                //       as={Fragment}
+                //       enter="transition ease-out duration-100"
+                //       enterFrom="transform opacity-0 scale-95"
+                //       enterTo="transform opacity-100 scale-100"
+                //       leave="transition ease-in duration-75"
+                //       leaveFrom="transform opacity-100 scale-100"
+                //       leaveTo="transform opacity-0 scale-95"
+                //     >
+                //       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                //         <div className="py-1">
+                //           <Menu.Item>
+                //             {({ active }) => (
+                //               <a
+                //                 href="/user-profile"
+                //                 className={classNames(
+                //                   active
+                //                     ? 'bg-gray-100 text-gray-900'
+                //                     : 'text-gray-700',
+                //                   'block px-4 py-2 text-sm',
+                //                 )}
+                //               >
+                //                 Account settings
+                //               </a>
+                //             )}
+                //           </Menu.Item>
+                //           <Menu.Item>
+                //             {({ active }) => (
+                //               <a
+                //                 href="#"
+                //                 className={classNames(
+                //                   active
+                //                     ? 'bg-gray-100 text-gray-900'
+                //                     : 'text-gray-700',
+                //                   'block px-4 py-2 text-sm',
+                //                 )}
+                //               >
+                //                 Support
+                //               </a>
+                //             )}
+                //           </Menu.Item>
+                //           <Menu.Item>
+                //             {({ active }) => (
+                //               <a
+                //                 href="#"
+                //                 className={classNames(
+                //                   active
+                //                     ? 'bg-gray-100 text-gray-900'
+                //                     : 'text-gray-700',
+                //                   'block px-4 py-2 text-sm',
+                //                 )}
+                //               >
+                //                 License
+                //               </a>
+                //             )}
+                //           </Menu.Item>
+                //           <Menu.Item>
+                //             {({ active }) => (
+                //               <button
+                //                 onClick={() => signOut()}
+                //                 type="submit"
+                //                 className={classNames(
+                //                   active
+                //                     ? 'bg-gray-100 text-gray-900'
+                //                     : 'text-gray-700',
+                //                   'block w-full text-left px-4 py-2 text-sm',
+                //                 )}
+                //               >
+                //                 Sign out
+                //               </button>
+                //             )}
+                //           </Menu.Item>
+                //         </div>
+                //       </Menu.Items>
+                //     </Transition>
+                //   </Menu>
+                // )
                 <>
                   <NextLink href="/login">
                     <a className="text-base font-medium text-gray-500 hover:text-gray-900">
