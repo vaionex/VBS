@@ -72,6 +72,7 @@ export default function Example() {
     dispatch(setResetAuth())
   }
 
+  console.log(auth)
   return (
     <Popover className="relative bg-white">
       <div
@@ -81,14 +82,16 @@ export default function Example() {
       <div className="relative z-20">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10">
           <div>
-            <a href="/" className="flex">
-              <span className="sr-only">Workflow</span>
-              <img
-                className="h-8 w-auto sm:h-10"
-                src="https://i.ibb.co/4jWbzz7/vbsLogo.png"
-                alt=""
-              />
-            </a>
+            <NextLink href="/">
+              <a className="flex">
+                <span className="sr-only">Workflow</span>
+                <img
+                  className="h-8 w-auto sm:h-10"
+                  src="https://i.ibb.co/4jWbzz7/vbsLogo.png"
+                  alt=""
+                />
+              </a>
+            </NextLink>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
             <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -171,16 +174,15 @@ export default function Example() {
                           <div className="max-w-7xl mx-auto space-y-6 px-4 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-6 lg:px-8">
                             {callsToAction.map((item) => (
                               <div key={item.name} className="flow-root">
-                                <a
-                                  href={item.href}
-                                  className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
-                                >
-                                  <item.icon
-                                    className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                    aria-hidden="true"
-                                  />
-                                  <span className="ml-3">{item.name}</span>
-                                </a>
+                                <NextLink href={item.href}>
+                                  <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+                                    <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    />
+                                    <span className="ml-3">{item.name}</span>
+                                  </a>
+                                </NextLink>
                               </div>
                             ))}
                           </div>
@@ -233,22 +235,23 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {marketing.slice(0, 10).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      {/* <item.icon
+                                    <NextLink href={item.href}>
+                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
                                       /> */}
-                                      <Image
-                                        src={'/img/vaionex-icon.png'}
-                                        width={20}
-                                        height={20}
-                                        alt="element-icons"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
+                                        <Image
+                                          src={'/img/vaionex-icon.png'}
+                                          width={20}
+                                          height={20}
+                                          alt="element-icons"
+                                        />
+                                        <span className="ml-4">
+                                          {item.name}
+                                        </span>
+                                      </a>
+                                    </NextLink>
                                   </li>
                                 ))}
                               </ul>
@@ -260,22 +263,23 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {marketing.slice(10).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      {/* <item.icon
+                                    <NextLink href={item.href}>
+                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
                                       /> */}
-                                      <Image
-                                        src={'/img/vaionex-icon.png'}
-                                        width={20}
-                                        height={20}
-                                        alt="element-icons"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
+                                        <Image
+                                          src={'/img/vaionex-icon.png'}
+                                          width={20}
+                                          height={20}
+                                          alt="element-icons"
+                                        />
+                                        <span className="ml-4">
+                                          {item.name}
+                                        </span>
+                                      </a>
+                                    </NextLink>
                                   </li>
                                 ))}
                               </ul>
@@ -287,22 +291,23 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {applicationUi.slice(0, 10).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      {/* <item.icon
+                                    <NextLink href={item.href}>
+                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
                                       /> */}
-                                      <Image
-                                        src={'/img/vaionex-icon.png'}
-                                        width={20}
-                                        height={20}
-                                        alt="element-icons"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
+                                        <Image
+                                          src={'/img/vaionex-icon.png'}
+                                          width={20}
+                                          height={20}
+                                          alt="element-icons"
+                                        />
+                                        <span className="ml-4">
+                                          {item.name}
+                                        </span>
+                                      </a>
+                                    </NextLink>
                                   </li>
                                 ))}
                               </ul>
@@ -314,22 +319,23 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {applicationUi.slice(10, 20).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      {/* <item.icon
+                                    <NextLink href={item.href}>
+                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
                                       /> */}
-                                      <Image
-                                        src={'/img/vaionex-icon.png'}
-                                        width={20}
-                                        height={20}
-                                        alt="element-icons"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
+                                        <Image
+                                          src={'/img/vaionex-icon.png'}
+                                          width={20}
+                                          height={20}
+                                          alt="element-icons"
+                                        />
+                                        <span className="ml-4">
+                                          {item.name}
+                                        </span>
+                                      </a>
+                                    </NextLink>
                                   </li>
                                 ))}
                               </ul>
@@ -341,22 +347,23 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {applicationUi.slice(20, 30).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      {/* <item.icon
+                                    <NextLink href={item.href}>
+                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
                                       /> */}
-                                      <Image
-                                        src={'/img/vaionex-icon.png'}
-                                        width={20}
-                                        height={20}
-                                        alt="element-icons"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
+                                        <Image
+                                          src={'/img/vaionex-icon.png'}
+                                          width={20}
+                                          height={20}
+                                          alt="element-icons"
+                                        />
+                                        <span className="ml-4">
+                                          {item.name}
+                                        </span>
+                                      </a>
+                                    </NextLink>
                                   </li>
                                 ))}
                               </ul>
@@ -368,22 +375,23 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {applicationUi.slice(30).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      {/* <item.icon
+                                    <NextLink href={item.href}>
+                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
                                       /> */}
-                                      <Image
-                                        src={'/img/vaionex-icon.png'}
-                                        width={20}
-                                        height={20}
-                                        alt="element-icons"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
+                                        <Image
+                                          src={'/img/vaionex-icon.png'}
+                                          width={20}
+                                          height={20}
+                                          alt="element-icons"
+                                        />
+                                        <span className="ml-4">
+                                          {item.name}
+                                        </span>
+                                      </a>
+                                    </NextLink>
                                   </li>
                                 ))}
                               </ul>
@@ -395,22 +403,23 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {ecommerce.map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <a
-                                      href={item.href}
-                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                                    >
-                                      {/* <item.icon
+                                    <NextLink href={item.href}>
+                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {/* <item.icon
                                         className="flex-shrink-0 h-6 w-6 text-gray-400"
                                         aria-hidden="true"
                                       /> */}
-                                      <Image
-                                        src={'/img/vaionex-icon.png'}
-                                        width={20}
-                                        height={20}
-                                        alt="element-icons"
-                                      />
-                                      <span className="ml-4">{item.name}</span>
-                                    </a>
+                                        <Image
+                                          src={'/img/vaionex-icon.png'}
+                                          width={20}
+                                          height={20}
+                                          alt="element-icons"
+                                        />
+                                        <span className="ml-4">
+                                          {item.name}
+                                        </span>
+                                      </a>
+                                    </NextLink>
                                   </li>
                                 ))}
                               </ul>
@@ -462,28 +471,30 @@ export default function Example() {
                           {({ active }) => {
                             if (item.name === 'Sign out') {
                               return (
-                                <a
-                                  href={item.href}
-                                  onClick={() => signOut()}
-                                  className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700',
-                                  )}
-                                >
-                                  {item.name}
-                                </a>
+                                <NextLink href={item.href}>
+                                  <a
+                                    onClick={() => signOut()}
+                                    className={classNames(
+                                      active ? 'bg-gray-100' : '',
+                                      'block px-4 py-2 text-sm text-gray-700',
+                                    )}
+                                  >
+                                    {item.name}
+                                  </a>
+                                </NextLink>
                               )
                             } else {
                               return (
-                                <a
-                                  href={item.href}
-                                  className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700',
-                                  )}
-                                >
-                                  {item.name}
-                                </a>
+                                <NextLink href={item.href}>
+                                  <a
+                                    className={classNames(
+                                      active ? 'bg-gray-100' : '',
+                                      'block px-4 py-2 text-sm text-gray-700',
+                                    )}
+                                  >
+                                    {item.name}
+                                  </a>
+                                </NextLink>
                               )
                             }
                           }}
@@ -493,108 +504,6 @@ export default function Example() {
                   </Transition>
                 </Menu>
               ) : (
-                // (
-                //   <Menu
-                //     as="div"
-                //     className=" h-10 w-10 rounded-full overflow-hidden bg-gray-100"
-                //   >
-                //     <Menu.Button className="h-10 w-10 rounded-full overflow-hidden bg-gray-100">
-                //       <span className="flex relative w-full h-full rounded-full overflow-hidden bg-gray-100">
-                //         {auth.userPhotoURL ? (
-                //           <Image
-                //             src={auth.userPhotoURL}
-                //             objectFit="cover"
-                //             layout="fill"
-                //             alt="profile-photo"
-                //           />
-                //         ) : (
-                //           <svg
-                //             className="h-full w-full text-gray-300"
-                //             fill="currentColor"
-                //             viewBox="0 0 24 24"
-                //           >
-                //             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                //           </svg>
-                //         )}
-                //       </span>
-                //     </Menu.Button>
-                //     <Transition
-                //       as={Fragment}
-                //       enter="transition ease-out duration-100"
-                //       enterFrom="transform opacity-0 scale-95"
-                //       enterTo="transform opacity-100 scale-100"
-                //       leave="transition ease-in duration-75"
-                //       leaveFrom="transform opacity-100 scale-100"
-                //       leaveTo="transform opacity-0 scale-95"
-                //     >
-                //       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                //         <div className="py-1">
-                //           <Menu.Item>
-                //             {({ active }) => (
-                //               <a
-                //                 href="/user-profile"
-                //                 className={classNames(
-                //                   active
-                //                     ? 'bg-gray-100 text-gray-900'
-                //                     : 'text-gray-700',
-                //                   'block px-4 py-2 text-sm',
-                //                 )}
-                //               >
-                //                 Account settings
-                //               </a>
-                //             )}
-                //           </Menu.Item>
-                //           <Menu.Item>
-                //             {({ active }) => (
-                //               <a
-                //                 href="#"
-                //                 className={classNames(
-                //                   active
-                //                     ? 'bg-gray-100 text-gray-900'
-                //                     : 'text-gray-700',
-                //                   'block px-4 py-2 text-sm',
-                //                 )}
-                //               >
-                //                 Support
-                //               </a>
-                //             )}
-                //           </Menu.Item>
-                //           <Menu.Item>
-                //             {({ active }) => (
-                //               <a
-                //                 href="#"
-                //                 className={classNames(
-                //                   active
-                //                     ? 'bg-gray-100 text-gray-900'
-                //                     : 'text-gray-700',
-                //                   'block px-4 py-2 text-sm',
-                //                 )}
-                //               >
-                //                 License
-                //               </a>
-                //             )}
-                //           </Menu.Item>
-                //           <Menu.Item>
-                //             {({ active }) => (
-                //               <button
-                //                 onClick={() => signOut()}
-                //                 type="submit"
-                //                 className={classNames(
-                //                   active
-                //                     ? 'bg-gray-100 text-gray-900'
-                //                     : 'text-gray-700',
-                //                   'block w-full text-left px-4 py-2 text-sm',
-                //                 )}
-                //               >
-                //                 Sign out
-                //               </button>
-                //             )}
-                //           </Menu.Item>
-                //         </div>
-                //       </Menu.Items>
-                //     </Transition>
-                //   </Menu>
-                // )
                 <>
                   <NextLink href="/login">
                     <a className="text-base font-medium text-gray-500 hover:text-gray-900">
