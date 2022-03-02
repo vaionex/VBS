@@ -1,7 +1,6 @@
 import {
   firebaseAuth,
   firebaseDb,
-  firebaseGoogleProvider,
 } from '@/firebase/init'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import {
@@ -81,6 +80,7 @@ const firebaseGetAuthorizedUser = () => {
 
 const firebaseLoginWithGoogle = async () => {
   try {
+    const firebaseGoogleProvider = new GoogleAuthProvider()
     const userInfo = await signInWithPopup(firebaseAuth, firebaseGoogleProvider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
