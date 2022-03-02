@@ -43,7 +43,7 @@ function LoginForm() {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const { user } = await firebaseLogin(formData)
     if (user) {

@@ -52,11 +52,13 @@ function App({ Component, pageProps }) {
     // return () => unsubscribe
   }, [])
 
-  return render && (
-    <Provider store={store}>
-      <GetCurrentUser />
-      <Component {...pageProps} />
-    </Provider>
+  return (
+    render && (
+      <Provider store={store}>
+        <GetCurrentUser />
+        <Component {...pageProps} />
+      </Provider>
+    )
   )
 }
 
