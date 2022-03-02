@@ -43,9 +43,14 @@ function LoginForm() {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-    firebaseLogin(formData)
+    const { user } = await firebaseLogin(formData)
+    if (user) {
+      dispatch(setUserData(user.displayName))
+      dispatch(setAuthenticated())
+      router.replace('/')
+    }
   }
 
   const handleGoogleAuth = async () => {
