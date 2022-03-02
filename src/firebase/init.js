@@ -8,7 +8,6 @@ const firebaseApp = getApps().length === 0 ? initializeApp(config) : getApps()
 const firebaseDb = getFirestore(firebaseApp)
 const firebaseAuth = getAuth(firebaseApp)
 const firebaseStorage = getStorage(firebaseApp)
-const firebaseGoogleProvider = new GoogleAuthProvider()
 const fireBaseSignOut = async () => await signOut(firebaseAuth)
 
 export {
@@ -16,6 +15,5 @@ export {
   firebaseAuth,
   firebaseDb,
   firebaseStorage,
-  firebaseGoogleProvider,
   fireBaseSignOut,
 }
