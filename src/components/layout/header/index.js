@@ -71,8 +71,6 @@ export default function Example() {
     await fireBaseSignOut()
     dispatch(setResetAuth())
   }
-
-  console.log(auth)
   return (
     <Popover className="relative bg-white">
       <div

@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import store from '@/redux/store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { firebaseApp } from '@/firebase/init'
 import { getAnalytics, initializeAnalytics } from 'firebase/analytics'
 import GetCurrentUser from '@/components/elements/GetCurrentUser'
@@ -14,6 +14,7 @@ import {
 } from '@/redux/slices/auth'
 
 function App({ Component, pageProps }) {
+  const [render, setRender] = useState(false)
   useEffect(() => {
     //firebase setup
     initializeAnalytics(firebaseApp)
@@ -32,6 +33,7 @@ function App({ Component, pageProps }) {
             store.dispatch(setUserData(currentUser.displayName))
             store.dispatch(setUserProfilePic(currentUser.photoURL))
           }
+          setRender(true)
         },
         reject,
       )
@@ -50,7 +52,7 @@ function App({ Component, pageProps }) {
     // return () => unsubscribe
   }, [])
 
-  return (
+  return render && (
     <Provider store={store}>
       <GetCurrentUser />
       <Component {...pageProps} />
