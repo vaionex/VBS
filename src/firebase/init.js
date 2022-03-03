@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
-import { getAuth, GoogleAuthProvider, signOut } from 'firebase/auth'
+import { getAuth, signOut } from 'firebase/auth'
 import { getStorage } from 'firebase/storage'
 import config from './config'
 
