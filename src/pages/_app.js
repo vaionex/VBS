@@ -15,45 +15,51 @@ import {
 
 function App({ Component, pageProps }) {
   const [render, setRender] = useState(false)
+  const [init, setInit] = useState(false)
   useEffect(() => {
     //firebase setup
-    initializeAnalytics(firebaseApp)
-    getAnalytics(firebaseApp)
-    const auth = getAuth()
-    // eslint-disable-next-line no-undef
-    new Promise((resolve, reject) => {
-      resolve(auth.currentUser)
-      const unsubscribe = onAuthStateChanged(
-        auth,
-        (currentUser) => {
-          unsubscribe()
-          resolve(currentUser)
-          if (currentUser) {
-            store.dispatch(setAuthenticated())
-            store.dispatch(setUserData(currentUser.displayName))
-            store.dispatch(setUserProfilePic(currentUser.photoURL))
-          }
-          setRender(true)
-        },
-        reject,
-      )
-    }).then((currentUser) => {
-      if (currentUser) {
-        store.dispatch(setAuthenticated())
-        store.dispatch(setUserData(currentUser.displayName))
-        store.dispatch(setUserProfilePic(currentUser.photoURL))
-      }
-    })
+    if (render) {
+      initializeAnalytics(firebaseApp)
+      getAnalytics(firebaseApp)
+      const auth = getAuth()
+      // eslint-disable-next-line no-undef
+      new Promise((resolve, reject) => {
+        resolve(auth.currentUser)
+        const unsubscribe = onAuthStateChanged(
+          auth,
+          (currentUser) => {
+            unsubscribe()
+            resolve(currentUser)
+            if (currentUser) {
+              store.dispatch(setAuthenticated())
+              store.dispatch(setUserData(currentUser.displayName))
+              store.dispatch(setUserProfilePic(currentUser.photoURL))
+            }
+            setInit(true)
+          },
+          reject,
+        )
+      }).then((currentUser) => {
+        if (currentUser) {
+          store.dispatch(setAuthenticated())
+          store.dispatch(setUserData(currentUser.displayName))
+          store.dispatch(setUserProfilePic(currentUser.photoURL))
+        }
+      })
+    } else {
+      setRender(true)
+    }
+
     // const checkUser = localStorage.getItem('auth_user')
     // if (checkUser) {
     //   store.dispatch(setAuthenticated())
     // }
     // const unsubscribe = firebaseGetAuthorizedUser()
     // return () => unsubscribe
-  }, [])
+  }, [render])
 
   return (
-    render && (
+    init && (
       <Provider store={store}>
         <GetCurrentUser />
         <Component {...pageProps} />

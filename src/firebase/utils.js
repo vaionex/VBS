@@ -1,7 +1,4 @@
-import {
-  firebaseAuth,
-  firebaseDb,
-} from '@/firebase/init'
+import { firebaseAuth, firebaseDb } from '@/firebase/init'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import {
   signInWithEmailAndPassword,
