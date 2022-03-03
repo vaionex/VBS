@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable @next/next/no-img-element */
 
-import { firebaseLogin, firebaseLoginWithGoogle } from '@/firebase/utils'
+import { firebaseLoginWithGoogle } from '@/firebase/utils'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-
 import { FormInput } from '@/components/elements/ui'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   setUserData,
   setUserProfilePic,
   setAuthenticated,
+  login,
 } from '@/redux/slices/auth'
 
 const inputAttributes = [
@@ -32,6 +32,7 @@ const inputAttributes = [
 function LoginForm() {
   const dispatch = useDispatch()
   const router = useRouter()
+  const auth = useSelector((state) => state.auth)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -45,9 +46,8 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { user } = await firebaseLogin(formData)
+    const user = await dispatch(login(formData)).unwrap()
     if (user) {
-      dispatch(setUserData(user.displayName))
       dispatch(setAuthenticated())
       router.replace('/')
     }
@@ -117,8 +117,13 @@ function LoginForm() {
 
             <div>
               <button
+                disabled={auth.isPending ? true : false}
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                  auth.isPending
+                    ? 'bg-gray-100'
+                    : 'bg-indigo-600 hover:bg-indigo-700'
+                } transition ease-in-out delay-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
               >
                 Sign in
               </button>
