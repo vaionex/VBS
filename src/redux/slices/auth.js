@@ -17,10 +17,8 @@ const initialState = {
 export const login = createAsyncThunk(
   'auth/login',
   async (request, thunkAPI) => {
-    const { email, password } = request
-
     try {
-      const user = await firebaseLogin(email, password)
+      const user = await firebaseLogin(request)
       return user
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message })
@@ -39,9 +37,8 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 export const register = createAsyncThunk(
   'user/signupUser',
   async (request, thunkAPI) => {
-    const { email, password, username } = request
     try {
-      const user = await firebaseRegister(email, password, username)
+      const user = await firebaseRegister(request)
       return user
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message })
@@ -68,6 +65,32 @@ const authSlice = createSlice({
         (state.isPending = false),
         (state.isError = false),
         (state.isAuthenticated = false)
+    },
+  },
+  extraReducers: {
+    [login.pending]: (state, action) => {
+      state.isPending = true
+      state.isError = null
+    },
+    [login.rejected]: (state, action) => {
+      state.isPending = false
+      state.isError = action.error
+    },
+    [login.fulfilled]: (state, action) => {
+      state.isPending = false
+      state.user = action.payload
+    },
+    [register.pending]: (state, action) => {
+      state.isPending = true
+      state.isError = null
+    },
+    [register.rejected]: (state, action) => {
+      state.isPending = false
+      state.isError = action.error
+    },
+    [register.fulfilled]: (state, action) => {
+      state.isPending = false
+      state.user = action.payload
     },
   },
 })

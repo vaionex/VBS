@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { firebaseRegister, firebaseLoginWithGoogle } from '@/firebase/utils'
 import { FormInput } from '@/components/elements/ui'
@@ -14,20 +14,15 @@ import {
   setUserData,
   setAuthenticated,
   setUserProfilePic,
+  register,
 } from '@/redux/slices/auth'
 
 const inputAttributes = [
   {
     type: 'text',
-    placeholder: 'First Name',
-    name: 'firstname',
-    label: 'First Name',
-  },
-  {
-    type: 'text',
-    placeholder: 'Last Name',
-    name: 'lastname',
-    label: 'Last Name',
+    placeholder: 'Username',
+    name: 'username',
+    label: 'User Name',
   },
   {
     type: 'email',
@@ -46,6 +41,7 @@ const inputAttributes = [
 function RegisterForm() {
   const dispatch = useDispatch()
   const router = useRouter()
+  const auth = useSelector((state) => state.auth)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -59,7 +55,11 @@ function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    let userRes = await firebaseRegister(formData)
+    const user = await dispatch(register(formData)).unwrap()
+    if (user) {
+      dispatch(setAuthenticated())
+      router.replace('/')
+    }
   }
 
   const handleGoogleAuth = async () => {
@@ -126,10 +126,15 @@ function RegisterForm() {
 
             <div>
               <button
+                disabled={auth.isPending ? true : false}
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                  auth.isPending
+                    ? 'bg-gray-100'
+                    : 'bg-indigo-600 hover:bg-indigo-700'
+                } transition ease-in-out delay-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
               >
-                Sign in
+                Sign up
               </button>
             </div>
           </form>

@@ -24,23 +24,22 @@ const firebaseLogin = async ({ email, password }) => {
   try {
     const user = await signInWithEmailAndPassword(firebaseAuth, email, password)
 
-    return user
+    return user?.user?.displayName
   } catch (error) {
     console.error(error)
   }
 }
 
-const firebaseRegister = async ({ firstname, lastname, email, password }) => {
+const firebaseRegister = async ({ username, email, password }) => {
   try {
     await createUserWithEmailAndPassword(firebaseAuth, email, password)
 
     await updateProfile(firebaseAuth.currentUser, {
-      displayName: `${firstname} ${lastname}`,
+      displayName: `${username}`,
     })
 
     const infos = {
-      name: firstname,
-      lastname: lastname,
+      username: username,
       displayName: firebaseAuth.currentUser.displayName,
       email: firebaseAuth.currentUser.email,
       uid: firebaseAuth.currentUser.uid,
@@ -51,7 +50,7 @@ const firebaseRegister = async ({ firstname, lastname, email, password }) => {
 
     const user = await firebaseGetUserInfoFromDb(firebaseAuth.currentUser.uid)
 
-    return user
+    return user.displayName
   } catch (error) {
     console.error(error)
   }
