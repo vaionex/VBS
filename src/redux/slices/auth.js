@@ -10,7 +10,7 @@ const initialState = {
   user: null,
   userPhotoURL: null,
   isPending: false,
-  isError: false,
+  errorMessage: null,
   isAuthenticated: false,
 }
 
@@ -19,9 +19,10 @@ export const login = createAsyncThunk(
   async (request, thunkAPI) => {
     try {
       const user = await firebaseLogin(request)
-      return user
+      if (user && !user?.error) return user
+      else throw user?.error
     } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message })
+      return thunkAPI.rejectWithValue(error)
     }
   },
 )
@@ -39,9 +40,10 @@ export const register = createAsyncThunk(
   async (request, thunkAPI) => {
     try {
       const user = await firebaseRegister(request)
-      return user
+      if (user && !user?.error) return user
+      else throw user?.error
     } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message })
+      return thunkAPI.rejectWithValue(error)
     }
   },
 )
@@ -63,18 +65,18 @@ const authSlice = createSlice({
       ;(state.user = null),
         (state.userPhotoURL = null),
         (state.isPending = false),
-        (state.isError = false),
+        (state.errorMessage = null),
         (state.isAuthenticated = false)
     },
   },
   extraReducers: {
     [login.pending]: (state, action) => {
       state.isPending = true
-      state.isError = null
+      state.errorMessage = null
     },
     [login.rejected]: (state, action) => {
       state.isPending = false
-      state.isError = action.error
+      state.errorMessage = action.payload
     },
     [login.fulfilled]: (state, action) => {
       state.isPending = false
@@ -82,11 +84,11 @@ const authSlice = createSlice({
     },
     [register.pending]: (state, action) => {
       state.isPending = true
-      state.isError = null
+      state.errorMessage = null
     },
     [register.rejected]: (state, action) => {
       state.isPending = false
-      state.isError = action.error
+      state.errorMessage = action.payload
     },
     [register.fulfilled]: (state, action) => {
       state.isPending = false

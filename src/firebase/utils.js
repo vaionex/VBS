@@ -26,7 +26,7 @@ const firebaseLogin = async ({ email, password }) => {
 
     return user?.user?.displayName
   } catch (error) {
-    console.error(error)
+    return { error: 'Incorrect email or password.' }
   }
 }
 
@@ -52,7 +52,7 @@ const firebaseRegister = async ({ username, email, password }) => {
 
     return user.displayName
   } catch (error) {
-    console.error(error)
+    return { error: 'Email has already been taken.' }
   }
 }
 

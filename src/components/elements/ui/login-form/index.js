@@ -5,6 +5,7 @@ import { firebaseLoginWithGoogle } from '@/firebase/utils'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { FormInput } from '@/components/elements/ui'
+import Alert from '@/components/layout/alerts/alert'
 
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -47,7 +48,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const user = await dispatch(login(formData)).unwrap()
-    if (user) {
+    if (user && !user?.error) {
       dispatch(setAuthenticated())
       router.replace('/')
     }
@@ -77,6 +78,11 @@ function LoginForm() {
         </h2>
       </div>
 
+      <div className="flex justify-center pt-2">
+        {auth.errorMessage && (
+          <Alert message={auth.errorMessage} type="error" />
+        )}
+      </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
