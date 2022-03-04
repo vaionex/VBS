@@ -27,7 +27,7 @@ const colorType = {
 
 export default function Alert({ message, type }) {
   return (
-    <div className={`rounded-md bg-${colorType[type]}-50 p-4 w-96`}>
+    <div className={`rounded-md bg-${colorType[type]}-50 p-4 max-w-md w-full`}>
       <div className="flex justify-center">
         <div className="flex-shrink-0">{types(type)}</div>
         <div className="ml-3">
