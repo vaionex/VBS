@@ -25,6 +25,7 @@ import {
   UserIcon,
 } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import WithAuthProtection from 'src/hooks/authProtection'
 
 const user = {
   name: 'Whitney Francis',
@@ -127,7 +128,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+const UserProfile = () => {
   return (
     <>
       {/*
@@ -484,3 +485,5 @@ export default function Example() {
     </>
   )
 }
+
+export default WithAuthProtection(UserProfile)
