@@ -17,8 +17,7 @@ import {
 } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
-import { setResetAuth } from '@/redux/slices/auth'
-import { fireBaseSignOut } from '@/firebase/init'
+import { logout } from '@/redux/slices/auth'
 
 const solutions = [
   {
@@ -67,9 +66,9 @@ export default function Example() {
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
 
-  const signOut = async () => {
-    await fireBaseSignOut()
-    dispatch(setResetAuth())
+  const signOut = async (e) => {
+    e.preventDefault()
+    await dispatch(logout()).unwrap()
   }
   return (
     <Popover className="relative bg-white">
@@ -471,7 +470,7 @@ export default function Example() {
                               return (
                                 <NextLink href={item.href}>
                                   <a
-                                    onClick={() => signOut()}
+                                    onClick={(e) => signOut(e)}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700',

@@ -94,6 +94,22 @@ const authSlice = createSlice({
       state.isPending = false
       state.user = action.payload
     },
+    [logout.pending]: (state, action) => {
+      state.isPending = true
+      state.errorMessage = null
+    },
+    [logout.rejected]: (state, action) => {
+      state.isPending = false
+      state.errorMessage = action.payload
+    },
+    [logout.fulfilled]: (state, action) => {
+      state.isPending = false
+      state.user = null
+      state.userPhotoURL = null
+      state.isPending = false
+      state.errorMessage = null
+      state.isAuthenticated = false
+    },
   },
 })
 
