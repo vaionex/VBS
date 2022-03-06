@@ -291,7 +291,7 @@ export default function Server({ slug }) {
         return (
           <div key={index} className="py-4">
             <div className="w-3/4 mx-auto h-full translate-x-0 border-b border-gray-400 bg-white p-2">
-              <div className="min-w-full p-1 my-5 min-h-[1000px]">
+              <div className="min-w-full p-1 my-5 min-h-[750px]">
                 <h3 className="text-sm font-medium p-2 tracking-wide text-gray-500 uppercase">
                   {Component.name}
                 </h3>
