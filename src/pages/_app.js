@@ -7,11 +7,7 @@ import { firebaseApp } from '@/firebase/init'
 import { getAnalytics, initializeAnalytics } from 'firebase/analytics'
 import GetCurrentUser from '@/components/elements/GetCurrentUser'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import {
-  setAuthenticated,
-  setUserData,
-  setUserProfilePic,
-} from '@/redux/slices/auth'
+import { setAuthenticated, setUserData } from '@/redux/slices/auth'
 
 function App({ Component, pageProps }) {
   const [render, setRender] = useState(false)
@@ -32,30 +28,36 @@ function App({ Component, pageProps }) {
             resolve(currentUser)
             if (currentUser) {
               store.dispatch(setAuthenticated())
-              store.dispatch(setUserData(currentUser.displayName))
-              store.dispatch(setUserProfilePic(currentUser.photoURL))
+              store.dispatch(
+                setUserData({
+                  name: currentUser.displayName,
+                  uid: currentUser.uid,
+                  email: currentUser.email,
+                  photoURL: currentUser.photoURL,
+                }),
+              )
             }
             setInit(true)
           },
           reject,
         )
+        return () => unsubscribe
       }).then((currentUser) => {
         if (currentUser) {
           store.dispatch(setAuthenticated())
-          store.dispatch(setUserData(currentUser.displayName))
-          store.dispatch(setUserProfilePic(currentUser.photoURL))
+          store.dispatch(
+            setUserData({
+              name: currentUser.displayName,
+              uid: currentUser.uid,
+              email: currentUser.email,
+              photoURL: currentUser.photoURL,
+            }),
+          )
         }
       })
     } else {
       setRender(true)
     }
-
-    // const checkUser = localStorage.getItem('auth_user')
-    // if (checkUser) {
-    //   store.dispatch(setAuthenticated())
-    // }
-    // const unsubscribe = firebaseGetAuthorizedUser()
-    // return () => unsubscribe
   }, [render])
 
   return (

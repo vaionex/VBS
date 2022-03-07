@@ -1,11 +1,20 @@
 import { firebaseAuth, firebaseDb } from '@/firebase/init'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  deleteObject,
+  getDownloadURL,
+  listAll,
+} from 'firebase/storage'
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
   GoogleAuthProvider,
   signInWithPopup,
+  updatePassword,
 } from 'firebase/auth'
 import store from '@/redux/store'
 import { setUserData } from '@/redux/slices/auth'
@@ -22,9 +31,13 @@ const firebaseGetUserInfoFromDb = async (id) => {
 
 const firebaseLogin = async ({ email, password }) => {
   try {
-    const user = await signInWithEmailAndPassword(firebaseAuth, email, password)
-
-    return user?.user?.displayName
+    const auth = await signInWithEmailAndPassword(firebaseAuth, email, password)
+    return {
+      name: auth.user.displayName,
+      uid: auth.user.uid,
+      email: auth.user.email,
+      photoURL: auth.user.photoURL,
+    }
   } catch (error) {
     return { error: 'Incorrect email or password.' }
   }
@@ -39,10 +52,10 @@ const firebaseRegister = async ({ username, email, password }) => {
     })
 
     const infos = {
-      username: username,
       displayName: firebaseAuth.currentUser.displayName,
       email: firebaseAuth.currentUser.email,
       uid: firebaseAuth.currentUser.uid,
+      photoPATH: firebaseAuth.currentUser.photoURL,
       createdAt: firebaseAuth.currentUser.metadata.creationTime,
     }
 
@@ -64,10 +77,16 @@ const firebaseGetAuthorizedUser = () => {
   const fn = firebaseAuth.onAuthStateChanged(async (userResponse) => {
     if (userResponse) {
       const user = await firebaseGetUserInfoFromDb(userResponse.uid)
-      store.dispatch(setUserData(user))
-      localStorage.setItem('auth_user', JSON.stringify(user))
+      store.dispatch(
+        setUserData({
+          name: user.displayName,
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL,
+        }),
+      )
     } else {
-      localStorage.removeItem('auth_user')
+      console.log('not auth')
     }
   })
 
@@ -102,10 +121,92 @@ const firebaseLoginWithGoogle = async () => {
   }
 }
 
+const firebaseResetPassword = async (user, newPassword) => {
+  try {
+    await updatePassword(user, newPassword)
+
+    return { success: 'Password change successful.' }
+  } catch (error) {
+    console.log(error)
+    return {
+      error: error.message,
+    }
+  }
+}
+
+const firebaseUpdateProfilePicture = async ({ user, file, filePath }) => {
+  if (user && file && filePath) {
+    const storage = getStorage()
+    const userInfoFromDb = await firebaseGetUserInfoFromDb(user.uid)
+    const userRef = doc(firebaseDb, 'users', user.uid)
+    const fileRef = ref(storage, filePath)
+    const oldRef = ref(storage, userInfoFromDb.photoPATH)
+
+    await uploadBytes(fileRef, file).then(async (snapshot) => {
+      const firebaseProfileURL = await getDownloadURL(snapshot.ref)
+      await updateProfile(user, {
+        photoURL: firebaseProfileURL,
+      }).then(async () => {
+        if (userInfoFromDb.photoPATH) {
+          deleteObject(oldRef).catch((error) => console.log(error))
+        }
+        store.dispatch(
+          setUserData({
+            name: userInfoFromDb.displayName,
+            uid: userInfoFromDb.uid,
+            email: userInfoFromDb.email,
+            photoURL: firebaseProfileURL,
+          }),
+        )
+        await updateDoc(userRef, {
+          ...userInfoFromDb,
+          photoPATH: filePath,
+        })
+      })
+    })
+    return { message: 'successful' }
+  }
+  return { message: 'fail' }
+}
+
+const firebaseUpdateProfilDetails = async ({
+  user,
+  password,
+  username,
+  photoURL,
+}) => {
+  const userInfoFromDb = await firebaseGetUserInfoFromDb(user.uid)
+  const userRef = doc(firebaseDb, 'users', user.uid)
+  if (username) {
+    await updateProfile(user, {
+      displayName: username,
+    }).then(async () => {
+      await updateDoc(userRef, {
+        ...userInfoFromDb,
+        displayName: username,
+        username: username,
+      })
+      store.dispatch(
+        setUserData({
+          name: username,
+          uid: userInfoFromDb.uid,
+          email: userInfoFromDb.email,
+          photoURL: photoURL,
+        }),
+      )
+    })
+  }
+  if (password) {
+    await firebaseResetPassword(user, password)
+  }
+}
+
 export {
   firebaseLogin,
   firebaseRegister,
   firebaseGetAuthorizedUser,
   firebaseLogout,
+  firebaseUpdateProfilePicture,
+  firebaseUpdateProfilDetails,
   firebaseLoginWithGoogle,
 }
