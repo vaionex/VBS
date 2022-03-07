@@ -11,3 +11,7 @@
     @apply h-full;
   }
 }
+
+input[type='email']:disabled {
+  @apply bg-gray-200;
+}

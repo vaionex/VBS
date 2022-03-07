@@ -11,12 +11,7 @@ import Alert from '@/components/layout/alerts/alert'
 import apiConfig from '@/config/relysiaApi'
 import { createwallet } from '@/services/relysia-queries'
 import { firebaseAuth } from '@/firebase/init'
-import {
-  setUserData,
-  setAuthenticated,
-  setUserProfilePic,
-  register,
-} from '@/redux/slices/auth'
+import { setUserData, setAuthenticated, register } from '@/redux/slices/auth'
 
 const inputAttributes = [
   {
@@ -67,8 +62,14 @@ function RegisterForm() {
     // eslint-disable-next-line no-undef
     const userInfo = await firebaseLoginWithGoogle()
     if (userInfo) {
-      dispatch(setUserData(userInfo.displayName))
-      dispatch(setUserProfilePic(userInfo.photoURL))
+      dispatch(
+        setUserData({
+          name: userInfo.displayName,
+          uid: userInfo.uid,
+          email: userInfo.email,
+          photoURL: userInfo.photoURL,
+        }),
+      )
       dispatch(setAuthenticated())
       router.replace('/')
     }

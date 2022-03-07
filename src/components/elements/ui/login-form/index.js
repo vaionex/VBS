@@ -8,12 +8,7 @@ import { FormInput } from '@/components/elements/ui'
 import Alert from '@/components/layout/alerts/alert'
 
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setUserData,
-  setUserProfilePic,
-  setAuthenticated,
-  login,
-} from '@/redux/slices/auth'
+import { setAuthenticated, login } from '@/redux/slices/auth'
 
 const inputAttributes = [
   {
@@ -58,8 +53,6 @@ function LoginForm() {
     // eslint-disable-next-line no-undef
     const userInfo = await firebaseLoginWithGoogle()
     if (userInfo) {
-      dispatch(setUserData(userInfo.displayName))
-      dispatch(setUserProfilePic(userInfo.photoURL))
       dispatch(setAuthenticated())
       router.replace('/')
     }
