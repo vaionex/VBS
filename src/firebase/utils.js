@@ -97,12 +97,41 @@ const firebaseLoginWithGoogle = async () => {
   try {
     const firebaseGoogleProvider = new GoogleAuthProvider()
     const userInfo = await signInWithPopup(firebaseAuth, firebaseGoogleProvider)
-      .then((result) => {
+      .then(async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result)
         const token = credential?.accessToken
         // The signed-in user info.
         const user = result.user
+        const userInfoFromDb = await firebaseGetUserInfoFromDb(user.uid)
+        if (!userInfoFromDb) {
+          const infos = {
+            displayName: user.displayName,
+            email: user.email,
+            uid: user.uid,
+            photoPATH: null,
+            createdAt: user.metadata.creationTime,
+          }
+
+          await setDoc(doc(firebaseDb, 'users', user.uid), infos)
+          store.dispatch(
+            setUserData({
+              name: user.displayName,
+              uid: user.uid,
+              email: user.email,
+              photoURL: user.photoURL,
+            }),
+          )
+        } else {
+          store.dispatch(
+            setUserData({
+              name: user.displayName,
+              uid: user.uid,
+              email: user.email,
+              photoURL: user.photoURL,
+            }),
+          )
+        }
         return { credential, token, user }
       })
       .catch((error) => {
