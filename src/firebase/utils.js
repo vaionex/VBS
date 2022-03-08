@@ -15,6 +15,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   updatePassword,
+  updateEmail,
 } from 'firebase/auth'
 import store from '@/redux/store'
 import { setUserData } from '@/redux/slices/auth'
@@ -202,6 +203,7 @@ const firebaseUpdateProfilDetails = async ({
   user,
   password,
   username,
+  email,
   photoURL,
 }) => {
   const userInfoFromDb = await firebaseGetUserInfoFromDb(user.uid)
@@ -225,8 +227,32 @@ const firebaseUpdateProfilDetails = async ({
       )
     })
   }
+  if (email) {
+    await updateUserEmail(user, email, photoURL)
+  }
   if (password) {
     await firebaseResetPassword(user, password)
+  }
+}
+
+const updateUserEmail = async (user, email, photoURL) => {
+  try {
+    await updateEmail(user, email)
+    store.dispatch(
+      setUserData({
+        name: user.displayName,
+        uid: user.uid,
+        email: email,
+        photoURL: photoURL,
+      }),
+    )
+
+    return { success: 'Email has been updated.' }
+  } catch (error) {
+    console.log(error)
+    return {
+      error: error.message,
+    }
   }
 }
 

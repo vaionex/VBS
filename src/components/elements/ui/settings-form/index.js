@@ -26,6 +26,7 @@ export default function Settings() {
 
   const [formData, setFormData] = useState({
     username: '',
+    email: '',
     password: '',
     confirmPassword: '',
   })
@@ -69,6 +70,7 @@ export default function Settings() {
     setInfoLoading(true)
     let newPassword = null
     let newUsername = null
+    let newEmail = null
     if (formData.password.length > 0) {
       if (formData.password.length < 6) {
         setPopup(() => ({
@@ -103,10 +105,24 @@ export default function Settings() {
         newUsername = formData.username
       }
     }
-    if (!newPassword && !newUsername) {
+    if (formData.email.length > 0) {
+      if (formData.email === auth.user.email) {
+        setPopup(() => ({
+          message:
+            'Be sure to enter an email that is different from your current email address',
+          messageType: 'fail',
+          state: true,
+        }))
+        setInfoLoading(false)
+        return
+      } else {
+        newEmail = formData.email
+      }
+    }
+    if (!newPassword && !newUsername && !newEmail) {
       setPopup(() => ({
         message: "You've made no changes",
-        messageType: 'success',
+        messageType: 'fail',
         state: true,
       }))
       setInfoLoading(false)
@@ -116,6 +132,7 @@ export default function Settings() {
       user: authUser.currentUser,
       password: newPassword,
       username: newUsername,
+      email: newEmail,
       photoURL: auth.user.photoURL,
     }).then(() => {
       setPopup(() => ({
@@ -226,7 +243,7 @@ export default function Settings() {
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   <input
                     type="text"
-                    defaultValue={auth.user.name}
+                    placeholder={auth.user.name}
                     name="username"
                     id="username"
                     onChange={handleChange}
@@ -246,12 +263,12 @@ export default function Settings() {
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   <input
                     type="email"
-                    defaultValue={auth.user.email}
-                    disabled
+                    placeholder={auth.user.email}
                     name="email"
                     id="email"
+                    onChange={handleChange}
                     autoComplete="given-name"
-                    className="max-w-lg block w-full shadow-sm text-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
               </div>
