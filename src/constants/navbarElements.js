@@ -235,11 +235,11 @@ export const applicationUi = [
     href: '/components/application-ui/steps',
     icon: BriefcaseIcon,
   },
-  {
-    name: 'Command Palettes',
-    href: '/components/application-ui/commandpalet',
-    icon: BriefcaseIcon,
-  },
+  // {
+  //   name: 'Command Palettes',
+  //   href: '/components/application-ui/commandpalet',
+  //   icon: BriefcaseIcon,
+  // },
   {
     name: 'Modals',
     href: '/components/application-ui/modals',
