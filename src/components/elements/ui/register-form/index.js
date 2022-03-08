@@ -5,12 +5,11 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { firebaseRegister, firebaseLoginWithGoogle } from '@/firebase/utils'
+import { firebaseLoginWithGoogle } from '@/firebase/utils'
 import { FormInput } from '@/components/elements/ui'
 import Alert from '@/components/layout/alerts/alert'
 import apiConfig from '@/config/relysiaApi'
 import { createwallet } from '@/services/relysia-queries'
-import { firebaseAuth } from '@/firebase/init'
 import { setUserData, setAuthenticated, register } from '@/redux/slices/auth'
 
 const inputAttributes = [
