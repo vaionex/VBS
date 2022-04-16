@@ -1,7 +1,7 @@
-import Layout from '@/components/layout'
-import MainContent from '@/components/layout/main-content'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+
+import Layout from '@/components/layout'
+import HomePage from '@/components/pages/home'
 
 export default function Home() {
   return (
@@ -13,11 +13,7 @@ export default function Home() {
       </Head>
 
       <Layout>
-        <MainContent>
-          <h1 className={styles.title}>
-            Welcome to <a href="https://vaionex.com">Vaionex</a>
-          </h1>
-        </MainContent>
+        <HomePage />
       </Layout>
     </div>
   )

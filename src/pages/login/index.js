@@ -1,12 +1,20 @@
-import LoginForm from '@/components/elements/ui/login-form'
+import Head from 'next/head'
+
+import LoginPage from '@/components/pages/login'
 import Layout from '@/components/layout'
 
-export function LoginPage() {
+export default function Login() {
   return (
-    <Layout>
-      <LoginForm />
-    </Layout>
+    <div>
+      <Head>
+        <title>Login</title>
+        <meta name="description" content="" />
+        <link rel="icon" href="/vbsLogo.ico" />
+      </Head>
+
+      <Layout>
+        <LoginPage />
+      </Layout>
+    </div>
   )
 }
-
-export default LoginPage

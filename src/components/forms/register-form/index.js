@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { firebaseLoginWithGoogle } from '@/firebase/utils'
-import { FormInput } from '@/components/elements/ui'
+import { FormInput } from '@/components/forms'
 import Alert from '@/components/layout/alerts/alert'
 import apiConfig from '@/config/relysiaApi'
 import { createwallet } from '@/services/relysia-queries'
