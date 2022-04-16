@@ -28,18 +28,10 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
-    "eslint": "8.9.0",
-    "eslint-config-next": "12.0.10",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "lint-staged": ">=10",
     "postcss": "^8.4.6",
     "postcss-nested": "^5.0.6",
     "prettier": "^2.5.1",
     "tailwindcss": "^3.0.23",
     "url-loader": "^4.1.1"
-  },
-  "lint-staged": {
-    "*.{js,css}": "prettier --write"
   }
 }
