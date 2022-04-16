@@ -1,14 +1,21 @@
-import RegisterForm from '@/components/elements/ui/register-form'
 import React from 'react'
+import Head from 'next/head'
 
+import RegisterPage from '@/components/pages/register'
 import Layout from '@/components/layout'
 
-const RegisterPage = () => {
+export default function Register() {
   return (
-    <Layout>
-      <RegisterForm />
-    </Layout>
+    <div>
+      <Head>
+        <title>Register</title>
+        <meta name="description" content="" />
+        <link rel="icon" href="/vbsLogo.ico" />
+      </Head>
+
+      <Layout>
+        <RegisterPage />
+      </Layout>
+    </div>
   )
 }
-
-export default RegisterPage
