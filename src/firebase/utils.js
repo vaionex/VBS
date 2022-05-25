@@ -1,5 +1,5 @@
 import { firebaseAuth, firebaseDb } from '@/firebase/init'
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore/lite'
 import {
   getStorage,
   ref,
