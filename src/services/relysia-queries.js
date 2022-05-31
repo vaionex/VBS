@@ -7,7 +7,7 @@ import {
   updateMnemonic,
   updateWalletHistory,
 } from '../redux/slices/wallet'
-import { doc, getDoc, updateDoc } from 'firebase/firestore/lite'
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { firebaseDb } from '@/firebase/init'
 
 export const getMaxNftSize = async () => {

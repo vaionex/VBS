@@ -11,6 +11,7 @@ const initialState = {
   isPending: false,
   errorMessage: null,
   isAuthenticated: false,
+  accessToken: null,
 }
 
 export const login = createAsyncThunk(

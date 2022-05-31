@@ -1,5 +1,5 @@
 import { firebaseAuth, firebaseDb } from '@/firebase/init'
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore/lite'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import {
   getStorage,
   ref,
@@ -38,6 +38,7 @@ const firebaseLogin = async ({ email, password }) => {
       uid: auth.user.uid,
       email: auth.user.email,
       photoURL: auth.user.photoURL,
+      accessToken: auth.user.accessToken,
     }
   } catch (error) {
     return { error: 'Incorrect email or password.' }
@@ -46,26 +47,34 @@ const firebaseLogin = async ({ email, password }) => {
 
 const firebaseRegister = async ({ username, email, password }) => {
   try {
-    await createUserWithEmailAndPassword(firebaseAuth, email, password)
-
-    await updateProfile(firebaseAuth.currentUser, {
-      displayName: `${username}`,
+    const userInfos = await createUserWithEmailAndPassword(
+      firebaseAuth,
+      email,
+      password,
+    ).then(async (result) => {
+      const user = result.user
+      const userInfoFromDb = await firebaseGetUserInfoFromDb(user.uid)
+      if (!userInfoFromDb) {
+        const infos = {
+          displayName: `${username}`,
+          email: user.email,
+          uid: user.uid,
+          photoPATH: null,
+          createdAt: user.metadata.creationTime,
+        }
+        await setDoc(doc(firebaseDb, 'users', user.uid), infos)
+        return {
+          name: `${username}`,
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL,
+          accessToken: user.accessToken,
+        }
+      }
     })
-
-    const infos = {
-      displayName: firebaseAuth.currentUser.displayName,
-      email: firebaseAuth.currentUser.email,
-      uid: firebaseAuth.currentUser.uid,
-      photoPATH: firebaseAuth.currentUser.photoURL,
-      createdAt: firebaseAuth.currentUser.metadata.creationTime,
-    }
-
-    await setDoc(doc(firebaseDb, 'users', firebaseAuth.currentUser.uid), infos)
-
-    const user = await firebaseGetUserInfoFromDb(firebaseAuth.currentUser.uid)
-
-    return user.displayName
+    return { ...userInfos }
   } catch (error) {
+    console.log(error)
     return { error: 'Email has already been taken.' }
   }
 }
