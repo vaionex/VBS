@@ -13,6 +13,7 @@
       "@/services/*": ["src/services/*"],
       "@/constants/*": ["src/constants/*"],
       "@/pages/*": ["src/pages/*"],
+      "@/presets/*": ["src/presets/*"],
       "@/redux/*": ["src/redux/*"],
       "@/styles/*": ["src/styles/*"],
       "@/images/*": ["public/images/*"],

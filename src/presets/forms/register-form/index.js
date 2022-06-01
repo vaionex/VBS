@@ -1,16 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable @next/next/no-img-element */
 
-import { firebaseLoginWithGoogle } from '@/firebase/utils'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { FormInput } from '@/components/forms'
-import Alert from '@/components/layout/alerts/alert'
-
 import { useDispatch, useSelector } from 'react-redux'
-import { setAuthenticated, login } from '@/redux/slices/auth'
+
+import { firebaseLoginWithGoogle } from '@/firebase/utils'
+import { FormInput } from '@/presets/forms'
+import Alert from '@/presets/layout/alerts/alert'
+import apiConfig from '@/config/relysiaApi'
+import { createwallet } from '@/services/relysia-queries'
+import { setUserData, setAuthenticated, register } from '@/redux/slices/auth'
 
 const inputAttributes = [
+  {
+    type: 'text',
+    placeholder: 'Username',
+    name: 'username',
+    label: 'User Name',
+  },
   {
     type: 'email',
     placeholder: 'Email',
@@ -25,7 +33,7 @@ const inputAttributes = [
   },
 ]
 
-function LoginForm() {
+function RegisterForm() {
   const dispatch = useDispatch()
   const router = useRouter()
   const auth = useSelector((state) => state.auth)
@@ -42,7 +50,7 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const user = await dispatch(login(formData)).unwrap()
+    const user = await dispatch(register(formData)).unwrap()
     if (user && !user?.error) {
       dispatch(setAuthenticated())
       router.replace('/')
@@ -53,6 +61,14 @@ function LoginForm() {
     // eslint-disable-next-line no-undef
     const userInfo = await firebaseLoginWithGoogle()
     if (userInfo) {
+      dispatch(
+        setUserData({
+          name: userInfo.displayName,
+          uid: userInfo.uid,
+          email: userInfo.email,
+          photoURL: userInfo.photoURL,
+        }),
+      )
       dispatch(setAuthenticated())
       router.replace('/')
     }
@@ -67,10 +83,9 @@ function LoginForm() {
           alt="vaionex-logo"
         />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign in to your account
+          Register
         </h2>
       </div>
-
       <div className="flex justify-center pt-2">
         {auth.errorMessage && (
           <Alert message={auth.errorMessage} type="error" />
@@ -87,7 +102,6 @@ function LoginForm() {
                 onChange={handleChange}
               />
             ))}
-
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -124,7 +138,7 @@ function LoginForm() {
                     : 'bg-indigo-600 hover:bg-indigo-700'
                 } transition ease-in-out delay-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
               >
-                Sign in
+                Sign up
               </button>
             </div>
           </form>
@@ -207,4 +221,4 @@ function LoginForm() {
   )
 }
 
-export default LoginForm
+export default RegisterForm

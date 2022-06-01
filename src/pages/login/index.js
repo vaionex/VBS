@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
-import LoginPage from '@/components/pages/login'
-import Layout from '@/components/layout'
+import LoginPage from '@/presets/pages/login'
+import Layout from '@/presets/layout'
 
 export default function Login() {
   return (
