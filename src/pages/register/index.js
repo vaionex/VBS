@@ -1,8 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
 
-import RegisterPage from '@/components/pages/register'
-import Layout from '@/components/layout'
+import RegisterPage from '@/presets/pages/register'
+import Layout from '@/presets/layout'
 
 export default function Register() {
   return (

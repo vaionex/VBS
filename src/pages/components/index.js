@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { marketing, applicationUi, ecommerce } from '@/constants/navbarElements'
 
-import Header from '@/components/layout/header/index'
+import Header from '@/presets/layout/header/index'
 
 export default function Footers() {
   return (

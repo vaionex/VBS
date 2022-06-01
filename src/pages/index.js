@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
-import Layout from '@/components/layout'
-import HomePage from '@/components/pages/home'
+import Layout from '@/presets/layout'
+import HomePage from '@/presets/pages/home'
 
 export default function Home() {
   return (
