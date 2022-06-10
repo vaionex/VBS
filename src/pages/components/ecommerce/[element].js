@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Layout from '@/presets/layout'
+import SharedLayout from '@/components/layout/shared-layout'
 
 import CategoryFilter1 from '@/presets/elements/ecommerce/categoryFilters/categoryFilter1'
 import CategoryFilter2 from '@/presets/elements/ecommerce/categoryFilters/categoryFilter2'
@@ -286,7 +286,7 @@ const components = {
 export default function Server({ slug }) {
   const Components = components[slug]
   return (
-    <Layout>
+    <SharedLayout>
       {Components.map((Component, index) => {
         return (
           <div key={index} className="py-4">
@@ -301,7 +301,7 @@ export default function Server({ slug }) {
           </div>
         )
       })}
-    </Layout>
+    </SharedLayout>
   )
 }
 
