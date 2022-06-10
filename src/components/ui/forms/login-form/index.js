@@ -4,8 +4,8 @@
 import { firebaseLoginWithGoogle } from '@/firebase/utils'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { FormInput } from '@/presets/forms'
-import Alert from '@/presets/layout/alerts/alert'
+import { FormInput } from '@/components/ui/forms'
+import Alert from '@/components/layout/alerts/alert'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuthenticated, login } from '@/redux/slices/auth'
