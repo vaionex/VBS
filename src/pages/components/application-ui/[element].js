@@ -345,7 +345,7 @@ import VerticalNavigation3 from '@/presets/elements/applicationUi/verticalNaviga
 import VerticalNavigation4 from '@/presets/elements/applicationUi/verticalNavigation/verticalNavigation4'
 import VerticalNavigation5 from '@/presets/elements/applicationUi/verticalNavigation/verticalNavigation5'
 import VerticalNavigation6 from '@/presets/elements/applicationUi/verticalNavigation/verticalNavigation6'
-import Layout from '@/presets/layout'
+import SharedLayout from '@/components/layout/shared-layout'
 
 const slugs = [
   { slug: 'pageheadings' },
@@ -842,7 +842,7 @@ const components = {
 export default function Server({ slug }) {
   const Components = components[slug]
   return (
-    <Layout>
+    <SharedLayout>
       {Components.map((Component, index) => {
         return (
           <div key={index} className="py-4">
@@ -857,7 +857,7 @@ export default function Server({ slug }) {
           </div>
         )
       })}
-    </Layout>
+    </SharedLayout>
   )
 }
 
