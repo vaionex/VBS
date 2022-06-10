@@ -1,13 +1,12 @@
-import Settings from '@/presets/forms/settings-form'
-import Layout from '@/presets/layout'
-import React from 'react'
+import Settings from '@/components/ui/forms/settings-form'
+import SharedLayout from '@/components/layout/shared-layout'
 import WithAuthProtection from 'src/hooks/authProtection'
 
 const SettingsProfile = () => {
   return (
-    <Layout>
+    <SharedLayout title="Settings">
       <Settings />
-    </Layout>
+    </SharedLayout>
   )
 }
 

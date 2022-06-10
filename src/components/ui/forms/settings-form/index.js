@@ -8,7 +8,7 @@ import {
   firebaseUpdateProfilePicture,
   firebaseUpdateProfilDetails,
 } from '@/firebase/utils'
-import Notification from '@/presets/layout/notification'
+import Notification from '@/components/layout/notification'
 
 export default function Settings() {
   const router = useRouter()
