@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import store from '@/redux/store'
 import GetCurrentUser from '@/presets/elements/GetCurrentUser'
-import AuthComponent from '@/hooks/auth'
+import AuthComponent from '@/components/auth'
 
 function App({ Component, pageProps }) {
   return (

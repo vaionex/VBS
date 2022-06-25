@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-
 import { firebaseApp } from '@/firebase/init'
 import { getAnalytics, initializeAnalytics } from 'firebase/analytics'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
