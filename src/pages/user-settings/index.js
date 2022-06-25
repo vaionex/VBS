@@ -1,8 +1,12 @@
 import Settings from '@/components/ui/forms/settings-form'
-import SharedLayout from '@/components/layout/shared-layout'
-import WithAuthProtection from 'src/hooks/authProtection'
+import useAuthProtection from '@/hooks/useAuthProtection'
 
 const SettingsProfile = () => {
+  const authUser = useAuthProtection()
+
+  if (!authUser) {
+    return <div>Loading...</div>
+  }
   return (
     <SharedLayout title="Settings">
       <Settings />
@@ -10,4 +14,4 @@ const SettingsProfile = () => {
   )
 }
 
-export default WithAuthProtection(SettingsProfile)
+export default SettingsProfile
