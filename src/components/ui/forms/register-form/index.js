@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { firebaseLoginWithGoogle } from '@/firebase/utils'
 import { FormInput } from '@/components/ui/forms'
-import Alert from '@/components/layout/alerts/alert'
+import Alert from '@/components/ui/alert'
 import apiConfig from '@/config/relysiaApi'
 import { createwallet } from '@/services/relysia-queries'
 import { setUserData, setAuthenticated, register } from '@/redux/slices/auth'
