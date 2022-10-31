@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 
