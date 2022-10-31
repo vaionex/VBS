@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import NextLink from 'next/link'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import { Popover, Transition, Menu } from '@headlessui/react'
 import { marketing, applicationUi, ecommerce } from '@/constants/navbarElements'
 import {
@@ -78,15 +78,15 @@ export default function Example() {
       <div className="relative z-20">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10">
           <div>
-            <NextLink href="/">
-              <a className="flex">
-                <span className="sr-only">Workflow</span>
-                <img
-                  className="h-8 w-auto sm:h-10"
-                  src="https://i.ibb.co/4jWbzz7/vbsLogo.png"
-                  alt=""
-                />
-              </a>
+            <NextLink href="/" className="flex">
+
+              <span className="sr-only">Workflow</span>
+              <img
+                className="h-8 w-auto sm:h-10"
+                src="https://i.ibb.co/4jWbzz7/vbsLogo.png"
+                alt=""
+              />
+
             </NextLink>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
@@ -170,14 +170,16 @@ export default function Example() {
                           <div className="max-w-7xl mx-auto space-y-6 px-4 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-6 lg:px-8">
                             {callsToAction.map((item) => (
                               <div key={item.name} className="flow-root">
-                                <NextLink href={item.href}>
-                                  <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
-                                    <item.icon
-                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                      aria-hidden="true"
-                                    />
-                                    <span className="ml-3">{item.name}</span>
-                                  </a>
+                                <NextLink
+                                  href={item.href}
+                                  className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+
+                                  <item.icon
+                                    className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                    aria-hidden="true"
+                                  />
+                                  <span className="ml-3">{item.name}</span>
+
                                 </NextLink>
                               </div>
                             ))}
@@ -231,22 +233,24 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {marketing.slice(0, 10).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <NextLink href={item.href}>
-                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                                        {/* <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      /> */}
-                                        <Image
-                                          src={'/img/vaionex-icon.png'}
-                                          width={20}
-                                          height={20}
-                                          alt="element-icons"
-                                        />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
-                                      </a>
+                                    <NextLink
+                                      href={item.href}
+                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+
+                                      {/* <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
+                                      />
+                                      <span className="ml-4">
+                                        {item.name}
+                                      </span>
+
                                     </NextLink>
                                   </li>
                                 ))}
@@ -259,22 +263,24 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {marketing.slice(10).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <NextLink href={item.href}>
-                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                                        {/* <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      /> */}
-                                        <Image
-                                          src={'/img/vaionex-icon.png'}
-                                          width={20}
-                                          height={20}
-                                          alt="element-icons"
-                                        />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
-                                      </a>
+                                    <NextLink
+                                      href={item.href}
+                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+
+                                      {/* <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
+                                      />
+                                      <span className="ml-4">
+                                        {item.name}
+                                      </span>
+
                                     </NextLink>
                                   </li>
                                 ))}
@@ -287,22 +293,24 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {applicationUi.slice(0, 10).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <NextLink href={item.href}>
-                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                                        {/* <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      /> */}
-                                        <Image
-                                          src={'/img/vaionex-icon.png'}
-                                          width={20}
-                                          height={20}
-                                          alt="element-icons"
-                                        />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
-                                      </a>
+                                    <NextLink
+                                      href={item.href}
+                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+
+                                      {/* <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
+                                      />
+                                      <span className="ml-4">
+                                        {item.name}
+                                      </span>
+
                                     </NextLink>
                                   </li>
                                 ))}
@@ -315,22 +323,24 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {applicationUi.slice(10, 20).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <NextLink href={item.href}>
-                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                                        {/* <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      /> */}
-                                        <Image
-                                          src={'/img/vaionex-icon.png'}
-                                          width={20}
-                                          height={20}
-                                          alt="element-icons"
-                                        />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
-                                      </a>
+                                    <NextLink
+                                      href={item.href}
+                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+
+                                      {/* <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
+                                      />
+                                      <span className="ml-4">
+                                        {item.name}
+                                      </span>
+
                                     </NextLink>
                                   </li>
                                 ))}
@@ -343,22 +353,24 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {applicationUi.slice(20, 30).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <NextLink href={item.href}>
-                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                                        {/* <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      /> */}
-                                        <Image
-                                          src={'/img/vaionex-icon.png'}
-                                          width={20}
-                                          height={20}
-                                          alt="element-icons"
-                                        />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
-                                      </a>
+                                    <NextLink
+                                      href={item.href}
+                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+
+                                      {/* <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
+                                      />
+                                      <span className="ml-4">
+                                        {item.name}
+                                      </span>
+
                                     </NextLink>
                                   </li>
                                 ))}
@@ -371,22 +383,24 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {applicationUi.slice(30).map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <NextLink href={item.href}>
-                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                                        {/* <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      /> */}
-                                        <Image
-                                          src={'/img/vaionex-icon.png'}
-                                          width={20}
-                                          height={20}
-                                          alt="element-icons"
-                                        />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
-                                      </a>
+                                    <NextLink
+                                      href={item.href}
+                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+
+                                      {/* <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
+                                      />
+                                      <span className="ml-4">
+                                        {item.name}
+                                      </span>
+
                                     </NextLink>
                                   </li>
                                 ))}
@@ -399,22 +413,24 @@ export default function Example() {
                               <ul role="list" className="mt-5 space-y-6">
                                 {ecommerce.map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <NextLink href={item.href}>
-                                      <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                                        {/* <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      /> */}
-                                        <Image
-                                          src={'/img/vaionex-icon.png'}
-                                          width={20}
-                                          height={20}
-                                          alt="element-icons"
-                                        />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
-                                      </a>
+                                    <NextLink
+                                      href={item.href}
+                                      className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+
+                                      {/* <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    /> */}
+                                      <Image
+                                        src={'/img/vaionex-icon.png'}
+                                        width={20}
+                                        height={20}
+                                        alt="element-icons"
+                                      />
+                                      <span className="ml-4">
+                                        {item.name}
+                                      </span>
+
                                     </NextLink>
                                   </li>
                                 ))}
@@ -495,14 +511,16 @@ export default function Example() {
                             <div className="max-w-7xl mx-auto space-y-6 px-4 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-6 lg:px-8">
                               {callsToAction.map((item) => (
                                 <div key={item.name} className="flow-root">
-                                  <NextLink href={item.href}>
-                                    <a className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
-                                      <item.icon
-                                        className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                        aria-hidden="true"
-                                      />
-                                      <span className="ml-3">{item.name}</span>
-                                    </a>
+                                  <NextLink
+                                    href={item.href}
+                                    className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+
+                                    <item.icon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    />
+                                    <span className="ml-3">{item.name}</span>
+
                                   </NextLink>
                                 </div>
                               ))}
@@ -554,31 +572,31 @@ export default function Example() {
                           {({ active }) => {
                             if (item.name === 'Sign out') {
                               return (
-                                <NextLink href={item.href}>
-                                  <a
-                                    onClick={(e) => signOut(e)}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700',
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
-                                </NextLink>
-                              )
+                                (<NextLink
+                                  href={item.href}
+                                  onClick={(e) => signOut(e)}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700',
+                                  )}>
+
+                                  {item.name}
+
+                                </NextLink>)
+                              );
                             } else {
                               return (
-                                <NextLink href={item.href}>
-                                  <a
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700',
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
-                                </NextLink>
-                              )
+                                (<NextLink
+                                  href={item.href}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700',
+                                  )}>
+
+                                  {item.name}
+
+                                </NextLink>)
+                              );
                             }
                           }}
                         </Menu.Item>
@@ -588,15 +606,19 @@ export default function Example() {
                 </Menu>
               ) : (
                 <>
-                  <NextLink href="/login">
-                    <a className="text-base font-medium text-gray-500 hover:text-gray-900">
+                  <NextLink
+                    href="/login"
+                    className="text-base font-medium text-gray-500 hover:text-gray-900">
+                    
                       Sign in
-                    </a>
+                    
                   </NextLink>
-                  <NextLink href="/register">
-                    <a className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                  <NextLink
+                    href="/register"
+                    className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                    
                       Sign up
-                    </a>
+                    
                   </NextLink>
                 </>
               )}
@@ -667,24 +689,28 @@ export default function Example() {
             </div>
             <div className="py-6 px-5">
               <div className="grid grid-cols-1 gap-4">
-                <NextLink href="/components">
-                  <a className="rounded-md text-base font-medium py-2 bg-gray-200 hover:bg-gray-300 flex justify-center text-gray-900 hover:text-gray-700">
+                <NextLink
+                  href="/components"
+                  className="rounded-md text-base font-medium py-2 bg-gray-200 hover:bg-gray-300 flex justify-center text-gray-900 hover:text-gray-700">
+                  
                     Components
-                  </a>
+                  
                 </NextLink>
               </div>
               <div className="mt-6">
-                <NextLink href="/register">
-                  <a className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                <NextLink
+                  href="/register"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                  
                     Sign up
-                  </a>
+                  
                 </NextLink>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing customer?{' '}
-                  <NextLink href="/login">
-                    <a className="text-indigo-600 hover:text-indigo-500">
+                  <NextLink href="/login" className="text-indigo-600 hover:text-indigo-500">
+                    
                       Sign in
-                    </a>
+                    
                   </NextLink>
                 </p>
               </div>
@@ -693,5 +719,5 @@ export default function Example() {
         </Popover.Panel>
       </Transition>
     </Popover>
-  )
+  );
 }

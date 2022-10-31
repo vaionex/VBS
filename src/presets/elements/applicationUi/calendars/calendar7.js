@@ -214,5 +214,5 @@ export default function Example() {
         </ol>
       </section>
     </div>
-  )
+  );
 }
