@@ -2,7 +2,7 @@
 
 A repository with a variety of code components and bindings that lets you instantly create blockchain applications.
 
-demo: https://vbs-mu.vercel.app/
+demo page: https://vbs-mu.vercel.app/
 
 ## Getting Started
 

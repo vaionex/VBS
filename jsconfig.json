@@ -12,11 +12,9 @@
       "@/config/*": ["src/config/*"],
       "@/services/*": ["src/services/*"],
       "@/constants/*": ["src/constants/*"],
-      "@/pages/*": ["src/pages/*"],
-      "@/presets/*": ["src/presets/*"],
       "@/redux/*": ["src/redux/*"],
       "@/styles/*": ["src/styles/*"],
-      "@/images/*": ["public/images/*"],
+      "@/images/*": ["src/images/*"],
       "@/firebase/*": ["src/firebase/*"],
       "@/utils/*": ["src/utils/*"],
       "@/hooks/*": ["src/hooks/*"]
