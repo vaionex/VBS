@@ -65,46 +65,47 @@ const authSlice = createSlice({
         (state.isAuthenticated = false)
     },
   },
-  extraReducers: {
-    [login.pending]: (state, action) => {
-      state.isPending = true
-      state.errorMessage = null
-    },
-    [login.rejected]: (state, action) => {
-      state.isPending = false
-      state.errorMessage = action.payload
-    },
-    [login.fulfilled]: (state, action) => {
-      state.isPending = false
-      state.user = action.payload
-    },
-    [register.pending]: (state, action) => {
-      state.isPending = true
-      state.errorMessage = null
-    },
-    [register.rejected]: (state, action) => {
-      state.isPending = false
-      state.errorMessage = action.payload
-    },
-    [register.fulfilled]: (state, action) => {
-      state.isPending = false
-      state.user = action.payload
-    },
-    [logout.pending]: (state, action) => {
-      state.isPending = true
-      state.errorMessage = null
-    },
-    [logout.rejected]: (state, action) => {
-      state.isPending = false
-      state.errorMessage = action.payload
-    },
-    [logout.fulfilled]: (state, action) => {
-      state.isPending = false
-      state.user = null
-      state.isPending = false
-      state.errorMessage = null
-      state.isAuthenticated = false
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending, (state, action) => {
+        state.isPending = true
+        state.errorMessage = null
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isPending = false
+        state.errorMessage = action.payload
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isPending = false
+        state.user = action.payload
+      })
+      .addCase(register.pending, (state, action) => {
+        state.isPending = true
+        state.errorMessage = null
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isPending = false
+        state.errorMessage = action.payload
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isPending = false
+        state.user = action.payload
+      })
+      .addCase(logout.pending, (state, action) => {
+        state.isPending = true
+        state.errorMessage = null
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.isPending = false
+        state.errorMessage = action.payload
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.isPending = false
+        state.user = null
+        state.isPending = false
+        state.errorMessage = null
+        state.isAuthenticated = false
+      })
   },
 })
 
