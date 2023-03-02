@@ -1,4 +1,4 @@
-import './globals.css'
+import '../globals.css'
 import { Header, Footer } from '@/components/Layout'
 
 export const metadata = {
