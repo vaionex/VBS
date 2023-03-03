@@ -9,16 +9,16 @@ export default function Login() {
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt="Your Company"
             />
-            <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-100">
               Sign in to your account
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-gray-400">
               Or{' '}
               <a
                 href="#"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                st art your 14-day free trial
+                start your 14-day free trial
               </a>
             </p>
           </div>
@@ -26,7 +26,7 @@ export default function Login() {
           <div className="mt-8">
             <div>
               <div>
-                <p className="text-sm font-medium leading-6 text-gray-900">
+                <p className="text-sm font-medium leading-6 text-gray-100">
                   Sign in with
                 </p>
 
@@ -34,7 +34,7 @@ export default function Login() {
                   <div>
                     <a
                       href="#"
-                      className="inline-flex w-full justify-center rounded-md bg-white py-2 px-3 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
+                      className="inline-flex w-full justify-center rounded-md bg-white py-2 px-3 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
                     >
                       <span className="sr-only">Sign in with Facebook</span>
                       <svg
@@ -55,7 +55,7 @@ export default function Login() {
                   <div>
                     <a
                       href="#"
-                      className="inline-flex w-full justify-center rounded-md bg-white py-2 px-3 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
+                      className="inline-flex w-full justify-center rounded-md bg-white py-2 px-3 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
                     >
                       <span className="sr-only">Sign in with Twitter</span>
                       <svg
@@ -72,7 +72,7 @@ export default function Login() {
                   <div>
                     <a
                       href="#"
-                      className="inline-flex w-full justify-center rounded-md bg-white py-2 px-3 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
+                      className="inline-flex w-full justify-center rounded-md bg-white py-2 px-3 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
                     >
                       <span className="sr-only">Sign in with GitHub</span>
                       <svg
@@ -100,7 +100,7 @@ export default function Login() {
                   <div className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="bg-white px-2 text-gray-500">
+                  <span className="bg-black px-2 text-gray-300">
                     Or continue with
                   </span>
                 </div>
@@ -112,7 +112,7 @@ export default function Login() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-gray-100"
                   >
                     Email address
                   </label>
@@ -131,7 +131,7 @@ export default function Login() {
                 <div className="space-y-1">
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-gray-100"
                   >
                     Password
                   </label>
@@ -157,7 +157,7 @@ export default function Login() {
                     />
                     <label
                       htmlFor="remember-me"
-                      className="ml-2 block text-sm text-gray-900"
+                      className="ml-2 block text-sm text-gray-100"
                     >
                       Remember me
                     </label>
