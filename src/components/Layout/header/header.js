@@ -1,69 +1,111 @@
+import { useState } from 'react'
+import { Dialog } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+
+const navigation = [
+  { name: 'Product', href: '#' },
+  { name: 'Features', href: '#' },
+  { name: 'Marketplace', href: '#' },
+  { name: 'Company', href: '#' },
+]
+
 export function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-24 px-6 sm:py-32 lg:px-8">
-      <img
-        src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
-        alt=""
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
-      />
-      <svg
-        viewBox="0 0 1097 845"
-        aria-hidden="true"
-        className="hidden transform-gpu blur-3xl sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:w-[68.5625rem]"
+    <header className="bg-gray-900">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
       >
-        <path
-          fill="url(#10724532-9d81-43d2-bb94-866e98dd6e42)"
-          fillOpacity=".2"
-          d="M301.174 646.641 193.541 844.786 0 546.172l301.174 100.469 193.845-356.855c1.241 164.891 42.802 431.935 199.124 180.978 195.402-313.696 143.295-588.18 284.729-419.266 113.148 135.13 124.068 367.989 115.378 467.527L811.753 372.553l20.102 451.119-530.681-177.031Z"
-        />
-        <defs>
-          <linearGradient
-            id="10724532-9d81-43d2-bb94-866e98dd6e42"
-            x1="1097.04"
-            x2="-141.165"
-            y1=".22"
-            y2="363.075"
-            gradientUnits="userSpaceOnUse"
+        <div className="flex lg:flex-1">
+          <a href="#" className="-m-1.5 p-1.5">
+            <span className="sr-only">Your Company</span>
+            <img
+              className="h-8 w-auto"
+              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+              alt=""
+            />
+          </a>
+        </div>
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
+            onClick={() => setMobileMenuOpen(true)}
           >
-            <stop stopColor="#776FFF" />
-            <stop offset={1} stopColor="#FF4694" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <svg
-        viewBox="0 0 1097 845"
-        aria-hidden="true"
-        className="absolute left-1/2 -top-52 -z-10 w-[68.5625rem] -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0"
+            <span className="sr-only">Open main menu</span>
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+        <div className="hidden lg:flex lg:gap-x-12">
+          {navigation.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-sm font-semibold leading-6 text-white"
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <a href="#" className="text-sm font-semibold leading-6 text-white">
+            Log in <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </nav>
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
       >
-        <path
-          fill="url(#8ddc7edb-8983-4cd7-bccb-79ad21097d70)"
-          fillOpacity=".2"
-          d="M301.174 646.641 193.541 844.786 0 546.172l301.174 100.469 193.845-356.855c1.241 164.891 42.802 431.935 199.124 180.978 195.402-313.696 143.295-588.18 284.729-419.266 113.148 135.13 124.068 367.989 115.378 467.527L811.753 372.553l20.102 451.119-530.681-177.031Z"
-        />
-        <defs>
-          <linearGradient
-            id="8ddc7edb-8983-4cd7-bccb-79ad21097d70"
-            x1="1097.04"
-            x2="-141.165"
-            y1=".22"
-            y2="363.075"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#776FFF" />
-            <stop offset={1} stopColor="#FF4694" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-          Support center
-        </h2>
-        <p className="mt-6 text-lg leading-8 text-gray-300">
-          Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
-          cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat
-          aliqua.
-        </p>
-      </div>
-    </div>
+        <div className="fixed inset-0 z-10" />
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
+          <div className="flex items-center justify-between">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Your Company</span>
+              <img
+                className="h-8 w-auto"
+                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                alt=""
+              />
+            </a>
+            <button
+              type="button"
+              className="-m-2.5 rounded-md p-2.5 text-gray-400"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className="sr-only">Close menu</span>
+              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/25">
+              <div className="space-y-2 py-6">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+              <div className="py-6">
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                >
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </Dialog.Panel>
+      </Dialog>
+    </header>
   )
 }
