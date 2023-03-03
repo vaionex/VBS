@@ -6,10 +6,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
 const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'About', href: '/about' },
+  { name: 'Dashboard', href: '/dashboard' },
 ]
 
 export function Header() {
@@ -99,7 +97,7 @@ export function Header() {
               </div>
               <div className="py-6">
                 <Link
-                  href="#"
+                  href="/login"
                   className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 >
                   Log in
