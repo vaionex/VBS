@@ -1,13 +1,16 @@
-export default function About() {
-    return (
-      <div className="bg-white py-24 sm:py-32">
+export function About() {
+  return (
+    <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2">
           <div className="mx-auto w-full max-w-xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Trusted by the most innovative teams</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+              Trusted by the most innovative teams
+            </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a
-              scelerisque amet ullamcorper eu enim et fermentum, augue.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
+              egestas tempus tellus etiam sed. Quam a scelerisque amet
+              ullamcorper eu enim et fermentum, augue.
             </p>
             <div className="mt-8 flex items-center gap-x-6">
               <a
@@ -68,5 +71,5 @@ export default function About() {
         </div>
       </div>
     </div>
-    )
-  }
+  )
+}
