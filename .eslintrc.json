@@ -1,5 +1,5 @@
 {
-  "extends": ["next/core-web-vitals", "prettier", "airbnb", "airbnb/hooks"],
+  "extends": ["next/core-web-vitals"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "semi": ["error", "never"],
