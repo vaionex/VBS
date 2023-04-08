@@ -4,7 +4,6 @@
     "react/react-in-jsx-scope": "off",
     "semi": ["error", "never"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-one-expression-per-line": [2, { "allow": "single-child" }],
     "import/prefer-default-export": "off"
   },
   "settings": {
