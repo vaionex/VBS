@@ -1,11 +1,21 @@
-import { useState, useEffect } from 'react'
-import { app } from './app'
+'use client'
 
-export const auth = app.auth()
+import { useState, useEffect } from 'react'
+import {
+  GoogleAuthProvider,
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+} from 'firebase/auth'
+import { firebase } from './app'
+
+export const auth = getAuth(firebase)
 
 const formatAuthUser = (user) => ({
   uid: user.uid,
   email: user.email,
+  photoUrl: user.photoURL,
+  name: user.displayName,
 })
 
 export const useFirebaseAuth = () => {
@@ -27,12 +37,23 @@ export const useFirebaseAuth = () => {
 
   // listen for Firebase state change
   useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged(authStateChanged)
+    const unsubscribe = onAuthStateChanged(auth, authStateChanged)
     return () => unsubscribe()
   }, [])
 
   return {
     authUser,
     loading,
+  }
+}
+
+export const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider()
+  try {
+    const result = await signInWithPopup(auth, provider)
+    const user = result.user
+    console.log(`Google sign-in successful: ${user.displayName}`)
+  } catch (error) {
+    console.error(error)
   }
 }

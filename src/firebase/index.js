@@ -1,2 +1,4 @@
-export { app } from './app'
-export { auth, useFirebaseAuth } from './auth'
+export { firebase } from './app'
+export { auth, useFirebaseAuth, signInWithGoogle } from './auth'
+export { storage } from './storage'
+export { firestore } from './firestore'
