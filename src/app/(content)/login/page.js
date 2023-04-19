@@ -13,7 +13,8 @@ export default function Login() {
               Sign in to your account
             </h2>
             <p className="mt-2 text-sm text-gray-400">
-              Or{' '}
+              Or
+              {' '}
               <a
                 href="#"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
