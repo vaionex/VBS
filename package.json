@@ -11,6 +11,8 @@
   "dependencies": {
     "@headlessui/react": "1.7.12",
     "@heroicons/react": "2.0.16",
+    "@novu/node": "^0.14.0",
+    "axios": "^1.4.0",
     "firebase": "9.17.1",
     "next": "13.3.0",
     "react": "18.2.0",
