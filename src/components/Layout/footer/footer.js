@@ -1,7 +1,38 @@
+'use client'
 import Link from 'next/link'
 import { navigation } from './config'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 export function Footer() {
+  const [email, setEmail] = useState('')
+  const handleSubmitEmail = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email,
+        }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+      console.log(response)
+      if (response.ok) {
+        console.log('succesfull')
+        toast.success('Subscription successful!')
+        setEmail('')
+      } else {
+        console.log('failure')
+        toast.error('Subscription failed. Please try again.')
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('An error occurred. Please try again.')
+    }
+  }
   return (
     <footer className="bg-gray-900" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
@@ -99,23 +130,32 @@ export function Footer() {
               weekly.
             </p>
           </div>
-          <form className="mt-6 sm:flex sm:max-w-md lg:mt-0">
+          <form
+            onSubmit={handleSubmitEmail}
+            className="mt-6 sm:flex sm:max-w-md lg:mt-0 "
+          >
             <label htmlFor="email-address" className="sr-only">
               Email address
             </label>
-            <input
-              type="email"
-              name="email-address"
-              id="email-address"
-              autoComplete="email"
-              required
-              className="w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:w-56 sm:text-sm sm:leading-6"
-              placeholder="Enter your email"
-            />
-            <div className="mt-4 sm:mt-0 sm:ml-4 sm:flex-shrink-0">
+            <div className=" min-w-0 inline-flex justify-start ring-1 ring-inset ring-white/10 border-0 bg-white/5 rounded-md focus-within:ring-2 focus-within:ring-indigo-500">
+              <input
+                type="email"
+                name="email-address"
+                id="email-address"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                }}
+                required
+                className=" bg-transparent border-0 focus:outline-none focus:ring-0 m-2 text-base text-white shadow-sm  placeholder:text-gray-500  sm:w-56 sm:text-sm sm:leading-6"
+                placeholder="Enter your email"
+              />
+
               <button
                 type="submit"
-                className="flex w-full items-center justify-center rounded-md bg-indigo-500 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                onClick={() => console.log('clicked', email)}
+                className=" rounded-md bg-indigo-500 m-2 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Subscribe
               </button>
