@@ -1,14 +1,10 @@
 import '../globals.css'
 
 export const metadata = {
-  description: 'Login or create an account',
-  title: 'Login',
+  description: 'Dashboard',
+  title: 'Dashboard',
 }
 
-export default function LoginLayout({ children }) {
-  return (
-    <html lang="en" className="h-full bg-white">
-      <body className="h-full">{children}</body>
-    </html>
-  )
+export default function DashboardRootLayout({ children }) {
+  return <>{children}</>
 }
