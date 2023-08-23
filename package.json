@@ -13,6 +13,8 @@
     "@heroicons/react": "2.0.16",
     "@hubspot/api-client": "^9.0.0",
     "@novu/node": "^0.14.0",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
     "axios": "^1.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
