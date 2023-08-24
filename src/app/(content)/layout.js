@@ -6,14 +6,12 @@ export const metadata = {
   title: 'Create Next App',
 }
 
-export default function RootLayout({ children }) {
+export default function ContentRootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
   )
 }
