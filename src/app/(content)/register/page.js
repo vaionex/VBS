@@ -5,6 +5,6 @@ export const metadata = {
   title: 'Register',
 }
 
-export default function Login() {
+export default function Register() {
   return <RegisterComponent />
 }

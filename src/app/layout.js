@@ -1,18 +1,17 @@
 import React from 'react'
-import { ToastContainer } from 'react-toastify'
+import { FirebaseAuthProvider } from '@/contexts/firebaseAuthContext'
 import 'react-toastify/dist/ReactToastify.css'
 
 export const metadata = {
-  title: '#',
-  description: '#',
+  title: 'Main root of the Project',
+  description: 'Main root description of the Project',
 }
 
 export default function AppLayout({ children }) {
   return (
     <html lang="en" className={`bg-white`}>
       <body className="flex flex-col">
-        {children}
-        <ToastContainer />
+        <FirebaseAuthProvider>{children}</FirebaseAuthProvider>
       </body>
     </html>
   )

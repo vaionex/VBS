@@ -1,9 +1,14 @@
 'use client'
 import React, { useState } from 'react'
-// import { toast } from 'react-toastify'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import { signInWithGoogle } from '@/firebase/auth'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
+import { Checkbox } from '@/components/ui/checkbox'
 
 const loginFields = [
   {
@@ -20,23 +25,26 @@ const loginFields = [
   },
 ]
 export default function LoginComponent() {
+  const { authUser, updateUserData } = useFirebaseAuthContext()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
+  const { push } = useRouter()
+  const [isChecked, setIsChecked] = useState(true)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prevData) => ({ ...prevData, [name]: value }))
   }
+  const handleEmailSignIn = async () => {}
 
-  const handleLogin = async (e) => {
+  const handleGoogleSignIn = async (e) => {
     e.preventDefault()
-    // TODO: Login user logic here. (e.g., send data to API, Firebase, etc.)
-  }
-
-  const handleGoogleSignIn = () => {
-    // TODO: Implement Google Sign-In using Firebase here.
+    let res = await signInWithGoogle(authUser, updateUserData)
+    if (res.status === 'success') {
+      push('/dashboard')
+    }
   }
 
   return (
@@ -44,9 +52,11 @@ export default function LoginComponent() {
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
         <div className="mx-auto w-full max-w-sm lg:w-96 mb-6">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              class="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            <Image
+              src="./mark.svg"
+              height={60}
+              width={72}
+              className="mx-auto"
               alt="Your Company"
             />
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -54,7 +64,7 @@ export default function LoginComponent() {
             </h2>
           </div>
         </div>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleEmailSignIn}>
           {loginFields.map((field) => (
             <div className="mb-4" key={field.name}>
               <Label htmlFor={field.name}>{field.label}</Label>
@@ -69,6 +79,35 @@ export default function LoginComponent() {
               />
             </div>
           ))}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center">
+              <Checkbox id="terms1" />
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                className="h-4 w-4 rounded border-gray-300 text-gray-600 focus:ring-gray-600"
+                checked={isChecked}
+                onChange={(e) => setIsChecked(e.target.checked)}
+              />
+              <Label
+                htmlFor="remember-me"
+                className="ml-3 block text-sm font-medium leading-6 text-gray-700"
+              >
+                Remember me
+              </Label>
+            </div>
+
+            <div className="text-sm leading-6 ">
+              <Link
+                href="/forgot-password"
+                rel="canonical"
+                className="text-gray font-semibold text-gray-600 hover:text-gray-500"
+              >
+                Forgot password?
+              </Link>
+            </div>
+          </div>
           <Button type="submit" className="w-full mb-3">
             Login
           </Button>
