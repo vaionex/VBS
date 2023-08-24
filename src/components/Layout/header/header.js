@@ -8,6 +8,7 @@ import Link from 'next/link'
 const navigation = [
   { name: 'About', href: '/about' },
   { name: 'Dashboard', href: '/dashboard' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export function Header() {
@@ -51,10 +52,17 @@ export function Header() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="#" className="text-sm font-semibold leading-6 text-white">
-            Log in
-            {' '}
-            <span aria-hidden="true">&rarr;</span>
+          <Link
+            href="/login"
+            className="text-sm font-semibold leading-6 mx-3 text-white"
+          >
+            Log in <span aria-hidden="true">&rarr;</span>
+          </Link>
+          <Link
+            href="/register"
+            className="text-sm font-semibold leading-6 text-white"
+          >
+            Register <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </nav>
@@ -103,6 +111,12 @@ export function Header() {
                   className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 >
                   Log in
+                </Link>
+                <Link
+                  href="/register"
+                  className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                >
+                  Register
                 </Link>
               </div>
             </div>
