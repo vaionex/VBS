@@ -5,12 +5,14 @@ import {
   GoogleAuthProvider,
   getAuth,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
   signInWithPopup,
   linkWithPopup,
   signInWithCredential,
   signOut,
 } from 'firebase/auth'
 import { firebase } from './app'
+import { createUserAndFetchDocument } from '@/firebase/firestore'
 
 export const auth = getAuth(firebase)
 
@@ -19,7 +21,6 @@ const formatAuthUser = (user) => ({
   email: user.email,
   photoUrl: user.photoURL,
   name: user.displayName,
-  userSubscription: user?.userSubscription ? user.userSubscription : null,
   firstName: user.firstName,
   lastName: user.lastName,
 })
@@ -103,5 +104,31 @@ export const logoutUser = async () => {
       })
   } catch (error) {
     console.error('Error logging out user:', error)
+  }
+}
+export const registerWithEmailAndPassword = async (
+  email,
+  password,
+  firstName,
+  lastName,
+) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    )
+    const user = userCredential.user
+
+    const userData = await createUserAndFetchDocument(user, {
+      firstName,
+      lastName,
+      email,
+    }) // yeni işlevi çağır
+
+    return formatAuthUser(userData) // userData'yı döndür
+  } catch (error) {
+    console.error('Error registering user:', error)
+    throw error
   }
 }

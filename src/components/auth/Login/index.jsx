@@ -81,14 +81,12 @@ export default function LoginComponent() {
           ))}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
-              <Checkbox id="terms1" />
-              <input
+              <Checkbox
                 id="remember-me"
                 name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-gray-600 focus:ring-gray-600"
                 checked={isChecked}
                 onChange={(e) => setIsChecked(e.target.checked)}
+                type="checkbox"
               />
               <Label
                 htmlFor="remember-me"

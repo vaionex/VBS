@@ -5,6 +5,9 @@ import { toast } from 'react-toastify'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { registerWithEmailAndPassword, signInWithGoogle } from '@/firebase/auth'
+import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import { useRouter } from 'next/navigation'
 
 const registrationFields = [
   {
@@ -40,6 +43,8 @@ const registrationFields = [
 ]
 
 export default function RegisterComponent() {
+  const { push } = useRouter()
+  const { authUser, updateUserData } = useFirebaseAuthContext()
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -52,17 +57,28 @@ export default function RegisterComponent() {
     const { name, value } = e.target
     setFormData((prevData) => ({ ...prevData, [name]: value }))
   }
+
   const handleRegister = async (e) => {
     e.preventDefault()
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords don't match.")
       return
     }
-    // TODO: Register user logic here. (e.g., send data to API, Firebase, etc.)
+    const { email, password, firstName, lastName } = formData
+    try {
+      await registerWithEmailAndPassword(email, password, firstName, lastName) // createUserAndFetchDocument fonksiyonu bu işlev içinde zaten çağrılmış olacak.
+      // Bu yüzden burada tekrar çağırmamıza gerek yok.
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  const handleGoogleSignIn = () => {
-    // TODO: Implement Google Sign-In using Firebase here.
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault()
+    let res = await signInWithGoogle(authUser, updateUserData)
+    if (res.status === 'success') {
+      push('/dashboard')
+    }
   }
 
   return (
