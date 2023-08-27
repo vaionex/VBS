@@ -6,6 +6,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from 'firebase/auth'
 import { firebase } from './app'
 
@@ -53,6 +54,15 @@ export const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, provider)
     const user = result.user
     console.log(`Google sign-in successful: ${user.displayName}`)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const resetUserPassword = async (email) => {
+  try {
+    const passwordResetEmail = await sendPasswordResetEmail(auth, email)
+    return true
   } catch (error) {
     console.error(error)
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import { Toaster } from '@/components/ui/toaster'
 export const metadata = {
   title: '#',
   description: '#',
@@ -13,6 +13,7 @@ export default function AppLayout({ children }) {
       <body className="flex flex-col">
         {children}
         <ToastContainer />
+        <Toaster />
       </body>
     </html>
   )
