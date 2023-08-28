@@ -24,6 +24,7 @@ const loginFields = [
     placeholder: '',
   },
 ]
+
 export default function LoginComponent() {
   const { authUser, updateUserData } = useFirebaseAuthContext()
   const [formData, setFormData] = useState({

@@ -66,8 +66,7 @@ export default function RegisterComponent() {
     }
     const { email, password, firstName, lastName } = formData
     try {
-      await registerWithEmailAndPassword(email, password, firstName, lastName) // createUserAndFetchDocument fonksiyonu bu işlev içinde zaten çağrılmış olacak.
-      // Bu yüzden burada tekrar çağırmamıza gerek yok.
+      await registerWithEmailAndPassword(email, password, firstName, lastName)
     } catch (error) {
       console.error(error)
     }

@@ -29,6 +29,3 @@ export const createUserAndFetchDocument = async (user, additionalData) => {
   const userDocument = await getDoc(userRef)
   return { uid: user.uid, ...userDocument.data() }
 }
-
-// const { user } = await createUserWithEmailAndPassword(auth, email, password);
-// const userData = await createUserAndFetchDocument(user, { firstName, lastName });

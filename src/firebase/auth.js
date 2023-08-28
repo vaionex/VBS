@@ -124,9 +124,9 @@ export const registerWithEmailAndPassword = async (
       firstName,
       lastName,
       email,
-    }) // yeni işlevi çağır
+    })
 
-    return formatAuthUser(userData) // userData'yı döndür
+    return formatAuthUser(userData)
   } catch (error) {
     console.error('Error registering user:', error)
     throw error

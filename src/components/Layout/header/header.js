@@ -56,13 +56,13 @@ export function Header() {
             href="/login"
             className="text-sm font-semibold leading-6 mx-3 text-white"
           >
-            Log in <span aria-hidden="true">&rarr;</span>
+            Log in
           </Link>
           <Link
             href="/register"
-            className="text-sm font-semibold leading-6 text-white"
+            className="text-sm font-semibold leading-6 mx3 text-white"
           >
-            Register <span aria-hidden="true">&rarr;</span>
+            Register
           </Link>
         </div>
       </nav>
