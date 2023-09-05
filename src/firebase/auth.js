@@ -13,6 +13,7 @@ import {
   signInWithEmailAndPassword,
   setPersistence,
   browserSessionPersistence,
+  sendPasswordResetEmail,
 } from 'firebase/auth'
 import { firebase } from './app'
 import { createUserAndFetchDocument } from '@/firebase/firestore'
@@ -154,5 +155,13 @@ export const signInWithEmail = async (formData, rememberMe) => {
   } catch (error) {
     console.error('Error signing in with email and password:', error)
     throw error
+  }
+}
+export const resetUserPassword = async (email) => {
+  try {
+    const passwordResetEmail = await sendPasswordResetEmail(auth, email)
+    return true
+  } catch (error) {
+    console.error(error)
   }
 }
