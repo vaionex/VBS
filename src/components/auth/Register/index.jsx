@@ -1,13 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
-import { toast } from 'react-toastify'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { registerWithEmailAndPassword, signInWithGoogle } from '@/firebase/auth'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/ui/use-toast'
 
 const registrationFields = [
   {
@@ -52,6 +52,7 @@ export default function RegisterComponent() {
     password: '',
     confirmPassword: '',
   })
+  const { toast } = useToast()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -61,7 +62,11 @@ export default function RegisterComponent() {
   const handleRegister = async (e) => {
     e.preventDefault()
     if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords don't match.")
+      toast({
+        variant: 'destructive',
+        title: 'Something went wrong.',
+        description: "Passwords don't match.",
+      })
       return
     }
     const { email, password, firstName, lastName } = formData
@@ -69,6 +74,11 @@ export default function RegisterComponent() {
       await registerWithEmailAndPassword(email, password, firstName, lastName)
     } catch (error) {
       console.error(error)
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: error.message,
+      })
     }
   }
 
@@ -77,6 +87,12 @@ export default function RegisterComponent() {
     let res = await signInWithGoogle(authUser, updateUserData)
     if (res.status === 'success') {
       push('/dashboard')
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: res.message,
+      })
     }
   }
 

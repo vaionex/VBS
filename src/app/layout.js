@@ -1,6 +1,5 @@
 import React from 'react'
 import { FirebaseAuthProvider } from '@/contexts/firebaseAuthContext'
-import 'react-toastify/dist/ReactToastify.css'
 
 export const metadata = {
   title: 'Main root of the Project',

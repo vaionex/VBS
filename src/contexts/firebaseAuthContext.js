@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext } from 'react'
 import { useFirebaseAuth } from '@/firebase/auth'
-import { ToastContainer } from 'react-toastify'
+import { Toaster } from '@/components/ui/toaster'
 
 export const FirebaseAuthContext = createContext()
 
@@ -12,7 +12,7 @@ export const FirebaseAuthProvider = ({ children }) => {
   return (
     <FirebaseAuthContext.Provider value={firebaseAuth}>
       {children}
-      <ToastContainer />
+      <Toaster />
     </FirebaseAuthContext.Provider>
   )
 }

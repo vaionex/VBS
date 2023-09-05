@@ -10,6 +10,9 @@ import {
   linkWithPopup,
   signInWithCredential,
   signOut,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
 } from 'firebase/auth'
 import { firebase } from './app'
 import { createUserAndFetchDocument } from '@/firebase/firestore'
@@ -129,6 +132,27 @@ export const registerWithEmailAndPassword = async (
     return formatAuthUser(userData)
   } catch (error) {
     console.error('Error registering user:', error)
+    throw error
+  }
+}
+
+export const signInWithEmail = async (formData, rememberMe) => {
+  const { email, password } = formData
+
+  try {
+    if (!rememberMe) {
+      await setPersistence(auth, browserSessionPersistence)
+    }
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    )
+    const user = userCredential.user
+
+    return formatAuthUser(user)
+  } catch (error) {
+    console.error('Error signing in with email and password:', error)
     throw error
   }
 }

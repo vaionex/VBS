@@ -4,24 +4,30 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
-import { signInWithGoogle } from '@/firebase/auth'
+import { signInWithGoogle, signInWithEmail } from '@/firebase/auth'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Checkbox } from '@/components/ui/checkbox'
+import { useToast } from '@/components/ui/use-toast'
+import SpinnerComponent from '@/components/Common/Spinner'
 
 const loginFields = [
   {
     label: 'Email',
     name: 'email',
     type: 'email',
-    placeholder: '',
+    placeholder: 'Email',
+    id: 'email',
   },
   {
     label: 'Password',
     name: 'password',
     type: 'password',
-    placeholder: '',
+    placeholder: 'Password',
+    autoComplete: 'current-password',
+    minLength: '6',
+    id: 'password',
   },
 ]
 
@@ -33,12 +39,51 @@ export default function LoginComponent() {
   })
   const { push } = useRouter()
   const [isChecked, setIsChecked] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prevData) => ({ ...prevData, [name]: value }))
   }
-  const handleEmailSignIn = async () => {}
+  const handleEmailSignIn = async (e) => {
+    try {
+      e.preventDefault()
+      setIsLoading(true)
+      await signInWithEmail(formData, isChecked)
+      push('/')
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+
+      let errorMessage = ''
+
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email address.'
+          break
+        case 'auth/wrong-password':
+          errorMessage = 'Incorrect password.'
+          break
+        case 'auth/user-not-found':
+          errorMessage = 'User not found.'
+          break
+        case 'auth/network-request-failed':
+          errorMessage =
+            'Network error. Please check your internet connection and try again.'
+          break
+        default:
+          errorMessage = 'An error occurred during sign in. Please try again.'
+          break
+      }
+
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: errorMessage,
+      })
+    }
+  }
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
@@ -52,7 +97,7 @@ export default function LoginComponent() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
         <div className="mx-auto w-full max-w-sm lg:w-96 mb-6">
-          <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <Image
               src="./mark.svg"
               height={60}
@@ -60,7 +105,7 @@ export default function LoginComponent() {
               className="mx-auto"
               alt="Your Company"
             />
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Sign in to your account
             </h2>
           </div>
@@ -108,6 +153,9 @@ export default function LoginComponent() {
             </div>
           </div>
           <Button type="submit" className="w-full mb-3">
+            {isLoading && (
+              <SpinnerComponent className="text-white absolute left-4" />
+            )}
             Login
           </Button>
           <Button type="button" onClick={handleGoogleSignIn} className="w-full">

@@ -1,7 +1,9 @@
 export default function Dashboard() {
   return (
     <>
-      <div>Dashboard Page</div>
+      <div className="text-4xl flex justify-center items-center">
+        Dashboard Page
+      </div>
     </>
   )
 }
