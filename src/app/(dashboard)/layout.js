@@ -1,4 +1,5 @@
 import '../globals.css'
+import { Header, Footer } from '@/components/Layout'
 
 export const metadata = {
   description: 'Dashboard',
@@ -6,5 +7,11 @@ export const metadata = {
 }
 
 export default function DashboardRootLayout({ children }) {
-  return <>{children}</>
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  )
 }
