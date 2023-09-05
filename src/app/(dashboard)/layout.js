@@ -9,7 +9,6 @@ export const metadata = {
 export default function DashboardRootLayout({ children }) {
   return (
     <>
-      {' '}
       <Header />
       {children}
       <Footer />
