@@ -2,10 +2,12 @@
 import Link from 'next/link'
 import { navigation } from './config'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
+import { useToast } from '@/components/ui/use-toast'
 
 export function Footer() {
   const [email, setEmail] = useState('')
+  const { toast } = useToast()
+
   const handleSubmitEmail = async (e) => {
     e.preventDefault()
     try {
@@ -22,15 +24,24 @@ export function Footer() {
       console.log(response)
       if (response.ok) {
         console.log('succesfull')
-        toast.success('Subscription successful!')
+        toast({
+          title: 'Success',
+          description: 'Subscription successful!',
+        })
         setEmail('')
       } else {
         console.log('failure')
-        toast.error('Subscription failed. Please try again.')
+        toast({
+          title: 'Error',
+          description: 'Subscription failed. Please try again.',
+        })
       }
     } catch (error) {
       console.log(error)
-      toast.error('An error occurred. Please try again.')
+      toast({
+        title: 'Error',
+        description: 'An error occurred. Please try again.',
+      })
     }
   }
   return (
