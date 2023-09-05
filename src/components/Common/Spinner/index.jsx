@@ -1,9 +1,10 @@
-import Spinner from 'react-bootstrap/Spinner'
-
 export default function SpinnerComponent() {
   return (
     <div>
-      <Spinner animation="grow" variant="secondary" />
+      <svg
+        class="animate-spin h-5 w-5 mr-3 bg-gray-200"
+        viewBox="0 0 24 24"
+      ></svg>
     </div>
   )
 }
