@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { toast } from 'react-toastify'
+import { useToast } from '@/components/ui/use-toast'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -52,6 +52,7 @@ export default function ContactComponent() {
     phoneNumber: '',
     message: '',
   })
+  const { toast } = useToast()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -77,7 +78,10 @@ export default function ContactComponent() {
 
       if (response.ok) {
         setTimeout(() => {
-          toast.success('Message Sent Successfully!')
+          toast({
+            title: 'Success!',
+            description: 'Message Sent Successfully!',
+          })
         }, 3000)
 
         setFormData({
@@ -88,11 +92,17 @@ export default function ContactComponent() {
           message: '',
         })
       } else {
-        toast.error('Message could not be sent. Please try again.')
+        toast({
+          title: 'Error!',
+          description: 'Message could not be sent. Please try again.',
+        })
       }
     } catch (error) {
       console.log(error)
-      toast.error('An error occurred. Please try again.')
+      toast({
+        title: 'Error!',
+        description: 'An error occurred. Please try again.',
+      })
     }
   }
 
