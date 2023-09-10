@@ -16,7 +16,7 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth'
 import { firebase } from './app'
-import { createUserAndFetchDocument } from '@/firebase/firestore'
+import { createUserDocument } from '@/firebase/firestore'
 
 export const auth = getAuth(firebase)
 
@@ -58,17 +58,57 @@ export const useFirebaseAuth = () => {
   }
 }
 
+// export const signInWithGoogle = async (authUser, updateUserData) => {
+//   const provider = new GoogleAuthProvider()
+//   try {
+//     let res
+//     if (authUser) {
+//       try {
+//         res = await linkWithPopup(auth.currentUser, provider)
+//         const user = res.user
+//         console.log('Accounts successfully linked')
+//         updateUserData(formatAuthUser(user))
+//         return { status: 'success' }
+//       } catch (error) {
+//         if (error?.code === 'auth/credential-already-in-use') {
+//           console.log('User exists, signing user in')
+//           const credential = GoogleAuthProvider.credentialFromResult(
+//             error.customData,
+//           )
+//           await signInWithCredential(auth, credential)
+//           console.log('User signed in')
+//           return { status: 'success' }
+//         }
+//         return { status: 'error' }
+//       }
+//     } else {
+//       try {
+//         await signInWithPopup(auth, provider)
+//         console.log('Accounts successfully logged')
+//         return { status: 'success' }
+//       } catch (error) {
+//         console.log('Signing user error', error)
+//         return { status: 'error' }
+//       }
+//     }
+//   } catch (error) {
+//     console.error('Error', error)
+//     return { status: 'error' }
+//   }
+// }
+
 export const signInWithGoogle = async (authUser, updateUserData) => {
   const provider = new GoogleAuthProvider()
   try {
     let res
+
     if (authUser) {
       try {
         res = await linkWithPopup(auth.currentUser, provider)
         const user = res.user
         console.log('Accounts successfully linked')
         updateUserData(formatAuthUser(user))
-        return { status: 'success' }
+        return { status: 'success', user }
       } catch (error) {
         if (error?.code === 'auth/credential-already-in-use') {
           console.log('User exists, signing user in')
@@ -79,13 +119,15 @@ export const signInWithGoogle = async (authUser, updateUserData) => {
           console.log('User signed in')
           return { status: 'success' }
         }
+        console.error('Error linking account', error)
         return { status: 'error' }
       }
     } else {
       try {
-        await signInWithPopup(auth, provider)
+        res = await signInWithPopup(auth, provider)
+        const user = res.user
         console.log('Accounts successfully logged')
-        return { status: 'success' }
+        return { status: 'success', user }
       } catch (error) {
         console.log('Signing user error', error)
         return { status: 'error' }
@@ -110,6 +152,7 @@ export const logoutUser = async () => {
     console.error('Error logging out user:', error)
   }
 }
+
 export const registerWithEmailAndPassword = async (
   email,
   password,
@@ -124,11 +167,14 @@ export const registerWithEmailAndPassword = async (
     )
     const user = userCredential.user
 
-    const userData = await createUserAndFetchDocument(user, {
+    const userData = await createUserDocument(user, {
       firstName,
       lastName,
-      email,
     })
+
+    if (!userData) {
+      throw new Error('User data could not be created.')
+    }
 
     return formatAuthUser(userData)
   } catch (error) {
