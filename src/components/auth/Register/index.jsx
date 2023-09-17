@@ -72,6 +72,12 @@ export default function RegisterComponent() {
     const { email, password, firstName, lastName } = formData
     try {
       await registerWithEmailAndPassword(email, password, firstName, lastName)
+      toast({
+        variant: 'success',
+        title: 'Successfully Registered',
+        description: 'You have successfully registered. Welcome!',
+      })
+      push('/dashboard')
     } catch (error) {
       console.error(error)
       toast({

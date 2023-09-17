@@ -110,6 +110,7 @@ export const logoutUser = async () => {
     console.error('Error logging out user:', error)
   }
 }
+
 export const registerWithEmailAndPassword = async (
   email,
   password,
