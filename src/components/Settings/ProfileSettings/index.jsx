@@ -1,11 +1,14 @@
 'use client'
-import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
-import Spinner from '@/components/Common/Spinner'
 
+import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import UpdateEmail from './UpdateEmail'
+import UpdatePassword from './UpdatePassword'
+import UpdateProfile from './UpdateProfile'
 import Image from 'next/image'
+import SpinnerComponent from '@/components/Common/Spinner'
 
 export default function ProfileSetting() {
-  const { isLoading } = useFirebaseAuthContext()
+  const { authUser, updateUserData, isLoading } = useFirebaseAuthContext()
 
   if (!isLoading) {
     return (
@@ -23,13 +26,17 @@ export default function ProfileSetting() {
           </h3>
         </div>
         <hr className="border-gray-200" />
-        <div>components will be here.</div>
+        <div>
+          <UpdateProfile authUser={authUser} updateUserData={updateUserData} />
+          <UpdateEmail authUser={authUser} updateUserData={updateUserData} />
+          <UpdatePassword authUser={authUser} updateUserData={updateUserData} />
+        </div>
       </div>
     )
   } else {
     return (
       <div className="h-full flex justify-center items-center">
-        <Spinner />
+        <SpinnerComponent />
       </div>
     )
   }

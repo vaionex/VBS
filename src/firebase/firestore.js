@@ -29,3 +29,8 @@ export const createUserAndFetchDocument = async (user, additionalData) => {
   const userDocument = await getDoc(userRef)
   return { uid: user.uid, ...userDocument.data() }
 }
+
+export const updateUserData = async (userId, updatedObj) => {
+  const docRef = doc(firestore, 'users', userId)
+  await setDoc(docRef, updatedObj, { merge: true })
+}
