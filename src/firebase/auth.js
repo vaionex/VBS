@@ -3,9 +3,11 @@
 import { useState, useEffect } from 'react'
 import {
   GoogleAuthProvider,
+  EmailAuthProvider,
   getAuth,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
+  reauthenticateWithCredential,
   signInWithPopup,
   linkWithPopup,
   signInWithCredential,
