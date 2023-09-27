@@ -63,7 +63,6 @@ export default function RegisterComponent() {
   const handleRegister = async (e) => {
     e.preventDefault()
 
-    // Şifre eşleşmesini kontrol et
     if (formData.password !== formData.confirmPassword) {
       toast({
         variant: 'destructive',
@@ -84,12 +83,10 @@ export default function RegisterComponent() {
       )
 
       if (formattedUser) {
-        // Yeni kullanıcı bilgilerini Firestore'a kaydet
         await createUserDocument(formattedUser, {
           firstName,
           lastName,
           email,
-          // ...diğer alanlar
         })
         setFormData({
           firstName: '',

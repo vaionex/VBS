@@ -58,45 +58,6 @@ export const useFirebaseAuth = () => {
   }
 }
 
-// export const signInWithGoogle = async (authUser, updateUserData) => {
-//   const provider = new GoogleAuthProvider()
-//   try {
-//     let res
-//     if (authUser) {
-//       try {
-//         res = await linkWithPopup(auth.currentUser, provider)
-//         const user = res.user
-//         console.log('Accounts successfully linked')
-//         updateUserData(formatAuthUser(user))
-//         return { status: 'success' }
-//       } catch (error) {
-//         if (error?.code === 'auth/credential-already-in-use') {
-//           console.log('User exists, signing user in')
-//           const credential = GoogleAuthProvider.credentialFromResult(
-//             error.customData,
-//           )
-//           await signInWithCredential(auth, credential)
-//           console.log('User signed in')
-//           return { status: 'success' }
-//         }
-//         return { status: 'error' }
-//       }
-//     } else {
-//       try {
-//         await signInWithPopup(auth, provider)
-//         console.log('Accounts successfully logged')
-//         return { status: 'success' }
-//       } catch (error) {
-//         console.log('Signing user error', error)
-//         return { status: 'error' }
-//       }
-//     }
-//   } catch (error) {
-//     console.error('Error', error)
-//     return { status: 'error' }
-//   }
-// }
-
 export const signInWithGoogle = async (authUser, updateUserData) => {
   const provider = new GoogleAuthProvider()
   try {
