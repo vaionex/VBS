@@ -1,0 +1,160 @@
+'use client'
+
+// import { Container } from '@/components/Common/Container'
+import { useState } from 'react'
+import PricingCard from './PricingCard'
+import { initiateSubscription } from '@/utils/stripe'
+import { useRouter } from 'next/navigation'
+import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import Image from 'next/image'
+
+const comingSoonFeatures = [
+  ['Access to US & UK templates', 'Email support'],
+  [
+    'Access to US, UK+ more premium contract templates',
+    'AI-based contract drafting',
+    'Multi-user access (Up to 3 users)',
+    'Integration with e-signature platform',
+    'Export contracts',
+    'Email support',
+  ],
+  [
+    'Access to US, UK+ more premium contract templates',
+    'AI-based contract drafting',
+    'Multi-user access (Up to 5 users)',
+    'Integration with e-signature platform',
+    'Export contracts',
+    'Email support',
+  ],
+]
+
+export default function Products({ plans }) {
+  const { authUser } = useFirebaseAuthContext()
+  const { push } = useRouter()
+
+  const [activeTab, setActiveTab] = useState('month')
+  const [selectedPlan, setSelectedPlan] = useState(plans[0]?.id)
+  const [loadingStripeCheckout, setloadingStripeCheckout] = useState(false)
+  const currentPlan = authUser?.userSubscription?.pricePlan?.product
+  const onTabChange = (tab) => setActiveTab(tab)
+
+  const generateRedirectLink = async (id, priceId) => {
+    try {
+      const FREE_PRODUCT_ID =
+        process.env.VERCEL_ENV !== 'production'
+          ? process.env.NEXT_PUBLIC_DEV_STRIPE_FREE_PRODUCT_ID
+          : process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID
+      if (!authUser || authUser?.isAnonymous) {
+        // push('/login?redirect=pricing')
+        return null
+      } else if (id !== FREE_PRODUCT_ID && currentPlan !== id) {
+        setloadingStripeCheckout(id)
+        const errorHandle = (msg) => {
+          setloadingStripeCheckout(false)
+          console.log('msg', msg)
+        }
+        await initiateSubscription(priceId, errorHandle)
+        return null
+      } else {
+        // push('/settings/billing')
+      }
+    } catch (err) {
+      setloadingStripeCheckout(false)
+      console.log('generateRedirectLink err', err)
+    }
+  }
+
+  const mappedFeatures = plans.map((plan, index) => {
+    const matchedComingSoonFeatures = comingSoonFeatures[index]
+    return JSON.parse(plan.stripe_metadata_features?.replace(/'/g, '"')).map(
+      (feature) =>
+        matchedComingSoonFeatures.includes(feature)
+          ? { feature: feature, status: 'Coming Soon' }
+          : { feature: feature, status: 'Available' },
+    )
+  })
+  const mappedPlans = plans.map((plan, index) => ({
+    ...plan,
+    stripe_metadata_features: mappedFeatures[index],
+  }))
+
+  return (
+    <section
+      id="pricing"
+      aria-label="Pricing"
+      className="py-8 sm:py-16 md:py-20 m-5"
+    >
+      {/* <Container> */}
+      <div className="md:text-center mt-10 md:mt-16">
+        <h2 className="font-semibold text-gray-900 text-5xl">Pricing plans</h2>
+        <p className="mt-6 text-xl text-gray-600">
+          Simple, transparent pricing that grows with you. Try any plan free for
+          30 days
+        </p>
+      </div>
+
+      <div className="font-semibold text-base flex justify-center	mt-10">
+        <div className="flex justify-center gap-x-2 rounded-lg	p-1.5 bg-gray-50 border-solid	border-gray-100 border">
+          <div
+            onClick={() => onTabChange('month')}
+            className={`cursor-pointer text-gray-500 px-3.5 py-2.5 rounded-md flex items-center  ${
+              activeTab === 'month' ? 'bg-white shadow text-gray-700' : ''
+            }`}
+          >
+            Monthly billing
+          </div>
+          <div
+            onClick={() => onTabChange('year')}
+            className={`cursor-pointer text-gray-500  px-3.5 py-2.5 rounded-md flex flex-col text-center ${
+              activeTab === 'year' ? 'bg-white shadow text-gray-700' : ''
+            }`}
+          >
+            <span>Annual billing</span>
+            <span className="text-gray-600 text-xs">Save up to 16%</span>
+          </div>
+        </div>
+      </div>
+      <div className="-mx-4 mt-16 lg:mt-24 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">
+        {mappedPlans &&
+          mappedPlans.map((plan, index) => {
+            return (
+              <PricingCard
+                key={'pricing_plan' + index}
+                activeTab={activeTab}
+                plan={plan}
+                currentPlan={currentPlan}
+                selected={
+                  selectedPlan
+                    ? selectedPlan === plan?.id
+                    : plans[0]?.id === plan?.id
+                }
+                onSelect={setSelectedPlan}
+                generateRedirectLink={generateRedirectLink}
+                loadingStripeCheckout={loadingStripeCheckout}
+              />
+            )
+          })}
+      </div>
+      <div className="mt-24">
+        <Image
+          className=""
+          src="/images/Geometric shapes Dark.png"
+          alt="Geometric Shapes Legal AI - Legaliser"
+          width={1216}
+          height={304}
+          quality="85"
+        />
+      </div>
+      <div className="faqs mt-24 flex-1 md:flex  md:justify-between">
+        <div className="">
+          <h1 className="text-gray-900 font-semibold text-4xl mb-5">FAQs</h1>
+          <p className="w-auto md:w-[448px] text-lg">
+            Everything you need to know about the product and billing. Can’t
+            find the answer you’re looking for? Please chat to our team.
+          </p>
+        </div>
+      </div>
+      {/* </Container> */}
+    </section>
+  )
+}
