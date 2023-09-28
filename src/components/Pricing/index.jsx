@@ -133,25 +133,6 @@ export default function Products({ plans }) {
             )
           })}
       </div>
-      <div className="mt-24">
-        <Image
-          className=""
-          src="/images/Geometric shapes Dark.png"
-          alt="Geometric Shapes Legal AI - Legaliser"
-          width={1216}
-          height={304}
-          quality="85"
-        />
-      </div>
-      <div className="faqs mt-24 flex-1 md:flex  md:justify-between">
-        <div className="">
-          <h1 className="text-gray-900 font-semibold text-4xl mb-5">FAQs</h1>
-          <p className="w-auto md:w-[448px] text-lg">
-            Everything you need to know about the product and billing. Can’t
-            find the answer you’re looking for? Please chat to our team.
-          </p>
-        </div>
-      </div>
     </section>
   )
 }
