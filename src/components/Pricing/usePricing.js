@@ -42,7 +42,7 @@ function usePricing(plan, billingCycle) {
     let calculatedSavedAmountInPercentage
     let actualYearlyAmount
 
-    if (billingCycle === 'year' && currentPrice.interval === 'year') {
+    if (billingCycle === 'year' && currentPrice?.interval === 'year') {
       const monthlyCyclePrice = calculateMonthlyPrice(
         title,
         billingCycle,
@@ -56,7 +56,7 @@ function usePricing(plan, billingCycle) {
     }
     let monthlyPrice
 
-    if (billingCycle === 'year' && currentPrice.interval === 'year') {
+    if (billingCycle === 'year' && currentPrice?.interval === 'year') {
       monthlyPrice = priceToShow / 10
       priceToShow = Math.ceil(priceToShow / 12)
     }

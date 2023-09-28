@@ -10,8 +10,6 @@ import {
 } from 'firebase/firestore'
 import { firestore } from '@/firebase/firestore'
 import { auth } from '@/firebase/auth'
-// import { httpsCallable } from 'firebase/functions'
-// import { functions } from '@/firebase/functions'
 import { initializeStripe } from '../initializeStripe'
 
 export const getPricingPlans = async () => {
