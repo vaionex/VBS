@@ -1,6 +1,5 @@
 'use client'
 
-// import { Container } from '@/components/Common/Container'
 import { useState } from 'react'
 import PricingCard from './PricingCard'
 import { initiateSubscription } from '@/utils/stripe'
@@ -84,7 +83,6 @@ export default function Products({ plans }) {
       aria-label="Pricing"
       className="py-8 sm:py-16 md:py-20 m-5"
     >
-      {/* <Container> */}
       <div className="md:text-center mt-10 md:mt-16">
         <h2 className="font-semibold text-gray-900 text-5xl">Pricing plans</h2>
         <p className="mt-6 text-xl text-gray-600">
@@ -154,7 +152,6 @@ export default function Products({ plans }) {
           </p>
         </div>
       </div>
-      {/* </Container> */}
     </section>
   )
 }

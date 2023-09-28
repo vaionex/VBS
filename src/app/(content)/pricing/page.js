@@ -1,7 +1,7 @@
-import ProductsComponent from '@/components/Products'
+import PricingComponent from '@/components/Pricing'
 import { getPricingPlans } from '@/utils/stripe'
 
 export default async function Products() {
   const plans = await getPricingPlans()
-  return <ProductsComponent plans={plans} />
+  return <PricingComponent plans={plans} />
 }

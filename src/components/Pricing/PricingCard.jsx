@@ -1,9 +1,7 @@
 import { Button } from '../Common/Button'
 import clsx from 'clsx'
 import NumberCount from './NumberCount'
-// import usePricing from '@/components/Pricing/usePricing'
 import usePricing from './usePricing'
-// import FeatureStatus from './FeatureStatus'
 
 function CheckIcon({ className }) {
   return (
@@ -174,10 +172,6 @@ export default function PricingCard({
               }`}
             >
               {plan?.feature}
-
-              {/* {plan?.status === 'Coming Soon' && (
-                <FeatureStatus label={plan?.status} bgColor="bg-[#ea580c]" />
-              )} */}
             </span>
           </li>
         ))}
