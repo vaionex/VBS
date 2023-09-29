@@ -1,5 +1,7 @@
 import { firebase } from './app'
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
+import { updateProfile } from '../firebase/auth'
+import { auth } from './app'
 
 export const firestore = getFirestore(firebase)
 
@@ -37,4 +39,28 @@ export const createUserDocument = async (
   }
 
   return null
+}
+
+export const storeUserData = async (formattedUser, firstName, lastName) => {
+  const userRef = doc(firestore, 'users', formattedUser.uid)
+
+  try {
+    await setDoc(userRef, {
+      firstName: firstName,
+      lastName: lastName,
+    })
+    const currentUser = auth.currentUser
+
+    await updateProfile(currentUser, {
+      displayName: `${firstName} ${lastName}`,
+    })
+  } catch (error) {
+    console.error('Error storing user data:', error)
+    throw error
+  }
+}
+
+export const updateUserData = async (userId, updatedObj) => {
+  const docRef = doc(firestore, 'users', userId)
+  await setDoc(docRef, updatedObj, { merge: true })
 }

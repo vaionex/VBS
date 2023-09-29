@@ -15,10 +15,8 @@ import {
   browserSessionPersistence,
   sendPasswordResetEmail,
 } from 'firebase/auth'
-import { firebase } from './app'
-import { createUserDocument } from '@/firebase/firestore'
-
-export const auth = getAuth(firebase)
+import { firebase } from '../firebase/app'
+import { storeUserData, createUserDocument } from '../firebase/firestore'
 
 const formatAuthUser = (user) => ({
   uid: user.uid,
@@ -41,7 +39,9 @@ export const useFirebaseAuth = () => {
     }
 
     setLoading(true)
-    const formattedUser = formatAuthUser(authState)
+    const formattedUser = formatAuthUser({
+      ...authState,
+    })
     setAuthUser(formattedUser)
     setLoading(false)
   }
@@ -51,12 +51,22 @@ export const useFirebaseAuth = () => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged)
     return () => unsubscribe()
   }, [])
+  const updateUserData = async (newCustomData) => {
+    setAuthUser((prev) => ({
+      ...prev,
+      ...newCustomData,
+    }))
+  }
 
   return {
     authUser,
     loading,
+    setAuthUser,
+    updateUserData,
   }
 }
+
+export const auth = getAuth(firebase)
 
 export const signInWithGoogle = async (authUser, updateUserData) => {
   const provider = new GoogleAuthProvider()
@@ -115,10 +125,9 @@ export const logoutUser = async () => {
 }
 
 export const registerWithEmailAndPassword = async (
-  email,
-  password,
-  firstName,
-  lastName,
+  authUser,
+  updateUserData,
+  { email, password, firstName, lastName },
 ) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -127,8 +136,12 @@ export const registerWithEmailAndPassword = async (
       password,
     )
     const user = userCredential.user
-
     const userData = await createUserDocument(user, {
+      firstName,
+      lastName,
+    })
+
+    await storeUserData(user, {
       firstName,
       lastName,
     })

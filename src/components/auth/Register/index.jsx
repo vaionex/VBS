@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { registerWithEmailAndPassword, signInWithGoogle } from '@/firebase/auth'
-import { createUserDocument } from '@/firebase/firestore'
+import { storeUserData } from '@/firebase/firestore'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
@@ -76,32 +76,25 @@ export default function RegisterComponent() {
 
     try {
       const formattedUser = await registerWithEmailAndPassword(
-        email,
-        password,
-        firstName,
-        lastName,
+        authUser,
+        updateUserData,
+        { email, password, firstName, lastName },
       )
 
-      if (formattedUser) {
-        await createUserDocument(formattedUser, {
-          firstName,
-          lastName,
-          email,
-        })
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-        })
-        toast({
-          variant: 'success',
-          title: 'Successfully registered!',
-          description: 'You are now signed in.',
-        })
-        push('/dashboard')
-      }
+      await storeUserData(formattedUser, firstName, lastName)
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      })
+      toast({
+        variant: 'success',
+        title: 'Successfully registered!',
+        description: 'You are now signed in.',
+      })
+      push('/dashboard')
     } catch (error) {
       console.error('Error registering user:', error)
 
@@ -115,17 +108,9 @@ export default function RegisterComponent() {
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
-
     try {
       let res = await signInWithGoogle(authUser, updateUserData)
-
       if (res.status === 'success') {
-        const user = res.user
-        await createUserDocument(
-          user,
-          { displayName: user.displayName, photoURL: user.photoURL },
-          'google',
-        )
         toast({
           variant: 'success',
           title: 'Successfully registered!',
