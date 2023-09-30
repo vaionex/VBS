@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { registerWithEmailAndPassword, signInWithGoogle } from '@/firebase/auth'
-import { storeUserData } from '@/firebase/firestore'
+import { createUserDocument } from '../../../utils/createUserCollection'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
@@ -81,7 +81,7 @@ export default function RegisterComponent() {
         { email, password, firstName, lastName },
       )
 
-      await storeUserData(formattedUser, firstName, lastName)
+      await createUserDocument(formattedUser, firstName, lastName)
       setFormData({
         firstName: '',
         lastName: '',

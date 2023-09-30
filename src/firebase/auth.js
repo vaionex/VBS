@@ -16,7 +16,7 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth'
 import { firebase } from '../firebase/app'
-import { storeUserData, createUserDocument } from '../firebase/firestore'
+import { createUserDocument } from '../utils/createUserCollection'
 
 const formatAuthUser = (user) => ({
   uid: user.uid,
@@ -137,11 +137,6 @@ export const registerWithEmailAndPassword = async (
     )
     const user = userCredential.user
     const userData = await createUserDocument(user, {
-      firstName,
-      lastName,
-    })
-
-    await storeUserData(user, {
       firstName,
       lastName,
     })
