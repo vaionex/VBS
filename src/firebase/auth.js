@@ -15,8 +15,8 @@ import {
   browserSessionPersistence,
   sendPasswordResetEmail,
 } from 'firebase/auth'
-import { firebase } from '../firebase/app'
-import { createUserDocument } from '../utils/createUserCollection'
+import { firebase } from '@/firebase/app'
+import { createUserDocument } from '@/utils/createUserCollection'
 
 const formatAuthUser = (user) => ({
   uid: user.uid,
