@@ -5,6 +5,8 @@ import PricingCard from './PricingCard'
 import { initiateSubscription } from '@/utils/stripe'
 import { useRouter } from 'next/navigation'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import { useFirebaseAuth } from '@/firebase/auth'
+import { useToast } from '@/components/ui/use-toast'
 import Image from 'next/image'
 
 const comingSoonFeatures = [
@@ -29,14 +31,16 @@ const comingSoonFeatures = [
 
 export default function Products({ plans }) {
   const { authUser } = useFirebaseAuthContext()
+  const firebaseAuth = useFirebaseAuth()
   const { push } = useRouter()
 
   const [activeTab, setActiveTab] = useState('month')
   const [selectedPlan, setSelectedPlan] = useState(plans[0]?.id)
   const [loadingStripeCheckout, setloadingStripeCheckout] = useState(false)
-  const currentPlan = authUser?.userSubscription?.pricePlan?.product
+  const currentPlan =
+    firebaseAuth?.authUser?.userSubscription?.pricePlan?.product
   const onTabChange = (tab) => setActiveTab(tab)
-
+  const { toast } = useToast()
   const generateRedirectLink = async (id, priceId) => {
     try {
       const FREE_PRODUCT_ID =
@@ -44,7 +48,7 @@ export default function Products({ plans }) {
           ? process.env.NEXT_PUBLIC_DEV_STRIPE_FREE_PRODUCT_ID
           : process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID
       if (!authUser || authUser?.isAnonymous) {
-        // push('/login?redirect=pricing')
+        push('/login?redirect=pricing')
         return null
       } else if (id !== FREE_PRODUCT_ID && currentPlan !== id) {
         setloadingStripeCheckout(id)
@@ -55,7 +59,10 @@ export default function Products({ plans }) {
         await initiateSubscription(priceId, errorHandle)
         return null
       } else {
-        // push('/settings/billing')
+        toast({
+          variant: 'destructive',
+          description: 'You have already Subscribed to this plan',
+        })
       }
     } catch (err) {
       setloadingStripeCheckout(false)
