@@ -15,7 +15,7 @@ import { initializeStripe } from '../initializeStripe'
 export const getPricingPlans = async () => {
   try {
     // To get plans documents
-    const collectionRef = collection(firestore, 'plans')
+    const collectionRef = collection(firestore, 'products')
     const plansDocs = await getDocs(collectionRef)
     const plans = []
     plansDocs.forEach((doc) => {
@@ -27,7 +27,7 @@ export const getPricingPlans = async () => {
       process.env.VERCEL_ENV !== 'production'
         ? process.env.NEXT_PUBLIC_DEV_STRIPE_FREE_PRODUCT_ID
         : process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID
-    const freePlanDocumentRef = doc(firestore, 'plans', freePlanId)
+    const freePlanDocumentRef = doc(firestore, 'products', freePlanId)
     const freePlanSubCollectionRef = collection(freePlanDocumentRef, 'prices')
 
     // Pro price plan collection ref
@@ -35,26 +35,14 @@ export const getPricingPlans = async () => {
       process.env.VERCEL_ENV !== 'production'
         ? process.env.NEXT_PUBLIC_DEV_STRIPE_PRO_PRODUCT_ID
         : process.env.NEXT_PUBLIC_STRIPE_PRO_PRODUCT_ID
-    const proPlanDocumentRef = doc(firestore, 'plans', proPlanId)
+    const proPlanDocumentRef = doc(firestore, 'products', proPlanId)
     const proPlanSubCollectionRef = collection(proPlanDocumentRef, 'prices')
-
-    // Enterprise price plan collection ref
-    const businessPlanId =
-      process.env.VERCEL_ENV !== 'production'
-        ? process.env.NEXT_PUBLIC_DEV_STRIPE_BUSINESS_PRODUCT_ID
-        : process.env.NEXT_PUBLIC_STRIPE_BUSINESS_PRODUCT_ID
-    const enterprisePlanDocumentRef = doc(firestore, 'plans', businessPlanId)
-    const enterprisePlanSubCollectionRef = collection(
-      enterprisePlanDocumentRef,
-      'prices',
-    )
 
     // To fetch prices
     const [freePricesSnapshot, proPricesSnapshot, enterprisePricesSnapshot] =
       await Promise.all([
         getDocs(freePlanSubCollectionRef),
         getDocs(proPlanSubCollectionRef),
-        getDocs(enterprisePlanSubCollectionRef),
       ])
 
     const freePlansData = freePricesSnapshot.docs.map((price) => ({
@@ -65,11 +53,7 @@ export const getPricingPlans = async () => {
       id: price.id,
       ...price.data(),
     }))
-    const enterprisePlansData = enterprisePricesSnapshot.docs.map((price) => ({
-      id: price.id,
-      ...price.data(),
-    }))
-    const prices = [freePlansData, proPlansData, enterprisePlansData]
+    const prices = [freePlansData, proPlansData]
     const mappedPlans = plans.map((plan, index) => ({
       ...plan,
       prices: prices[index],
@@ -122,4 +106,61 @@ export const initiateSubscription = async (planProductId, errorHandle) => {
     console.error('Error initiating subscription:', error)
     throw error
   }
+}
+
+export const getCurrentUserSubscriptions = async (uid) => {
+  const customerRef = doc(firestore, 'customers', uid)
+  const subscriptionsRef = collection(customerRef, 'subscriptions')
+
+  const subscriptionsQuery = query(
+    subscriptionsRef,
+    where('status', 'in', ['trialing', 'active']),
+  )
+
+  const [subscriptionSnapshot, customerSnapshot] = await Promise.all([
+    getDocs(subscriptionsQuery),
+    getDoc(customerRef),
+  ])
+
+  const subscriptionDoc = {
+    uploadCount:
+      customerSnapshot.exists() && customerSnapshot.data()?.uploadCount
+        ? customerSnapshot.data().uploadCount
+        : 0,
+  }
+
+  if (!subscriptionSnapshot.empty) {
+    const subscriptionData = subscriptionSnapshot.docs[0].data()
+
+    const pricePlanRef = subscriptionData.price
+    const pricePlanSnapshot = await getDoc(pricePlanRef)
+
+    const productPlanRef = subscriptionData.product
+    const productPlanSnapshot = await getDoc(productPlanRef)
+
+    subscriptionDoc.pricePlan = pricePlanSnapshot.data()
+    subscriptionDoc.product = productPlanSnapshot.data()
+    subscriptionDoc.priceId = subscriptionData.price.path
+  } else {
+    //free plan
+    const pricePlanRef = doc(
+      firestore,
+      'products',
+      process.env.NEXT_PUBLIC_STRIPE_FREE_PLAN_ID,
+      'prices',
+      process.env.NEXT_PUBLIC_STRIPE_FREE_PLAN_PRICE_ID,
+    )
+    const pricePlanSnapshot = await getDoc(pricePlanRef)
+
+    const productPlanRef = doc(
+      firestore,
+      'products',
+      process.env.NEXT_PUBLIC_STRIPE_FREE_PLAN_ID,
+    )
+    const productPlanSnapshot = await getDoc(productPlanRef)
+
+    subscriptionDoc.pricePlan = pricePlanSnapshot.data()
+    subscriptionDoc.product = productPlanSnapshot.data()
+  }
+  return subscriptionDoc
 }
