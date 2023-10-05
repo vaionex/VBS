@@ -66,20 +66,29 @@ export function Header() {
               </Link>
               <Link
                 href="/register"
-                className="text-sm font-semibold leading-6 mx3 text-white"
+                className="text-sm font-semibold leading-6 mx-3 text-white"
               >
                 Register
               </Link>
             </div>
           )}
           {authUser && (
-            <Button
-              onClick={() => {
-                logoutUser()
-              }}
-            >
-              Logout
-            </Button>
+            <div>
+              {' '}
+              <Link
+                href="/settings/profile"
+                className="text-white m-2 text-sm font-semibold leading-6"
+              >
+                Settings
+              </Link>
+              <Button
+                onClick={() => {
+                  logoutUser()
+                }}
+              >
+                Logout
+              </Button>
+            </div>
           )}
         </div>
       </nav>

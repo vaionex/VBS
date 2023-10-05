@@ -7,8 +7,3 @@ export const updateUserData = async (userId, updatedObj) => {
   const docRef = doc(firestore, 'users', userId)
   await setDoc(docRef, updatedObj, { merge: true })
 }
-
-export const updateUserData = async (userId, updatedObj) => {
-  const docRef = doc(firestore, 'users', userId)
-  await setDoc(docRef, updatedObj, { merge: true })
-}
