@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { CameraIcon } from '@heroicons/react/24/outline'
 import { UserCircleIcon } from '@heroicons/react/24/outline'
-import { updateUserData } from '@/firebase/firestore'
+import { updateUserDocs, updateCustomerData } from '@/firebase/firestore'
 import { uploadProfileImage } from '@/firebase/storage'
 import { updateUserProfile } from '@/firebase/auth'
 import { Input } from '@/components/ui/input'
@@ -28,13 +28,20 @@ export default function UpdateProfile({ authUser, updateUserData }) {
     try {
       let updatedObj = {}
 
+      console.log(updatedObj, 'updateObj 1')
       if (firstName !== authUser?.firstName) {
-        await updateUserData(authUser.uid, { firstName })
+        console.log(authUser.uid, 'authUser.uid')
+        console.log(updateUserData)
+        await updateUserDocs(authUser.uid, { firstName })
+        await updateCustomerData(authUser.uid, { firstName })
         updatedObj.firstName = firstName
       }
       if (lastName !== authUser?.lastName) {
-        await updateUserData(authUser.uid, { lastName })
+        await updateUserDocs(authUser.uid, { lastName })
+        await updateCustomerData(authUser.uid, { lastName })
         updatedObj.lastName = lastName
+        console.log(updatedObj, 'updatedObj 3')
+        console.log(updatedObj.lastName, 'lastname')
       }
 
       if (imageFile) {

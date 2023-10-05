@@ -10,7 +10,7 @@ import SpinnerComponent from '@/components/Common/Spinner'
 export default function ProfileSetting() {
   const { authUser, updateUserData, isLoading } = useFirebaseAuthContext()
 
-  if (!isLoading) {
+  if (!isLoading && authUser) {
     return (
       <div>
         <div className="py-4 px-6 gap-x-3 flex items-center text-lg">
