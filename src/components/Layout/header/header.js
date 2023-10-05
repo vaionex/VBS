@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { logoutUser } from '@/firebase/auth'
+import { Button } from '@/components/ui/button'
+import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 
 const navigation = [
   { name: 'About', href: '/about' },
@@ -13,6 +16,7 @@ const navigation = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { authUser } = useFirebaseAuthContext()
 
   return (
     <header className="bg-gray-900">
@@ -52,18 +56,31 @@ export function Header() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            href="/login"
-            className="text-sm font-semibold leading-6 mx-3 text-white"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/register"
-            className="text-sm font-semibold leading-6 mx3 text-white"
-          >
-            Register
-          </Link>
+          {!authUser && (
+            <div>
+              <Link
+                href="/login"
+                className="text-sm font-semibold leading-6 mx-3 text-white"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/register"
+                className="text-sm font-semibold leading-6 mx3 text-white"
+              >
+                Register
+              </Link>
+            </div>
+          )}
+          {authUser && (
+            <Button
+              onClick={() => {
+                logoutUser()
+              }}
+            >
+              Logout
+            </Button>
+          )}
         </div>
       </nav>
       <Dialog
@@ -105,20 +122,31 @@ export function Header() {
                   </Link>
                 ))}
               </div>
-              <div className="py-6">
-                <Link
-                  href="/login"
-                  className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+              {!authUser && (
+                <div className="py-6">
+                  <Link
+                    href="/login"
+                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                  >
+                    Log in
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
+              {authUser && (
+                <Button
+                  onClick={() => {
+                    logoutUser()
+                  }}
                 >
-                  Log in
-                </Link>
-                <Link
-                  href="/register"
-                  className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                >
-                  Register
-                </Link>
-              </div>
+                  Logout
+                </Button>
+              )}
             </div>
           </div>
         </Dialog.Panel>
