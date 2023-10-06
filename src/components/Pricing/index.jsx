@@ -43,14 +43,13 @@ export default function Products({ plans }) {
   const { toast } = useToast()
   const generateRedirectLink = async (id, priceId) => {
     try {
-      const FREE_PRODUCT_ID =
-        process.env.VERCEL_ENV !== 'production'
-          ? process.env.NEXT_PUBLIC_DEV_STRIPE_FREE_PRODUCT_ID
-          : process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID
       if (!authUser || authUser?.isAnonymous) {
         push('/login?redirect=pricing')
         return null
-      } else if (id !== FREE_PRODUCT_ID && currentPlan !== id) {
+      } else if (
+        id !== process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID &&
+        currentPlan !== id
+      ) {
         setloadingStripeCheckout(id)
         const errorHandle = (msg) => {
           setloadingStripeCheckout(false)
@@ -119,7 +118,7 @@ export default function Products({ plans }) {
           </div>
         </div>
       </div>
-      <div className="-mx-4 mt-16 lg:mt-24 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">
+      <div className="-mx-4 mt-16 lg:mt-24 flex  flex-wrap md:flex-nowrap gap-4  sm:mx-auto lg:-mx-auto lg:max-w-none justify-center xl:mx-0 xl:gap-x-8">
         {mappedPlans &&
           mappedPlans.map((plan, index) => {
             return (

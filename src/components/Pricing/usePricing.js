@@ -4,7 +4,7 @@ const CENTS_IN_DOLLAR = 100
 
 // helper function to find the price for a given interval
 const findPriceForInterval = (prices, interval) =>
-  prices.find((x) => x.interval === interval) || prices[0]
+  prices?.find((x) => x.interval === interval) || prices[0]
 
 // helper function to calculate the price to show
 const calculatePriceToShow = (currentPrice) => {
