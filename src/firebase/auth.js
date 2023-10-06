@@ -15,11 +15,9 @@ import {
   browserSessionPersistence,
   sendPasswordResetEmail,
 } from 'firebase/auth'
-import { firebase } from './app'
-import { createUserAndFetchDocument } from '@/firebase/firestore'
+import { firebase } from '@/firebase/app'
+import { createUserDocument } from '@/utils/createUserCollection'
 import { getCurrentUserSubscriptions } from '@/utils/stripe'
-
-export const auth = getAuth(firebase)
 
 const formatAuthUser = (user) => ({
   uid: user.uid,
@@ -57,24 +55,35 @@ export const useFirebaseAuth = () => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged)
     return () => unsubscribe()
   }, [])
+  const updateUserData = async (newCustomData) => {
+    setAuthUser((prev) => ({
+      ...prev,
+      ...newCustomData,
+    }))
+  }
 
   return {
     authUser,
     loading,
+    setAuthUser,
+    updateUserData,
   }
 }
+
+export const auth = getAuth(firebase)
 
 export const signInWithGoogle = async (authUser, updateUserData) => {
   const provider = new GoogleAuthProvider()
   try {
     let res
+
     if (authUser) {
       try {
         res = await linkWithPopup(auth.currentUser, provider)
         const user = res.user
         console.log('Accounts successfully linked')
         updateUserData(formatAuthUser(user))
-        return { status: 'success' }
+        return { status: 'success', user }
       } catch (error) {
         if (error?.code === 'auth/credential-already-in-use') {
           console.log('User exists, signing user in')
@@ -85,13 +94,15 @@ export const signInWithGoogle = async (authUser, updateUserData) => {
           console.log('User signed in')
           return { status: 'success' }
         }
+        console.error('Error linking account', error)
         return { status: 'error' }
       }
     } else {
       try {
-        await signInWithPopup(auth, provider)
+        res = await signInWithPopup(auth, provider)
+        const user = res.user
         console.log('Accounts successfully logged')
-        return { status: 'success' }
+        return { status: 'success', user }
       } catch (error) {
         console.log('Signing user error', error)
         return { status: 'error' }
@@ -116,11 +127,11 @@ export const logoutUser = async () => {
     console.error('Error logging out user:', error)
   }
 }
+
 export const registerWithEmailAndPassword = async (
-  email,
-  password,
-  firstName,
-  lastName,
+  authUser,
+  updateUserData,
+  { email, password, firstName, lastName },
 ) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -129,12 +140,14 @@ export const registerWithEmailAndPassword = async (
       password,
     )
     const user = userCredential.user
-
-    const userData = await createUserAndFetchDocument(user, {
+    const userData = await createUserDocument(user, {
       firstName,
       lastName,
-      email,
     })
+
+    if (!userData) {
+      throw new Error('User data could not be created.')
+    }
 
     return formatAuthUser(userData)
   } catch (error) {
