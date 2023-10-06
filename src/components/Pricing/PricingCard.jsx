@@ -54,14 +54,10 @@ export default function PricingCard({
     calculatedSavedAmountInPercentage,
   ] = usePricing(plan, activeTab)
 
-  const FREE_PRODUCT_ID =
-    process.env.VERCEL_ENV !== 'production'
-      ? process.env.NEXT_PUBLIC_DEV_STRIPE_FREE_PRODUCT_ID
-      : process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID
   return (
     <section
       className={clsx(
-        'flex flex-col rounded-3xl px-6 sm:px-8 cursor-pointer',
+        'flex flex-col rounded-3xl px-6 sm:px-8 cursor-pointer w-80',
         selected ? 'bg-blue-600 py-8 lg:order-none' : 'lg:py-8',
       )}
       onClick={() => onSelect(id)}
@@ -128,7 +124,8 @@ export default function PricingCard({
         className="mt-8 ring-gray-300 text-black dark:text-black"
         disabled={
           loadingStripeCheckout ||
-          (currentPlan === FREE_PRODUCT_ID && id === FREE_PRODUCT_ID)
+          (currentPlan === process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID &&
+            id === process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID)
         }
       >
         {loadingStripeCheckout === id ? (

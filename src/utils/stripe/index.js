@@ -23,27 +23,26 @@ export const getPricingPlans = async () => {
     })
 
     // Free price plan collection ref
-    const freePlanId =
-      process.env.VERCEL_ENV !== 'production'
-        ? process.env.NEXT_PUBLIC_DEV_STRIPE_FREE_PRODUCT_ID
-        : process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID
-    const freePlanDocumentRef = doc(firestore, 'products', freePlanId)
+    const freePlanDocumentRef = doc(
+      firestore,
+      'products',
+      process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID,
+    )
     const freePlanSubCollectionRef = collection(freePlanDocumentRef, 'prices')
 
     // Pro price plan collection ref
-    const proPlanId =
-      process.env.VERCEL_ENV !== 'production'
-        ? process.env.NEXT_PUBLIC_DEV_STRIPE_PRO_PRODUCT_ID
-        : process.env.NEXT_PUBLIC_STRIPE_PRO_PRODUCT_ID
-    const proPlanDocumentRef = doc(firestore, 'products', proPlanId)
+    const proPlanDocumentRef = doc(
+      firestore,
+      'products',
+      process.env.NEXT_PUBLIC_STRIPE_PLUS_PRODUCT_ID,
+    )
     const proPlanSubCollectionRef = collection(proPlanDocumentRef, 'prices')
 
     // To fetch prices
-    const [freePricesSnapshot, proPricesSnapshot, enterprisePricesSnapshot] =
-      await Promise.all([
-        getDocs(freePlanSubCollectionRef),
-        getDocs(proPlanSubCollectionRef),
-      ])
+    const [freePricesSnapshot, proPricesSnapshot] = await Promise.all([
+      getDocs(freePlanSubCollectionRef),
+      getDocs(proPlanSubCollectionRef),
+    ])
 
     const freePlansData = freePricesSnapshot.docs.map((price) => ({
       id: price.id,
@@ -146,16 +145,16 @@ export const getCurrentUserSubscriptions = async (uid) => {
     const pricePlanRef = doc(
       firestore,
       'products',
-      process.env.NEXT_PUBLIC_STRIPE_FREE_PLAN_ID,
+      process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID,
       'prices',
-      process.env.NEXT_PUBLIC_STRIPE_FREE_PLAN_PRICE_ID,
+      process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_PRICE_ID,
     )
     const pricePlanSnapshot = await getDoc(pricePlanRef)
 
     const productPlanRef = doc(
       firestore,
       'products',
-      process.env.NEXT_PUBLIC_STRIPE_FREE_PLAN_ID,
+      process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID,
     )
     const productPlanSnapshot = await getDoc(productPlanRef)
 
