@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { registerWithEmailAndPassword, signInWithGoogle } from '@/firebase/auth'
+import { createUserDocument } from '@/utils/createUserCollection'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
@@ -61,6 +62,7 @@ export default function RegisterComponent() {
 
   const handleRegister = async (e) => {
     e.preventDefault()
+
     if (formData.password !== formData.confirmPassword) {
       toast({
         variant: 'destructive',
@@ -69,14 +71,36 @@ export default function RegisterComponent() {
       })
       return
     }
+
     const { email, password, firstName, lastName } = formData
+
     try {
-      await registerWithEmailAndPassword(email, password, firstName, lastName)
+      const formattedUser = await registerWithEmailAndPassword(
+        authUser,
+        updateUserData,
+        { email, password, firstName, lastName },
+      )
+
+      await createUserDocument(formattedUser, firstName, lastName)
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      })
+      toast({
+        variant: 'success',
+        title: 'Successfully registered!',
+        description: 'You are now signed in.',
+      })
+      push('/dashboard')
     } catch (error) {
-      console.error(error)
+      console.error('Error registering user:', error)
+
       toast({
         variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
+        title: 'Ohh! Something went wrong.',
         description: error.message,
       })
     }
@@ -84,18 +108,32 @@ export default function RegisterComponent() {
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
-    let res = await signInWithGoogle(authUser, updateUserData)
-    if (res.status === 'success') {
-      push('/dashboard')
-    } else {
+    try {
+      let res = await signInWithGoogle(authUser, updateUserData)
+      if (res.status === 'success') {
+        toast({
+          variant: 'success',
+          title: 'Successfully registered!',
+          description: 'You are now signed in.',
+        })
+        push('/dashboard')
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Uh oh! Something went wrong.',
+          description: res.message,
+        })
+      }
+    } catch (error) {
+      console.error('Error signing in with Google:', error)
+
       toast({
         variant: 'destructive',
         title: 'Uh oh! Something went wrong.',
-        description: res.message,
+        description: error.message,
       })
     }
   }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">

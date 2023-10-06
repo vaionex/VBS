@@ -1,31 +1,9 @@
 import { firebase } from './app'
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
+import { getFirestore, doc, setDoc } from 'firebase/firestore'
 
 export const firestore = getFirestore(firebase)
 
-export const createUserAndFetchDocument = async (user, additionalData) => {
-  if (!user) return null
-
-  const userRef = doc(firestore, 'users', user.uid)
-
-  const snapshot = await getDoc(userRef)
-  if (!snapshot.exists()) {
-    const { email } = user
-    const { firstName, lastName } = additionalData
-
-    try {
-      await setDoc(userRef, {
-        firstName,
-        lastName,
-        email,
-        // ...other data
-      })
-    } catch (error) {
-      console.error('Error creating user document', error)
-      return null
-    }
-  }
-
-  const userDocument = await getDoc(userRef)
-  return { uid: user.uid, ...userDocument.data() }
+export const updateUserData = async (userId, updatedObj) => {
+  const docRef = doc(firestore, 'users', userId)
+  await setDoc(docRef, updatedObj, { merge: true })
 }
