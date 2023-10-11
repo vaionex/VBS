@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { navigation } from './config'
 import { useState } from 'react'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/components/UI/use-toast'
 
 export function Footer() {
   const [email, setEmail] = useState('')
