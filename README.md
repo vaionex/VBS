@@ -1,6 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Welcome to the VBS - the Vaionex Base Stack. This repository serves as a foundational blueprint for all our upcoming projects at Vaionex. Please take a moment to familiarize yourself with the guidelines in this document to ensure a consistent and efficient development experience.
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Setup
 
@@ -11,13 +13,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Installation Steps
 
-````
-
 **1. Install the dependencies:**
 
 ```bash
 yarn install
-````
+```
 
 **2. Obtain the necessary environment variables from the Vercel platform. It will be explained under Pulling .env Variables from Vercel.**
 
