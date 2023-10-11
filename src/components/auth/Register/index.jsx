@@ -1,14 +1,14 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
+import { Input } from '@/components/UI/input'
+import { Button } from '@/components/UI/button'
+import { Label } from '@/components/UI/label'
 import { registerWithEmailAndPassword, signInWithGoogle } from '@/firebase/auth'
 import { createUserDocument } from '@/utils/createUserCollection'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { useRouter } from 'next/navigation'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/components/UI/use-toast'
 
 const registrationFields = [
   {
