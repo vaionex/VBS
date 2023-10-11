@@ -4,14 +4,6 @@ import * as React from 'react'
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
 
-// eslint-disable-next-line no-unused-vars
-const actionTypes = {
-  ADD_TOAST: 'ADD_TOAST',
-  UPDATE_TOAST: 'UPDATE_TOAST',
-  DISMISS_TOAST: 'DISMISS_TOAST',
-  REMOVE_TOAST: 'REMOVE_TOAST',
-}
-
 let count = 0
 
 function genId() {
