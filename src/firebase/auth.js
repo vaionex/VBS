@@ -174,6 +174,7 @@ export const signInWithEmail = async (formData, rememberMe) => {
 }
 export const resetUserPassword = async (email) => {
   try {
+    // eslint-disable-next-line no-unused-vars
     const passwordResetEmail = await sendPasswordResetEmail(auth, email)
     return true
   } catch (error) {
