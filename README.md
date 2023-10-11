@@ -11,27 +11,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Installation Steps
 
-**1. Clone the VBS repository:**
+````
 
-```bash
-git clone git@github.com:vaionex/VBS.git
-```
-
-**2. Navigate to the VBS directory:**
-
-```bash
-cd VBS
-```
-
-**3. Install the dependencies:**
+**1. Install the dependencies:**
 
 ```bash
 yarn install
-```
-```bash
-npm install
-```
-**4. Obtain the necessary environment variables from the Vercel platform. It will be explained under Pulling .env Variables from Vercel.**
+````
+
+**2. Obtain the necessary environment variables from the Vercel platform. It will be explained under Pulling .env Variables from Vercel.**
 
 ```env
 NEXT_PUBLIC_DEV_STRIPE_FREE_PRODUCT_ID=
@@ -64,26 +52,9 @@ VBS incorporates several popular libraries and tools:
 - [Radix UI](https://radix-ui.com/)
 - [Tailwind CSS](https://tailwindcss.com/docs/utility-first)
 - [Headless UI](https://headlessui.dev/)
-- [Heroicons](https://heroicons.com/)
 - [Axios](https://axios-http.com/)
 - [clsx](https://www.npmjs.com/package/clsx)
-- [Lucide Icons for React](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-react)
-- [React Toastify](https://fkhadra.github.io/react-toastify/)
 - And several others focused on development like ESLint configurations and PostCSS.
-
-## Usage
-
-### Local Development
-
-To run the VBS project locally:
-
-```bash
-yarn dev
-```
-```bash
-npm start
-```
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ### Build and Production
 
@@ -92,9 +63,6 @@ To build the application:
 ```bash
 yarn build
 ```
-```bash
-npm run build
-```
 
 After building, to run it in production mode:
 
@@ -102,9 +70,6 @@ After building, to run it in production mode:
 yarn start
 ```
 
-```bash
-npm start
-```
 ### Linting
 
 To lint your code:
@@ -112,18 +77,12 @@ To lint your code:
 ```bash
 yarn lint
 ```
-```bash
-npm run lint
-```
 
 ## Pulling .env Variables from Vercel
 
 **1. Install Vercel CLI**
 If you haven't already, install the [Vercel CLI](https://vercel.com/docs/cli#using-in-a-ci/cd-environment):
 
-```bash
-npm i -g vercel
-```
 ```bash
 yarn global add vercel
 ```
@@ -134,7 +93,9 @@ From the command line, log into your Vercel account:
 ```bash
 vercel login
 ```
+
 Vercel CLI supports the following login methods:
+
 ```bash
 GitHub OAuth
 GitLab OAuth
@@ -142,6 +103,7 @@ Bitbucket OAuth
 Email confirmation
 SAML Single Sign-On through your Team's identity provider
 ```
+
 Vercel CLI requires you to log in and authenticate before accessing resources or performing administrative tasks. In a terminal environment, you can use vercel login, which requires manual input.
 This will prompt you for your email address and send you a confirmation email. Once you click on the link in the email, the CLI login process will be completed.
 
@@ -156,29 +118,20 @@ cd path-to/your-project-directory
 Use the following command to pull the environment variables from Vercel to a local .env file:
 
 ```bash
-vercel env pull 
+vercel env pull
 ```
 
 This will write the environment variables from Vercel to a .env file in your local environment.
 
 For futher visit [Vercel](https://vercel.com/docs/cli/env).
 
-
-
 ## Using ShadCn
+
 ShadCn provides a streamlined way to add components to your projects. Here's a comprehensive guide on how to use it.
 
 ### Command Line Interface (CLI)
+
 The CLI is your main tool for interacting with ShadCn.
-
-Initializing a New Project
-To set up ShadCn for a new project:
-
-Use the init command. This initializes the configuration, installs necessary dependencies, adds the cn utility, and sets up tailwind.config.js and the project's CSS variables.
-
-```bash
-npx shadcn-ui@latest init
-```
 
 **Adding Components**
 To add specific components and their dependencies to your project:
@@ -199,7 +152,7 @@ Once added, you can easily import and use the component in your project:
 
 ```bash
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/UI/button"
 
 export default function Home() {
   return (
@@ -210,19 +163,18 @@ export default function Home() {
 }
 
 ```
+
 **Project Structure**
 
 Here's a brief on how the project is structured:
 
-**UI Components**: They reside in the components/ui folder.
+**UI Components**: They reside in the components/UI folder.
 
 **Other Components**: Components like <PageHeader /> and <MainNav /> are located in the components directory.
 
 **Utility Functions**: The lib directory holds all utility functions. The cn helper, for instance, is defined in utils.ts.
 
-**Styles**: The styles directory is home to the global CSS.
-
-
+**Styles**: The styles directory is home to the global CSS. However, it's essential to note that we predominantly use Tailwind classes for styling and theming, keeping direct CSS to a minimum.
 
 ## HubSpot Integration
 
@@ -241,7 +193,7 @@ HUBSPOT_SUBS_FORM_GUID=
 To get the HUBSPOT_ACCESS_TOKEN:
 
 Navigate to your HubSpot account.
-Go to **Settings > Integrations > Account Setup > Private App**. 
+Go to **Settings > Integrations > Account Setup > Private App**.
 If you don't have an app already, you'll need to create one. If you have an existing app, select it.
 Once you've selected your private app, you'll be directed to a page detailing the app's information.
 From this page, copy the authentication (auth) or access token and pair it with the **HUBSPOT_ACCESS_TOKEN** in your .env file.
@@ -259,7 +211,6 @@ To verify the integration:
 
 Go to **Contacts > List** in your HubSpot dashboard.
 From here, you can check the contacts related to your form.
-
 
 ## License
 
