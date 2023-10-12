@@ -53,12 +53,10 @@ export const getPricingPlans = async () => {
       ...price.data(),
     }))
     const prices = [freePlansData, proPlansData]
-    const mappedPlans = plans.map((plan, index) => ({
+    return plans.map((plan, index) => ({
       ...plan,
       prices: prices[index],
     }))
-
-    return mappedPlans
   } catch (error) {
     console.error('Error retrieving pricing plans:', error)
     throw error
