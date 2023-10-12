@@ -178,7 +178,7 @@ export const signInWithEmail = async (formData, rememberMe) => {
 }
 export const resetUserPassword = async (email) => {
   try {
-    const passwordResetEmail = await sendPasswordResetEmail(auth, email)
+    await sendPasswordResetEmail(auth, email)
     return true
   } catch (error) {
     console.error(error)
