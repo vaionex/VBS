@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext } from 'react'
 import { useFirebaseAuth } from '@/firebase/auth'
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from '@/components/UI/toaster'
 
 export const FirebaseAuthContext = createContext()
 
