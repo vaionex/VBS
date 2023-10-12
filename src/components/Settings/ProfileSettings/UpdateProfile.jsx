@@ -1,13 +1,12 @@
 import React, { useState, useRef } from 'react'
-import { CameraIcon } from '@heroicons/react/24/outline'
-import { UserCircleIcon } from '@heroicons/react/24/outline'
+import { UserCircle, Camera } from 'lucide-react'
 import { updateUserDocs, updateCustomerData } from '@/firebase/firestore'
 import { uploadProfileImage } from '@/firebase/storage'
 import { updateUserProfile } from '@/firebase/auth'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { useToast } from '@/components/ui/use-toast'
+import { Input } from '@/components/UI/input'
+import { Button } from '@/components/UI/button'
+import { Label } from '@/components/UI/label'
+import { useToast } from '@/components/UI/use-toast'
 import SpinnerComponent from '@/components/Common/Spinner'
 import Image from 'next/image'
 
@@ -145,11 +144,11 @@ export default function UpdateProfile({ authUser, updateUserData }) {
                       />
                     ) : (
                       <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center">
-                        <UserCircleIcon className="stroke-1 w-18 h-18 text-white" />
+                        <UserCircle className="stroke-1 w-18 h-18 text-white" />
                       </div>
                     )}
                     <div className="bg-[#344054] bg-opacity-50 p-2 rounded-xl absolute bottom-2 left-1/2 transform -translate-x-1/2">
-                      <CameraIcon className="w-4 h-4 text-white" />
+                      <Camera className="w-4 h-4 text-white" />
                     </div>
                     <Input
                       id="imageInput"

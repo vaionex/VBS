@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { updateUserPassword } from '@/firebase/auth'
-import { KeyIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { useToast } from '@/components/ui/use-toast'
+import { KeyRound, Eye, EyeOff } from 'lucide-react'
+import { Input } from '@/components/UI/input'
+import { Button } from '@/components/UI/button'
+import { Label } from '@/components/UI/label'
+import { useToast } from '@/components/UI/use-toast'
 import SpinnerComponent from '@/components/Common/Spinner'
 
 const UpdatePassword = ({ authUser }) => {
@@ -93,7 +93,7 @@ const UpdatePassword = ({ authUser }) => {
                 <Label htmlFor="current-password">Current password</Label>
 
                 <div className="mt-2 sm:col-span-3 relative input-with-icon">
-                  <KeyIcon className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
+                  <KeyRound className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
                   <Input
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     value={currentPassword}
@@ -113,9 +113,9 @@ const UpdatePassword = ({ authUser }) => {
                       className="password-toggle absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                     >
                       {currentPasswordVisible ? (
-                        <EyeSlashIcon className="h-5 w-5 text-gray-500" />
+                        <EyeOff className="h-5 w-5 text-gray-500" />
                       ) : (
-                        <EyeIcon className="h-5 w-5 text-gray-500" />
+                        <Eye className="h-5 w-5 text-gray-500" />
                       )}
                     </div>
                   )}
@@ -125,7 +125,7 @@ const UpdatePassword = ({ authUser }) => {
                 <Label htmlFor="new-password">New password</Label>
 
                 <div className="mt-2 sm:col-span-3 relative input-with-icon">
-                  <KeyIcon className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
+                  <KeyRound className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
                   <Input
                     onChange={(e) => setNewPassword(e.target.value)}
                     value={newPassword}
@@ -145,9 +145,9 @@ const UpdatePassword = ({ authUser }) => {
                       className="password-toggle absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                     >
                       {newPasswordVisible ? (
-                        <EyeSlashIcon className="h-5 w-5 text-gray-500" />
+                        <EyeOff className="h-5 w-5 text-gray-500" />
                       ) : (
-                        <EyeIcon className="h-5 w-5 text-gray-500" />
+                        <Eye className="h-5 w-5 text-gray-500" />
                       )}
                     </div>
                   )}
@@ -157,7 +157,7 @@ const UpdatePassword = ({ authUser }) => {
                 <Label htmlFor="first-name">Confirm New password</Label>
 
                 <div className="mt-2 sm:col-span-3 relative input-with-icon">
-                  <KeyIcon className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
+                  <KeyRound className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
                   <Input
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                     value={confirmNewPassword}
@@ -177,9 +177,9 @@ const UpdatePassword = ({ authUser }) => {
                       className="password-toggle absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                     >
                       {confirmNewPasswordVisible ? (
-                        <EyeSlashIcon className="h-5 w-5 text-gray-500" />
+                        <EyeOff className="h-5 w-5 text-gray-500" />
                       ) : (
-                        <EyeIcon className="h-5 w-5 text-gray-500" />
+                        <Eye className="h-5 w-5 text-gray-500" />
                       )}
                     </div>
                   )}

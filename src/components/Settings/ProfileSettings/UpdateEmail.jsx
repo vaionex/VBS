@@ -1,16 +1,11 @@
 import { useState } from 'react'
 import { updateEmailAddress } from '@/firebase/auth'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/UI/button'
 import { Label } from '@/components/ui/label'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/components/UI/use-toast'
 import SpinnerComponent from '@/components/Common/Spinner'
-import {
-  KeyIcon,
-  EnvelopeIcon,
-  EyeIcon,
-  EyeSlashIcon,
-} from '@heroicons/react/24/outline'
+import { KeyRound, Mail, Eye, EyeOff } from 'lucide-react'
 
 const UpdateEmail = ({ authUser, updateUserData }) => {
   const { toast } = useToast()
@@ -86,7 +81,7 @@ const UpdateEmail = ({ authUser, updateUserData }) => {
               <div className="col-span-full ">
                 <Label htmlFor="email">Email address</Label>
                 <div className="mt-2 flex input-with-icon relative">
-                  <EnvelopeIcon className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
+                  <Mail className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
 
                   <Input
                     onChange={(e) => setEmail(e.target.value)}
@@ -105,7 +100,7 @@ const UpdateEmail = ({ authUser, updateUserData }) => {
                 <Label htmlFor="email">Password</Label>
 
                 <div className="mt-2 sm:col-span-3 relative input-with-icon">
-                  <KeyIcon className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
+                  <KeyRound className="h-5 w-5 text-gray-700 absolute left-2 top-1/2 transform -translate-y-1/2" />
                   <Input
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
@@ -123,9 +118,9 @@ const UpdateEmail = ({ authUser, updateUserData }) => {
                       className="password-toggle absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                     >
                       {passwordVisible ? (
-                        <EyeSlashIcon className="h-5 w-5 text-gray-500" />
+                        <EyeOff className="h-5 w-5 text-gray-500" />
                       ) : (
-                        <EyeIcon className="h-5 w-5 text-gray-500" />
+                        <Eye className="h-5 w-5 text-gray-500" />
                       )}
                     </div>
                   )}
