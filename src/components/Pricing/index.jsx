@@ -6,7 +6,7 @@ import { initiateSubscription } from '@/utils/stripe'
 import { useRouter } from 'next/navigation'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { useFirebaseAuth } from '@/firebase/auth'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/components/UI/use-toast'
 import Image from 'next/image'
 
 const comingSoonFeatures = [
