@@ -1,47 +1,47 @@
 import {
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon,
-} from '@heroicons/react/24/outline'
+  Home,
+  BarChart4,
+  Calendar,
+  FolderClosed,
+  Inbox,
+  Users2,
+} from 'lucide-react'
 
 export const navigation = [
   {
     name: 'Dashboard',
     href: '#',
-    icon: HomeIcon,
+    icon: Home,
     current: true,
   },
   {
     name: 'Team',
     href: '#',
-    icon: UsersIcon,
+    icon: Users2,
     current: false,
   },
   {
     name: 'Projects',
     href: '#',
-    icon: FolderIcon,
+    icon: FolderClosed,
     current: false,
   },
   {
     name: 'Calendar',
     href: '#',
-    icon: CalendarIcon,
+    icon: Calendar,
     current: false,
   },
   {
     name: 'Documents',
     href: '#',
-    icon: InboxIcon,
+    icon: Inbox,
     current: false,
   },
   {
     name: 'Reports',
     href: '#',
-    icon: ChartBarIcon,
+    icon: BarChart4,
     current: false,
   },
 ]

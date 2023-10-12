@@ -1,33 +1,8 @@
-import { Button } from '../Common/Button'
 import clsx from 'clsx'
-import NumberCount from './NumberCount'
+import NumberCount from '../Common/NumberCount'
 import usePricing from './usePricing'
-
-function CheckIcon({ className }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className={clsx(
-        'h-6 w-6 flex-none fill-current stroke-current',
-        className,
-      )}
-    >
-      <path
-        d="M9.307 12.248a.75.75 0 1 0-1.114 1.004l1.114-1.004ZM11 15.25l-.557.502a.75.75 0 0 0 1.15-.043L11 15.25Zm4.844-5.041a.75.75 0 0 0-1.188-.918l1.188.918Zm-7.651 3.043 2.25 2.5 1.114-1.004-2.25-2.5-1.114 1.004Zm3.4 2.457 4.25-5.5-1.187-.918-4.25 5.5 1.188.918Z"
-        strokeWidth={0}
-      />
-      <circle
-        cx={12}
-        cy={12}
-        r={8.25}
-        fill="none"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
+import { CheckCircleIcon } from '@heroicons/react/24/outline'
+import { Button } from '../UI/button'
 
 const WHITE_TEXT_CLASS = 'text-white'
 const GRAY_TEXT_CLASS = 'text-gray-600'
@@ -57,7 +32,7 @@ export default function PricingCard({
   return (
     <section
       className={clsx(
-        'flex flex-col rounded-3xl px-6 sm:px-8 cursor-pointer w-80',
+        'flex flex-col rounded-3xl px-6 sm:px-8 cursor-pointer w-[330px]',
         selected ? 'bg-blue-600 py-8 lg:order-none' : 'lg:py-8',
       )}
       onClick={() => onSelect(id)}
@@ -121,7 +96,7 @@ export default function PricingCard({
         variant={selected ? 'solid' : 'outline'}
         color={selected ? 'white' : 'black'}
         textSize="text-base"
-        className="mt-8 ring-gray-300 text-black dark:text-black"
+        className="mt-8 ring-gray-300 text-black bg-gradient-to-br from-white to-white rounded-full"
         disabled={
           loadingStripeCheckout ||
           (currentPlan === process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID &&
@@ -160,8 +135,10 @@ export default function PricingCard({
         </p>
         {stripe_metadata_features.map((plan, index) => (
           <li key={`plan_${plan.feature}_${index}`} className="flex">
-            <CheckIcon
-              className={selected ? WHITE_TEXT_CLASS : GRAY_TEXT_CLASS}
+            <CheckCircleIcon
+              className={`h-6 w-6 ${
+                selected ? WHITE_TEXT_CLASS : GRAY_TEXT_CLASS
+              }`}
             />
             <span
               className={`ml-4 mt-[2px] ${

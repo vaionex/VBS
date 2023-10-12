@@ -91,13 +91,12 @@ export const initiateSubscription = async (planProductId, errorHandle) => {
         stripe.redirectToCheckout({ sessionId })
       }
       if (error) {
-        console.log('stripe error occured', error)
+        console.error('stripe error occured', error)
         // Handle the error using the provided errorHandle function or throw an error
         errorHandle(error?.message)
       }
       if (url) {
         // We have a Stripe Checkout URL, let's redirect.
-        console.log('redirecting user')
         window.location.assign(url)
       }
     })

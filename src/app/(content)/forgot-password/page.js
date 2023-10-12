@@ -1,4 +1,4 @@
-import ForgotPasswordComponent from '@/components/ForgotPassword'
+import ForgotPasswordComponent from '@/components/forgotpassword'
 
 export const metadata = {
   description: 'Forgot My Password',

@@ -53,7 +53,7 @@ export default function Products({ plans }) {
         setloadingStripeCheckout(id)
         const errorHandle = (msg) => {
           setloadingStripeCheckout(false)
-          console.log('msg', msg)
+          console.error('msg', msg)
         }
         await initiateSubscription(priceId, errorHandle)
         return null
@@ -65,7 +65,7 @@ export default function Products({ plans }) {
       }
     } catch (err) {
       setloadingStripeCheckout(false)
-      console.log('generateRedirectLink err', err)
+      console.error('generateRedirectLink err', err)
     }
   }
 
@@ -73,7 +73,7 @@ export default function Products({ plans }) {
     const matchedComingSoonFeatures = comingSoonFeatures[index]
     return JSON.parse(plan.stripe_metadata_features?.replace(/'/g, '"')).map(
       (feature) =>
-        matchedComingSoonFeatures.includes(feature)
+        matchedComingSoonFeatures?.includes(feature)
           ? { feature: feature, status: 'Coming Soon' }
           : { feature: feature, status: 'Available' },
     )

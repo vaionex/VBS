@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@headlessui/react": "1.7.12",
-    "@heroicons/react": "2.0.16",
     "@hubspot/api-client": "^9.0.0",
     "@novu/node": "^0.14.0",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -21,6 +20,7 @@
     "axios": "^1.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "encoding": "^0.1.13",
     "firebase": "9.17.1",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.268.0",
