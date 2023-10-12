@@ -1,34 +1,29 @@
-import {
-  ChatBubbleOvalLeftEllipsisIcon,
-  HeartIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from '@heroicons/react/24/outline'
+import { MessagesSquare, Heart, PenSquare, Trash2 } from 'lucide-react'
 
 const features = [
   {
     name: 'Spam report',
     description:
       'Autem reprehenderit aut debitis ut. Officiis harum omnis placeat blanditiis delectus sint vel et voluptatum. Labore asperiores non corporis molestiae.',
-    icon: TrashIcon,
+    icon: Trash2,
   },
   {
     name: 'Compose in markdown',
     description:
       'Illum et aut inventore. Ut et dignissimos quasi. Omnis saepe dolorum. Hic autem fugiat. Voluptatem officiis necessitatibus est.',
-    icon: PencilSquareIcon,
+    icon: PenSquare,
   },
   {
     name: 'Email commenting',
     description:
       'Commodi quam quo. In quasi mollitia optio voluptate et est reiciendis. Ut et sunt id officiis vitae perspiciatis. Et accusantium sapiente.',
-    icon: ChatBubbleOvalLeftEllipsisIcon,
+    icon: MessagesSquare,
   },
   {
     name: 'Customer connections',
     description:
       'Deserunt corrupti praesentium quo vel cupiditate est occaecati ad. Aperiam libero modi similique iure praesentium facilis quo cumque quibusdam.',
-    icon: HeartIcon,
+    icon: Heart,
   },
 ]
 
@@ -48,6 +43,7 @@ export function Features() {
                     <feature.icon
                       className="h-6 w-6 text-white"
                       aria-hidden="true"
+                      color="white"
                     />
                   </div>
                   {feature.name}

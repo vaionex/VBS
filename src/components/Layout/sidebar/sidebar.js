@@ -1,7 +1,7 @@
 'use client'
 
 import { Dialog, Transition } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { X, AlignJustify } from 'lucide-react'
 import { Fragment, useState } from 'react'
 
 import { navigation } from './config'
@@ -69,10 +69,7 @@ export function Sidebar() {
                         onClick={() => setSidebarOpen(false)}
                       >
                         <span className="sr-only">Close sidebar</span>
-                        <XMarkIcon
-                          className="h-6 w-6 text-white"
-                          aria-hidden="true"
-                        />
+                        <X className="h-6 w-6 text-white" aria-hidden="true" />
                       </button>
                     </div>
                   </Transition.Child>
@@ -207,7 +204,7 @@ export function Sidebar() {
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+              <AlignJustify className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
           <main className="flex-1">
