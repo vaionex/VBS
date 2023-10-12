@@ -7,17 +7,18 @@ import { useRouter } from 'next/navigation'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { useFirebaseAuth } from '@/firebase/auth'
 import { useToast } from '@/components/UI/use-toast'
-import Image from 'next/image'
+
+const EMAIL_SUPPORT = 'Email support'
 
 const comingSoonFeatures = [
-  ['Access to US & UK templates', 'Email support'],
+  ['Access to US & UK templates', EMAIL_SUPPORT],
   [
     'Access to US, UK+ more premium contract templates',
     'AI-based contract drafting',
     'Multi-user access (Up to 3 users)',
     'Integration with e-signature platform',
     'Export contracts',
-    'Email support',
+    EMAIL_SUPPORT,
   ],
   [
     'Access to US, UK+ more premium contract templates',
@@ -25,7 +26,7 @@ const comingSoonFeatures = [
     'Multi-user access (Up to 5 users)',
     'Integration with e-signature platform',
     'Export contracts',
-    'Email support',
+    EMAIL_SUPPORT,
   ],
 ]
 
