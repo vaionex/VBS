@@ -1,5 +1,3 @@
-'use client'
-
 import SettingsSidebar from '@/components/Settings/SettingsSidebar'
 import Image from 'next/image'
 
