@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import NumberCount from '../Common/NumberCount'
 import usePricing from './usePricing'
-import { CheckCircleIcon } from '@heroicons/react/24/outline'
+import { CheckCircle2 } from 'lucide-react'
 import { Button } from '../UI/button'
 
 const WHITE_TEXT_CLASS = 'text-white'
@@ -134,9 +134,12 @@ export default function PricingCard({
           FEATURES
         </p>
         {stripe_metadata_features.map((plan, index) => (
-          <li key={`plan_${plan.feature}_${index}`} className="flex">
-            <CheckCircleIcon
-              className={`h-6 w-6 ${
+          <li
+            key={`plan_${plan.feature}_${index}`}
+            className="flex items-center"
+          >
+            <CheckCircle2
+              className={`h-5 w-5 ${
                 selected ? WHITE_TEXT_CLASS : GRAY_TEXT_CLASS
               }`}
             />
