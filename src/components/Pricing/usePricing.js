@@ -30,6 +30,7 @@ const getPercentageValue = (yearlyAmount, discountedPrice) => {
 //To calculate Pricing
 function usePricing(plan, billingCycle) {
   return useMemo(() => {
+    if (!plan || !billingCycle) return
     const {
       stripe_metadata_title: title,
       stripe_metadata_upsell_discount: upsell_discount,
