@@ -3,8 +3,12 @@ import { useMemo } from 'react'
 const CENTS_IN_DOLLAR = 100
 
 // helper function to find the price for a given interval
-const findPriceForInterval = (prices, interval) =>
+const findPriceForInterval = (prices, interval) => {
+  if (!prices || prices.length === 0) {
+    return null
+  }
   prices?.find((x) => x.interval === interval) || prices[0]
+}
 
 // helper function to calculate the price to show
 const calculatePriceToShow = (currentPrice) => {
