@@ -3,6 +3,8 @@ import NumberCount from '../Common/NumberCount'
 import usePricing from './usePricing'
 import { CheckCircle2 } from 'lucide-react'
 import { Button } from '../UI/button'
+import { PriceDisplay } from './PriceDisplay'
+import { ButtonContent } from './ButtonContent'
 
 const WHITE_TEXT_CLASS = 'text-white'
 const GRAY_TEXT_CLASS = 'text-gray-600'
@@ -51,14 +53,7 @@ export default function PricingCard({
           selected ? WHITE_TEXT_CLASS : 'text-gray-900',
         )}
       >
-        {priceToShow === 0 ? (
-          'Free'
-        ) : (
-          <>
-            $
-            <NumberCount key={id + '_numCount'} targetNumber={priceToShow} />
-          </>
-        )}
+        <PriceDisplay priceToShow={priceToShow} id={id} />
         <span
           className={clsx(
             'mt-4 ml-2 font-display text-base font-medium tracking-tight',
@@ -96,26 +91,16 @@ export default function PricingCard({
         variant={selected ? 'solid' : 'outline'}
         color={selected ? 'white' : 'black'}
         textSize="text-base"
-        className="mt-8 ring-gray-300 text-black bg-gradient-to-br from-white to-white rounded-full"
+        className="mt-8 ring-gray-300 text-black bg-gradient-to-br from-white to-white rounded-full focus-visible:bg-white"
         disabled={
-          loadingStripeCheckout ||
-          (currentPlan === process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID &&
-            id === process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID)
+          currentPlan === process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID
         }
       >
-        {loadingStripeCheckout === id ? (
-          <div
-            className="animate-spin inline-block w-5 h-5 border-[3px] border-current border-t-transparent rounded-full text-blue-600 "
-            role="status"
-            aria-label="loading"
-          >
-            <span className="sr-only">Loading...</span>
-          </div>
-        ) : currentPlan === id ? (
-          'Current'
-        ) : (
-          'Get started'
-        )}
+        <ButtonContent
+          loadingStripeCheckout={loadingStripeCheckout}
+          currentPlan={currentPlan}
+          id={id}
+        />
       </Button>
 
       <ul
