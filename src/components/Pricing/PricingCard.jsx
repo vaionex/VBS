@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import NumberCount from '../Common/NumberCount'
 import usePricing from './usePricing'
 import { CheckCircle2 } from 'lucide-react'
 import { Button } from '../UI/button'
