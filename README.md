@@ -216,4 +216,68 @@ From here, you can check the contacts related to your form.
 
 Information about the license.
 
---
+# Stripe Configuration
+
+## Create Product on Stripe dashboard
+
+**1. Log In to Your Stripe Account**
+Go to the Stripe dashboard [Stripe](https://dashboard.stripe.com) and log in to your Stripe account. If you don't have a Stripe account, you'll need to sign up for one first.
+**2. Navigate to the Products Section**
+In the left-hand sidebar of the Stripe dashboard, click on "Products."
+**3. Create a New Product**
+Click the "Add Product" button to create a new product.
+**4. Add Product Details**
+Enter Detail of the Product(Name, Description, Image).
+**5. Pricing**
+Set the pricing details for your product. You can specify a one-time purchase price or recurring subscription pricing
+**6. Types of Pricing**
+
+- For one-time purchase
+  Enter the price in your desired currency.
+- For Subscription
+  You can set the subscription price, billing interval (e.g., monthly or annually), and other subscription details.
+
+**7. Other Settings**
+Depending on your product, you may have additional settings such as SKU (Stock Keeping Unit), product type, tax settings, etc. You can configure these according to your needs.
+**8. Save the Product**
+Once you've entered all the necessary details, click the "Save Product" button to create your product.
+**9. View and Manage Your Products**
+After creating the product, you can view and manage it in the "Products" section of your Stripe dashboard. You can edit, delete, or make changes to your products as needed
+**10. Integration**
+If you are integrating Stripe with your website or application, you will use the product information to set up the payment flow
+
+## Install stripe extension in Firebase
+
+- Create stripe account before integration
+- Go to Firebase and click on `Extensions`
+- Search "Run Payment with Stripe" and install this extension
+- There will be require the `admin` card details to perform payment method before extension installation
+- After successful installation Configure the extension with these settings:
+
+  ```bash
+  - Change the feild default collection name of "Products and pricing plans collection" to "plans"
+  - Change the another field default collection name of "Customer details and subscriptions collection" to "customers"
+  - Change the field default collection name of "Sync new users to Stripe customers and Cloud Firestore" to "sync"
+  - Change the another field default collection name of "Automatically delete Stripe customer objects" to "do not delete"
+  ```
+
+- Navigate to `Developers > API Keys` in Stripe Dashboard
+- Generate a new Restricted Key with the following permissions:
+
+  ```bash
+    - Write access to `Customers`
+    - Write access to `CheckoutSessions`
+    - Write access to `Customerportal`
+    - Read access to `Subscriptions`
+    - Read access to `Plans`
+  ```
+
+- Copy the keys as `Stripe API Key with Restricted Access` and paste it into firebase extension form
+- Copy the url from the Firebase Extension `How this extension works` tab and paste this url as a new `Endpoint` in `Stripe webhooks`.
+
+## Fetch it on Frontend from Firebase
+
+- Created a custom function for it
+- Fetching stripe plans from firebase "plans" collection by giving vercel env keys(ids).
+- These env keys should exist on Vercel and should have pulled the env file locally by command.`vercel env pull`
+- Displaying these plans dynamically on the frontend.
