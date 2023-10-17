@@ -36,9 +36,9 @@ export default function Products({ plans }) {
   const { push } = useRouter()
 
   const [activeTab, setActiveTab] = useState('month')
-  const [selectedPlan, setSelectedPlan] = useState(plans[0]?.id)
+  const [currentPlan, setCurrentPlan] = useState(plans[0]?.id)
   const [loadingStripeCheckout, setloadingStripeCheckout] = useState(false)
-  const currentPlan =
+  const selectedPlan =
     firebaseAuth?.authUser?.userSubscription?.pricePlan?.product
   const onTabChange = (tab) => setActiveTab(tab)
   const { toast } = useToast()
@@ -49,7 +49,7 @@ export default function Products({ plans }) {
         return null
       } else if (
         id !== process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID &&
-        currentPlan !== id
+        selectedPlan !== id
       ) {
         setloadingStripeCheckout(id)
         const errorHandle = (msg) => {
@@ -127,13 +127,13 @@ export default function Products({ plans }) {
                 key={'pricing_plan' + index}
                 activeTab={activeTab}
                 plan={plan}
-                currentPlan={currentPlan}
+                currentPlan={selectedPlan}
                 selected={
-                  selectedPlan
-                    ? selectedPlan === plan?.id
+                  currentPlan
+                    ? currentPlan === plan?.id
                     : plans[0]?.id === plan?.id
                 }
-                onSelect={setSelectedPlan}
+                onSelect={setCurrentPlan}
                 generateRedirectLink={generateRedirectLink}
                 loadingStripeCheckout={loadingStripeCheckout}
               />

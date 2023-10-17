@@ -279,3 +279,18 @@ If you are integrating Stripe with your website or application, you will use the
 - Fetching stripe plans from firebase "plans" collection by giving vercel env keys(ids).
 - These env keys should exist on Vercel and should have pulled the env file locally by command.`vercel env pull`
 - Displaying these plans dynamically on the frontend.
+
+## Checkout and subscription initialized
+
+- Installation of Stripe
+- use loadStripe to get checkout Session
+- Checkout Session provide chekout url
+- Routing on this checkout url
+- It provide stripe payment method default page
+
+## Test data of stripe work and information that those for live account
+
+- Getting plans from firebase through these static ids
+- Getting price id by selecting plan
+- Forward this to stripe for initiate subscription
+- Creating Checkout Session through loadstripe
