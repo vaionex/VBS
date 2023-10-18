@@ -280,17 +280,19 @@ If you are integrating Stripe with your website or application, you will use the
 - These env keys should exist on Vercel and should have pulled the env file locally by command.`vercel env pull`
 - Displaying these plans dynamically on the frontend.
 
-## Checkout and subscription initialized
+## Stripe Checkout and Subscription Integration
 
-- Installation of Stripe
-- use loadStripe to get checkout Session
-- Checkout Session provide chekout url
-- Routing on this checkout url
-- It provide stripe payment method default page
+- Integrate Stripe's checkout and subscription functionalities into your application.
 
-## Test data of stripe work and information that those for live account
+**1. Initialization**
+**Stripe Installation:** Ensure Stripe is installed. Refer to Stripe's official documentation.
+**Initializing Stripe:** Use loadStripe to retrieve a checkout session.
+**Checkout Session:** Obtain a checkout URL from the session.
+**Routing:** Direct users to the checkout URL.
+**Payment Interface:** Users will see Stripe's default payment page upon redirection.
 
-- Getting plans from firebase through these static ids
-- Getting price id by selecting plan
-- Forward this to stripe for initiate subscription
-- Creating Checkout Session through loadstripe
+**2. Testing and Live Data Handling**
+**Plan Retrieval:** Fetch plans from Firebase using static IDs.
+**Selecting a Plan:** Get the price ID of the chosen plan.
+**Initiating Subscription:** Send the price ID to Stripe to start the subscription.
+**Creating a Checkout Session:** Generate a checkout session for the subscription using loadStripe.
