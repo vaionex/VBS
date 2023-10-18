@@ -277,7 +277,7 @@ If you are integrating Stripe with your website or application, you will use the
 
 - Created a custom function for it
 - Fetching stripe plans from firebase "plans" collection by giving vercel env keys(ids).
-- These env keys should exist on Vercel and should have pulled the env file locally by command.`vercel env pull`
+- These env keys should exist on Vercel for security reasons and should have pulled the env file locally by command.`vercel env pull`
 - Displaying these plans dynamically on the frontend.
 
 ## Stripe Checkout and Subscription Integration
@@ -291,7 +291,7 @@ If you are integrating Stripe with your website or application, you will use the
 **Routing:** Direct users to the checkout URL.
 **Payment Interface:** Users will see Stripe's default payment page upon redirection.
 
-**2. Testing and Live Data Handling**
+**2. Fetching and Live Data Handling**
 **Plan Retrieval:** Fetch plans from Firebase using static IDs.
 **Selecting a Plan:** Get the price ID of the chosen plan.
 **Initiating Subscription:** Send the price ID to Stripe to start the subscription.
