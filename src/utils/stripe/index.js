@@ -171,7 +171,7 @@ export const getSubscriptionByProductId = async (userId, productId) => {
       where('product', '==', doc(firestore, 'products', productId)),
     )
 
-    const subscriptionData = await getDocs(subscriptionsQuery)
+    return await getDocs(subscriptionsQuery)
       .then((docData) => {
         const newDocs = []
         docData.forEach((doc) => {
@@ -179,8 +179,7 @@ export const getSubscriptionByProductId = async (userId, productId) => {
         })
         return newDocs
       })
-      .catch((error) => false)
-    return subscriptionData
+      .catch(() => false)
   } catch (error) {
     console.error('Error cancelling subscription:', error)
     return false
