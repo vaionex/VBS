@@ -1,10 +1,5 @@
 export default function SpinnerComponent() {
   return (
-    <div>
-      <svg
-        class="animate-spin h-5 w-5 mr-3 bg-gray-200"
-        viewBox="0 0 24 24"
-      ></svg>
-    </div>
+    <div className="animate-spin inline-block w-5 h-5 border-[3px] border-current  border-t-transparent rounded-full text-blue-600   "></div>
   )
 }
