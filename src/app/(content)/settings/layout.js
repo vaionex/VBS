@@ -1,4 +1,4 @@
-import SettingsSideBar from '@/components/Settings/SettingsSidebar'
+import SettingsSideBar from '@/components/Settings/SettingsSideBar'
 import Image from 'next/image'
 
 export const metadata = {
