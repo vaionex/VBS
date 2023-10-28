@@ -1,4 +1,4 @@
-import SettingsSidebar from '@/components/Settings/SettingsSidebar'
+import SettingsSideBar from '@/components/Settings/SettingsSidebar'
 import Image from 'next/image'
 
 export const metadata = {
@@ -22,7 +22,7 @@ export default function SettingsLayout({ children }) {
 
       <div className="flex gap-6">
         <div className="w-full md:w-[25%]">
-          <SettingsSidebar />
+          <SettingsSideBar />
         </div>
         <div className="w-full md:w-[75%] border border-gray-200 bg-gray-50 rounded-xl">
           {children}
