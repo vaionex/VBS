@@ -6,6 +6,7 @@ import { Label } from '@/components/UI/label'
 import { useToast } from '@/components/UI/use-toast'
 import SpinnerComponent from '@/components/Common/Spinner'
 import { KeyRound, Mail, Eye, EyeOff } from 'lucide-react'
+import { updateUserDocs } from '@/firebase/firestore'
 
 const UpdateEmail = ({ authUser, updateUserData }) => {
   const { toast } = useToast()
@@ -26,8 +27,10 @@ const UpdateEmail = ({ authUser, updateUserData }) => {
 
     try {
       await updateEmailAddress(authUser?.email, password, email)
-      toast({ description: 'Email updated successfully.' })
-      updateUserData({ email })
+      toast({ description: 'Email updated successfully in autharization.' })
+      console.log(authUser, 'authuser')
+      updateUserData({ [authUser.email]: email })
+      await updateUserDocs(authUser.uid, { email })
     } catch (error) {
       console.error('Error updating email address:', error)
 
@@ -40,7 +43,7 @@ const UpdateEmail = ({ authUser, updateUserData }) => {
           errorMessage = 'User not found. Please check your email and password.'
           break
         case 'auth/invalid-email':
-          errorMessage = 'Invalid email address.'
+          errorMessage = 'Invalid email or password address.'
           break
         case 'auth/requires-recent-login':
           errorMessage = 'Please log in again to update your email.'
