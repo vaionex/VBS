@@ -296,3 +296,12 @@ If you are integrating Stripe with your website or application, you will use the
 **Selecting a Plan:** Get the price ID of the chosen plan.
 **Initiating Subscription:** Send the price ID to Stripe to start the subscription.
 **Creating a Checkout Session:** Generate a checkout session for the subscription using loadStripe.
+
+## Webhook Integration
+
+**1. Webhook Secret:** Add webhook secret environment variable with the name `STRIPE_WEBHOOK_SECRET`
+
+**2. Handle Events:** Handle all necessary stripe events in the `src/app/api/stripe/webhook/route.js` file
+
+**3. Webhook Endpoint: :** Add webhook endpoint in Stripe dashboard
+`https://www.example.com/api/stripe/webhook`
