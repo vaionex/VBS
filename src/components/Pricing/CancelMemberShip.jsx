@@ -19,7 +19,7 @@ export default function CancelPlanModal({ open, setOpen }) {
       (s) => s?.status === 'active',
     )
     console.log('allSubscription', activeSubscription)
-    cancelSubscription(activeSubscription?.id)
+    await cancelSubscription(activeSubscription?.id)
     setOpen(false)
     window.location = '/'
   }

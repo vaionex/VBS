@@ -6,7 +6,7 @@ import { CheckCircle2 } from 'lucide-react'
 import { Button } from '../UI/button'
 import { PriceDisplay } from './PriceDisplay'
 import { ButtonContent } from './ButtonContent'
-import CancelMemberShip from './CancelMemberShip'
+import CancelPlanModal from './CancelMemberShip'
 const WHITE_TEXT_CLASS = 'text-white'
 const GRAY_TEXT_CLASS = 'text-gray-600'
 
@@ -151,7 +151,7 @@ export default function PricingCard({
           ))}
         </ul>
       </section>
-      {open && <CancelMemberShip open={open} setOpen={setOpen} />}
+      {open && <CancelPlanModal open={open} setOpen={setOpen} />}
     </>
   )
 }
