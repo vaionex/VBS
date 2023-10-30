@@ -7,6 +7,7 @@ import { logoutUser } from '@/firebase/auth'
 import { Button } from '@/components/UI/button'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { X, AlignJustify } from 'lucide-react'
+import NovuNotificationCenter from '@/components/UI/novu-notification-center'
 
 const navigation = [
   { name: 'About', href: '/about' },
@@ -79,7 +80,7 @@ export function Header() {
             </div>
           )}
           {authUser && (
-            <div>
+            <div className="inline-flex">
               {' '}
               <Link
                 href="/settings/profile"
@@ -87,6 +88,9 @@ export function Header() {
               >
                 Settings
               </Link>
+              <div className="flex justify-center items-center px-2">
+                <NovuNotificationCenter authUser={authUser} />
+              </div>
               <Button
                 onClick={() => {
                   logoutUser()
@@ -159,13 +163,17 @@ export function Header() {
                 </div>
               )}
               {authUser && (
-                <Button
-                  onClick={() => {
-                    logoutUser()
-                  }}
-                >
-                  Logout
-                </Button>
+                <div>
+                  {' '}
+                  <Button
+                    onClick={() => {
+                      logoutUser()
+                    }}
+                  >
+                    Logout
+                  </Button>
+                  <Link href="/settings/profile">Settings</Link>
+                </div>
               )}
             </div>
           </div>
