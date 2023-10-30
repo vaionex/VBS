@@ -1,6 +1,7 @@
 {
   "plugins": ["sonarjs"],
   "extends": [
+    "next/babel",
     "next/core-web-vitals",
     "plugin:sonarjs/recommended",
     "eslint:recommended"
@@ -8,7 +9,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "semi": ["error", "never"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
     "import/prefer-default-export": "off",
     "sonarjs/cognitive-complexity": "error"
   },

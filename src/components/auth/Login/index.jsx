@@ -26,7 +26,7 @@ const loginFields = [
     type: 'password',
     placeholder: 'Password',
     autoComplete: 'current-password',
-    minLength: '6',
+    minLength: '8',
     id: 'password',
   },
 ]
