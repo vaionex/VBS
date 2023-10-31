@@ -45,7 +45,7 @@ export async function POST(req) {
   }
 }
 
-export const config = {
+export const routeSegmentConfig = {
   api: {
     bodyParser: false,
   },
