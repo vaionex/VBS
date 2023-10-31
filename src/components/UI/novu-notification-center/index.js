@@ -3,16 +3,15 @@ import {
   PopoverNotificationCenter,
   NotificationBell,
 } from '@novu/notification-center'
-import { useFirebaseAuth } from '@/firebase'
 
-const NovuNotificationCenter = () => {
-  const { authUser } = useFirebaseAuth()
-
+const NovuNotificationCenter = ({ authUser }) => {
   const theme = {
     light: {
       loaderColor: '#2563EB',
-    }
+    },
   }
+
+  if (!authUser) return null
 
   return (
     <NovuProvider

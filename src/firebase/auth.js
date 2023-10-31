@@ -3,12 +3,17 @@
 import { useState, useEffect } from 'react'
 import {
   GoogleAuthProvider,
+  EmailAuthProvider,
   getAuth,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
+  reauthenticateWithCredential,
   signInWithPopup,
   linkWithPopup,
   signInWithCredential,
+  updateEmail,
+  updatePassword,
+  updateProfile,
   signOut,
   signInWithEmailAndPassword,
   setPersistence,
@@ -17,6 +22,7 @@ import {
 } from 'firebase/auth'
 import { firebase } from '@/firebase/app'
 import { createUserDocument } from '@/utils/createUserCollection'
+import { getCurrentUserData } from '@/firebase/firestore'
 import { getCurrentUserSubscriptions } from '@/utils/stripe'
 
 const formatAuthUser = (user) => ({
@@ -31,23 +37,25 @@ const formatAuthUser = (user) => ({
 
 export const useFirebaseAuth = () => {
   const [authUser, setAuthUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
   const authStateChanged = async (authState) => {
     if (!authState) {
       setAuthUser(null)
-      setLoading(false)
+      setIsLoading(false)
       return
     }
 
-    setLoading(true)
+    setIsLoading(true)
+    let userData = await getCurrentUserData(authState.uid)
     let userSubscription = await getCurrentUserSubscriptions(authState.uid)
     const formattedUser = formatAuthUser({
       ...authState,
+      ...userData,
       userSubscription,
     })
     setAuthUser(formattedUser)
-    setLoading(false)
+    setIsLoading(false)
   }
 
   // listen for Firebase state change
@@ -55,16 +63,17 @@ export const useFirebaseAuth = () => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged)
     return () => unsubscribe()
   }, [])
+
   const updateUserData = async (newCustomData) => {
     setAuthUser((prev) => ({
       ...prev,
       ...newCustomData,
     }))
   }
-
   return {
     authUser,
-    loading,
+    isLoading,
+    updateUserData,
     setAuthUser,
     updateUserData,
   }
@@ -176,11 +185,52 @@ export const signInWithEmail = async (formData, rememberMe) => {
     throw error
   }
 }
+
+export const updateEmailAddress = async (currentEmail, password, newEmail) => {
+  try {
+    const user = auth.currentUser
+
+    const credential = EmailAuthProvider.credential(currentEmail, password)
+    await reauthenticateWithCredential(user, credential)
+    await updateEmail(user, newEmail)
+
+    return true
+  } catch (error) {
+    throw error
+  }
+}
+
+export const updateUserPassword = async (
+  email,
+  currentPassword,
+  newPassword,
+) => {
+  try {
+    const user = auth.currentUser
+    const credential = EmailAuthProvider.credential(email, currentPassword)
+    await reauthenticateWithCredential(user, credential)
+
+    await updatePassword(user, newPassword)
+
+    return true
+  } catch (error) {
+    throw error
+  }
+}
+
 export const resetUserPassword = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email)
     return true
   } catch (error) {
-    console.error(error)
+    throw error
+  }
+}
+
+export const updateUserProfile = async (obj) => {
+  try {
+    await updateProfile(auth.currentUser, obj)
+  } catch (error) {
+    throw error
   }
 }

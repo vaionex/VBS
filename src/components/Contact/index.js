@@ -222,11 +222,7 @@ export default function ContactComponent() {
               ))}
             </div>
             <div className="mt-8 flex justify-end">
-              <Button
-                type="submit"
-                className=" text-white"
-                spinnerClassName="text-white"
-              >
+              <Button type="submit" className=" text-white">
                 Send message
               </Button>
             </div>
