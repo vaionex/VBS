@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Input } from '@/components/UI/input'
 import { Button } from '@/components/UI/button'
 import { Label } from '@/components/UI/label'
-import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import { useFirebaseAuthContext } from '@/contexts/authContext'
 import { signInWithGoogle, signInWithEmail } from '@/firebase/auth'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -54,8 +54,8 @@ export default function LoginComponent() {
     try {
       e.preventDefault()
       setIsLoading(true)
-      if (process.env.BACKEND_PLATFORM === 'supabase') {
-        const user = await signInWithSupabase(email, password)
+      if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
+        const user = await signInWithSupabase(formData.email, formData.password)
       } else {
         await signInWithEmail(formData, isChecked)
       }
@@ -90,13 +90,14 @@ export default function LoginComponent() {
         title: 'Uh oh! Something went wrong.',
         description: errorMessage,
       })
+      console.log(errorMessage)
     }
   }
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
-    if (process.env.BACKEND_PLATFORM === 'supabase') {
-      const user = await signInWithGoogleSupabase()
+    if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
+      const res = await signInWithGoogleSupabase()
     } else {
       let res = await signInWithGoogle(authUser, updateUserData)
     }

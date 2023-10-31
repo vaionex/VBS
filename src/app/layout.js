@@ -1,5 +1,5 @@
 import React from 'react'
-import { FirebaseAuthProvider } from '@/contexts/firebaseAuthContext'
+import { FirebaseAuthProvider } from '@/contexts/authContext'
 
 export const metadata = {
   title: 'Main root of the Project',

@@ -1,6 +1,6 @@
 'use client'
 
-import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import { useFirebaseAuthContext } from '@/contexts/authContext'
 import UpdateEmail from './UpdateEmail'
 import UpdatePassword from './UpdatePassword'
 import UpdateProfile from './UpdateProfile'

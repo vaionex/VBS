@@ -5,7 +5,7 @@ import { Dialog } from '@headlessui/react'
 import Link from 'next/link'
 import { logoutUser } from '@/firebase/auth'
 import { Button } from '@/components/UI/button'
-import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import { useFirebaseAuthContext } from '@/contexts/authContext'
 import { X, AlignJustify } from 'lucide-react'
 import NovuNotificationCenter from '@/components/UI/novu-notification-center'
 

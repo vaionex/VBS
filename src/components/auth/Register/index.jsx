@@ -6,7 +6,7 @@ import { Button } from '@/components/UI/button'
 import { Label } from '@/components/UI/label'
 import { registerWithEmailAndPassword, signInWithGoogle } from '@/firebase/auth'
 import { createUserDocument } from '@/utils/createUserCollection'
-import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import { useFirebaseAuthContext } from '@/contexts/authContext'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/UI/use-toast'
 import {
@@ -77,9 +77,9 @@ export default function RegisterComponent() {
     }
 
     const { email, password, firstName, lastName } = formData
-
+    console.log(process.env.NEXT_PUBLIC_BACKEND_PLATFORM)
     try {
-      if (process.env.BACKEND_PLATFORM === 'supabase') {
+      if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
         const user = await signUpWithSupabase(
           email,
           password,
@@ -122,7 +122,7 @@ export default function RegisterComponent() {
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
     try {
-      if (process.env.BACKEND_PLATFORM === 'supabase') {
+      if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
         const user = await signUpWithGoogleSupabase()
         // Supabase'de ek kullanıcı bilgisi kaydedin veya diğer işlemleri yapın.
       } else {
