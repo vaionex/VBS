@@ -4,15 +4,9 @@ import React, { useState } from 'react'
 import { Input } from '@/components/UI/input'
 import { Button } from '@/components/UI/button'
 import { Label } from '@/components/UI/label'
-import { registerWithEmailAndPassword, signInWithGoogle } from '@/firebase/auth'
-import { createUserDocument } from '@/utils/createUserCollection'
-import { useFirebaseAuthContext } from '@/contexts/authContext'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/UI/use-toast'
-import {
-  signUpWithSupabase,
-  signUpWithGoogleSupabase,
-} from '@/supabase/supaAuth'
+import { useAuth } from '@/hooks/useAuth'
 
 const registrationFields = [
   {
@@ -49,7 +43,13 @@ const registrationFields = [
 
 export default function RegisterComponent() {
   const { push } = useRouter()
-  const { authUser, updateUserData } = useFirebaseAuthContext()
+  const {
+    authUser,
+    updateUserData,
+    registerWithEmailAndPassword,
+    signInWithGoogle,
+  } = useAuth()
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -123,8 +123,8 @@ export default function RegisterComponent() {
     e.preventDefault()
     try {
       if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
-        const user = await signUpWithGoogleSupabase()
-        // Supabase'de ek kullanıcı bilgisi kaydedin veya diğer işlemleri yapın.
+        const user = await signInWithGoogle()
+        // Supabase için ek kullanıcı bilgisi kaydedilmesi gerekiyorsa burada yapabilirsiniz.
       } else {
         let res = await signInWithGoogle(authUser, updateUserData)
         if (res.status === 'success') {

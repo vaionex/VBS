@@ -5,7 +5,7 @@ import { Dialog } from '@headlessui/react'
 import Link from 'next/link'
 import { logoutUser } from '@/firebase/auth'
 import { Button } from '@/components/UI/button'
-import { useFirebaseAuthContext } from '@/contexts/authContext'
+import { useAuth } from '@/hooks/useAuth'
 import { X, AlignJustify } from 'lucide-react'
 import NovuNotificationCenter from '@/components/UI/novu-notification-center'
 
@@ -18,7 +18,7 @@ const navigation = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { authUser } = useFirebaseAuthContext()
+  const { authUser, signOut } = useAuth()
 
   return (
     <header className="bg-gray-900">
@@ -93,7 +93,7 @@ export function Header() {
               </div>
               <Button
                 onClick={() => {
-                  logoutUser()
+                  signOut()
                 }}
               >
                 Logout
@@ -163,7 +163,7 @@ export function Header() {
                 </div>
               )}
               {authUser && (
-                <div>
+                <div className="flex flex-col">
                   {' '}
                   <Button
                     onClick={() => {

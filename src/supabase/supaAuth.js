@@ -2,13 +2,12 @@ import supabase from '@/supabase/app'
 import { useState, useEffect } from 'react'
 
 export const useSupabaseAuth = () => {
-  const [supabaseUser, setSupabaseUser] = useState(null)
+  const [authUser, setAuthUser] = useState(null)
 
   useEffect(() => {
-    // Oturum durumundaki değişiklikleri dinleyen listener.
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        setSupabaseUser(session?.user || null)
+        setAuthUser(session?.user || null)
       },
     )
 
@@ -17,16 +16,13 @@ export const useSupabaseAuth = () => {
     }
   }, [])
 
-  // ... (diğer fonksiyonlarınız)
-
   return {
-    user: supabaseUser,
-    setSupabaseUser,
-    // Diğer fonksiyonlarınızı da burada döndürebilirsiniz.
+    authUser,
+    setAuthUser,
   }
 }
 
-export const signUpWithSupabase = async (
+export const registerWithEmailAndPassword = async (
   email,
   password,
   firstName,
@@ -50,7 +46,7 @@ export const signUpWithSupabase = async (
   return user
 }
 
-export const signUpWithGoogleSupabase = async () => {
+export const signInWithGoogle = async () => {
   const { user, error } = await supabase.auth.signIn({
     provider: 'google',
   })
@@ -59,7 +55,7 @@ export const signUpWithGoogleSupabase = async () => {
   return user
 }
 
-export const signInWithSupabase = async (email, password) => {
+export const signInWithEmail = async (email, password) => {
   const { user, error } = await supabase.auth.signIn({
     email,
     password,
@@ -69,13 +65,9 @@ export const signInWithSupabase = async (email, password) => {
   return user
 }
 
-export const signInWithGoogleSupabase = async () => {
-  const { user, error } = await supabase.auth.signIn({
-    provider: 'google',
-  })
+export const logoutUser = () => supabase.auth.signOut()
 
+export const resetUserPassword = async (email) => {
+  const { error } = await supabase.auth.api.resetPasswordForEmail(email)
   if (error) throw error
-  return user
 }
-
-export const signOut = () => supabase.auth.signOut()

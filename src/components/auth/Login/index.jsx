@@ -3,18 +3,13 @@ import React, { useState } from 'react'
 import { Input } from '@/components/UI/input'
 import { Button } from '@/components/UI/button'
 import { Label } from '@/components/UI/label'
-import { useFirebaseAuthContext } from '@/contexts/authContext'
-import { signInWithGoogle, signInWithEmail } from '@/firebase/auth'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Checkbox } from '@/components/UI/checkbox'
 import { useToast } from '@/components/UI/use-toast'
 import SpinnerComponent from '@/components/Common/Spinner'
-import {
-  signInWithSupabase,
-  signInWithGoogleSupabase,
-} from '@/supabase/supaAuth'
+import { useAuth } from '@/hooks/useAuth'
 
 const loginFields = [
   {
@@ -36,7 +31,13 @@ const loginFields = [
 ]
 
 export default function LoginComponent() {
-  const { authUser, updateUserData } = useFirebaseAuthContext()
+  const {
+    authUser,
+    updateUserData,
+    signInWithGoogle,
+    signInWithEmail,
+    registerWithEmailAndPassword,
+  } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -54,11 +55,7 @@ export default function LoginComponent() {
     try {
       e.preventDefault()
       setIsLoading(true)
-      if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
-        const user = await signInWithSupabase(formData.email, formData.password)
-      } else {
-        await signInWithEmail(formData, isChecked)
-      }
+      await signInWithEmail(formData, isChecked)
       push('/')
       setIsLoading(false)
     } catch (error) {
@@ -96,11 +93,7 @@ export default function LoginComponent() {
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
-    if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
-      const res = await signInWithGoogleSupabase()
-    } else {
-      let res = await signInWithGoogle(authUser, updateUserData)
-    }
+    let res = await signInWithGoogle(authUser, updateUserData)
     if (res.status === 'success') {
       push('/dashboard')
     }

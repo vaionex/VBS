@@ -3,6 +3,7 @@
 import React, { createContext, useContext } from 'react'
 import { useFirebaseAuth } from '@/firebase/auth'
 import { Toaster } from '@/components/UI/toaster'
+import { useSupabaseAuth } from '@/supabase/supaAuth'
 
 export const FirebaseAuthContext = createContext()
 
@@ -14,7 +15,6 @@ export const FirebaseAuthProvider = ({ children }) => {
   return (
     <FirebaseAuthContext.Provider value={firebaseAuth}>
       {children}
-      <Toaster />
     </FirebaseAuthContext.Provider>
   )
 }
@@ -30,11 +30,16 @@ export const SupabaseAuthProvider = ({ children }) => {
 }
 
 export const CombinedAuthProvider = ({ children }) => {
-  if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
-    return <SupabaseAuthProvider>{children}</SupabaseAuthProvider>
-  }
-
-  return <FirebaseAuthProvider>{children}</FirebaseAuthProvider>
+  return (
+    <>
+      {process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase' ? (
+        <SupabaseAuthProvider>{children}</SupabaseAuthProvider>
+      ) : (
+        <FirebaseAuthProvider>{children}</FirebaseAuthProvider>
+      )}
+      <Toaster />
+    </>
+  )
 }
 
 export const useFirebaseAuthContext = () => useContext(FirebaseAuthContext)

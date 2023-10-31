@@ -1,6 +1,6 @@
 'use client'
 
-import { useFirebaseAuthContext } from '@/contexts/authContext'
+import { useAuth } from '@/hooks/useAuth'
 import UpdateEmail from './UpdateEmail'
 import UpdatePassword from './UpdatePassword'
 import UpdateProfile from './UpdateProfile'
@@ -8,7 +8,7 @@ import Image from 'next/image'
 import SpinnerComponent from '@/components/Common/Spinner'
 
 export default function ProfileSetting() {
-  const { authUser, updateUserData, isLoading } = useFirebaseAuthContext()
+  const { authUser, updateUserData, isLoading } = useAuth()
 
   if (!isLoading && authUser) {
     return (

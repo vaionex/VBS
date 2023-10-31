@@ -10,7 +10,8 @@
       "@/assets/*": ["./src/assets/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/utils/*": ["./src/utils/*"],
-      "@/supabase/*": ["./src/supabase/*"]
+      "@/supabase/*": ["./src/supabase/*"],
+      "@/hooks/*": ["./src/hooks/*"]
     }
   }
 }

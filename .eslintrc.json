@@ -20,7 +20,10 @@
         "map": [
           ["@", "./src"],
           ["@/components", "./src/components"],
-          ["@/utils", "./src/utils"]
+          ["@/utils", "./src/utils"],
+          ["@/supabase", "./src/supabase"],
+          ["@/hooks", "./src/hooks"],
+          ["@/firebase", "./src/firebase"]
         ]
       }
     }
