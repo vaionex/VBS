@@ -9,6 +9,10 @@ import { createUserDocument } from '@/utils/createUserCollection'
 import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/UI/use-toast'
+import {
+  signUpWithSupabase,
+  signUpWithGoogleSupabase,
+} from '@/supabase/supaAuth'
 
 const registrationFields = [
   {
@@ -75,13 +79,22 @@ export default function RegisterComponent() {
     const { email, password, firstName, lastName } = formData
 
     try {
-      const formattedUser = await registerWithEmailAndPassword(
-        authUser,
-        updateUserData,
-        { email, password, firstName, lastName },
-      )
+      if (process.env.BACKEND_PLATFORM === 'supabase') {
+        const user = await signUpWithSupabase(
+          email,
+          password,
+          firstName,
+          lastName,
+        )
+      } else {
+        const formattedUser = await registerWithEmailAndPassword(
+          authUser,
+          updateUserData,
+          { email, password, firstName, lastName },
+        )
 
-      await createUserDocument(formattedUser, firstName, lastName)
+        await createUserDocument(formattedUser, firstName, lastName)
+      }
       setFormData({
         firstName: '',
         lastName: '',
@@ -109,20 +122,25 @@ export default function RegisterComponent() {
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
     try {
-      let res = await signInWithGoogle(authUser, updateUserData)
-      if (res.status === 'success') {
-        toast({
-          variant: 'success',
-          title: 'Successfully registered!',
-          description: 'You are now signed in.',
-        })
-        push('/dashboard')
+      if (process.env.BACKEND_PLATFORM === 'supabase') {
+        const user = await signUpWithGoogleSupabase()
+        // Supabase'de ek kullanıcı bilgisi kaydedin veya diğer işlemleri yapın.
       } else {
-        toast({
-          variant: 'destructive',
-          title: 'Uh oh! Something went wrong.',
-          description: res.message,
-        })
+        let res = await signInWithGoogle(authUser, updateUserData)
+        if (res.status === 'success') {
+          toast({
+            variant: 'success',
+            title: 'Successfully registered!',
+            description: 'You are now signed in.',
+          })
+          push('/dashboard')
+        } else {
+          toast({
+            variant: 'destructive',
+            title: 'Uh oh! Something went wrong.',
+            description: res.message,
+          })
+        }
       }
     } catch (error) {
       console.error('Error signing in with Google:', error)

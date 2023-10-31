@@ -11,6 +11,10 @@ import Image from 'next/image'
 import { Checkbox } from '@/components/UI/checkbox'
 import { useToast } from '@/components/UI/use-toast'
 import SpinnerComponent from '@/components/Common/Spinner'
+import {
+  signInWithSupabase,
+  signInWithGoogleSupabase,
+} from '@/supabase/supaAuth'
 
 const loginFields = [
   {
@@ -50,7 +54,11 @@ export default function LoginComponent() {
     try {
       e.preventDefault()
       setIsLoading(true)
-      await signInWithEmail(formData, isChecked)
+      if (process.env.BACKEND_PLATFORM === 'supabase') {
+        const user = await signInWithSupabase(email, password)
+      } else {
+        await signInWithEmail(formData, isChecked)
+      }
       push('/')
       setIsLoading(false)
     } catch (error) {
@@ -63,10 +71,10 @@ export default function LoginComponent() {
           errorMessage = 'Invalid email address.'
           break
         case 'auth/wrong-password':
-          errorMessage = 'Incorrect password.'
+          errorMessage = 'Password or email address is not matching.'
           break
         case 'auth/user-not-found':
-          errorMessage = 'User not found.'
+          errorMessage = 'Password or email address is not matching.'
           break
         case 'auth/network-request-failed':
           errorMessage =
@@ -87,7 +95,11 @@ export default function LoginComponent() {
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
-    let res = await signInWithGoogle(authUser, updateUserData)
+    if (process.env.BACKEND_PLATFORM === 'supabase') {
+      const user = await signInWithGoogleSupabase()
+    } else {
+      let res = await signInWithGoogle(authUser, updateUserData)
+    }
     if (res.status === 'success') {
       push('/dashboard')
     }
