@@ -7,6 +7,7 @@ import { Label } from '@/components/UI/label'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/UI/use-toast'
 import { useAuth } from '@/hooks/useAuth'
+import { createUserDocument } from '@/utils/createUserCollection'
 
 const registrationFields = [
   {
