@@ -8,13 +8,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
 
 export async function POST(req) {
-  let event = req.body
+  let event = req.text()
 
   if (endpointSecret) {
     const signature = req.headers['stripe-signature']
     try {
       event = stripe.webhooks.constructEvent(
-        (await buffer(req)).toString(),
+        await req.text(),
         signature,
         endpointSecret,
       )
