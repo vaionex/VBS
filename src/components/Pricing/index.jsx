@@ -4,7 +4,7 @@ import { useState } from 'react'
 import PricingCard from './PricingCard'
 import { initiateSubscription } from '@/utils/stripe'
 import { useRouter } from 'next/navigation'
-import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
+import { useFirebaseAuthContext } from '@/contexts/authContext'
 import { useFirebaseAuth } from '@/firebase/auth'
 import { useToast } from '@/components/UI/use-toast'
 

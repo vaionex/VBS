@@ -9,7 +9,9 @@
       "@/services/*": ["./src/services/*"],
       "@/assets/*": ["./src/assets/*"],
       "@/lib/*": ["./src/lib/*"],
-      "@/utils/*": ["./src/utils/*"]
+      "@/utils/*": ["./src/utils/*"],
+      "@/supabase/*": ["./src/supabase/*"],
+      "@/hooks/*": ["./src/hooks/*"]
     }
   }
 }

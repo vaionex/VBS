@@ -4,22 +4,23 @@ import { Button } from '@/components/UI/button'
 import { Label } from '@/components/UI/label'
 import { Input } from '@/components/UI/input'
 import { useRouter } from 'next/navigation'
-import { resetUserPassword } from '@/firebase/auth'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useToast } from '@/components/UI/use-toast'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function ForgotPasswordComponent() {
   const { push } = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState('')
   const { toast } = useToast()
+  const { resetPassword } = useAuth()
 
   const handleResetPassword = async (e) => {
     e.preventDefault()
     setIsLoading(true)
     try {
-      await resetUserPassword(email)
+      await resetPassword(email)
       toast({
         title: 'Success',
         description: 'Password reset email sent successfully.',

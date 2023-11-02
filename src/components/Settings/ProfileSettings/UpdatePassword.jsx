@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { updateUserPassword } from '@/firebase/auth'
+import { useAuth } from '@/hooks/useAuth'
 import { KeyRound, Eye, EyeOff } from 'lucide-react'
 import { Input } from '@/components/UI/input'
 import { Button } from '@/components/UI/button'
@@ -9,6 +9,7 @@ import SpinnerComponent from '@/components/Common/Spinner'
 
 const UpdatePassword = ({ authUser }) => {
   const { toast } = useToast()
+  const { updateUserPassword } = useAuth()
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')

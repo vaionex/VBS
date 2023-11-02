@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { UserCircle, Camera } from 'lucide-react'
-import { updateUserDocs, updateCustomerData } from '@/firebase/firestore'
-import { uploadProfileImage } from '@/firebase/storage'
-import { updateUserProfile } from '@/firebase/auth'
+import { useAuth } from '@/hooks/useAuth'
 import { Input } from '@/components/UI/input'
 import { Button } from '@/components/UI/button'
 import { Label } from '@/components/UI/label'
@@ -12,6 +10,12 @@ import Image from 'next/image'
 
 export default function UpdateProfile({ authUser, updateUserData }) {
   const { toast } = useToast()
+  const {
+    updateUserProfile,
+    updateUserDocs,
+    updateCustomerData,
+    uploadProfileImage,
+  } = useAuth()
   const [firstName, setFirstName] = useState(authUser?.firstName || '')
   const [lastName, setLastName] = useState(authUser?.lastName || '')
   const [isLoading, setIsLoading] = useState(false)

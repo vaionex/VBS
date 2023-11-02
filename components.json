@@ -11,6 +11,9 @@
   },
   "aliases": {
     "components": "@/components",
-    "utils": "@/utils/common"
+    "utils": "@/utils/common",
+    "supabase": "@/supabase",
+    "hooks": "@/hooks",
+    "firebase": "@/firebase"
   }
 }

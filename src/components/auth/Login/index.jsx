@@ -3,14 +3,13 @@ import React, { useState } from 'react'
 import { Input } from '@/components/UI/input'
 import { Button } from '@/components/UI/button'
 import { Label } from '@/components/UI/label'
-import { useFirebaseAuthContext } from '@/contexts/firebaseAuthContext'
-import { signInWithGoogle, signInWithEmail } from '@/firebase/auth'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Checkbox } from '@/components/UI/checkbox'
 import { useToast } from '@/components/UI/use-toast'
 import SpinnerComponent from '@/components/Common/Spinner'
+import { useAuth } from '@/hooks/useAuth'
 
 const loginFields = [
   {
@@ -32,7 +31,13 @@ const loginFields = [
 ]
 
 export default function LoginComponent() {
-  const { authUser, updateUserData } = useFirebaseAuthContext()
+  const {
+    authUser,
+    updateUserData,
+    signInWithGoogle,
+    signInWithEmail,
+    registerWithEmailAndPassword,
+  } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -63,10 +68,10 @@ export default function LoginComponent() {
           errorMessage = 'Invalid email address.'
           break
         case 'auth/wrong-password':
-          errorMessage = 'Incorrect password.'
+          errorMessage = 'Password or email address is not matching.'
           break
         case 'auth/user-not-found':
-          errorMessage = 'User not found.'
+          errorMessage = 'Password or email address is not matching.'
           break
         case 'auth/network-request-failed':
           errorMessage =
@@ -82,6 +87,7 @@ export default function LoginComponent() {
         title: 'Uh oh! Something went wrong.',
         description: errorMessage,
       })
+      console.log(errorMessage)
     }
   }
 

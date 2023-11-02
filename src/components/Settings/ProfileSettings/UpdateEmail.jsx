@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { updateEmailAddress } from '@/firebase/auth'
+import { useAuth } from '@/hooks/useAuth'
 import { Input } from '@/components/UI/input'
 import { Button } from '@/components/UI/button'
 import { Label } from '@/components/UI/label'
 import { useToast } from '@/components/UI/use-toast'
 import SpinnerComponent from '@/components/Common/Spinner'
 import { KeyRound, Mail, Eye, EyeOff } from 'lucide-react'
-import { updateUserDocs } from '@/firebase/firestore'
 
 const UpdateEmail = ({ authUser, updateUserData }) => {
   const { toast } = useToast()
@@ -14,6 +13,7 @@ const UpdateEmail = ({ authUser, updateUserData }) => {
   const [password, setPassword] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const { updateEmailAddress, updateUserDocs } = useAuth()
 
   const handleUpdateEmail = async (e) => {
     e.preventDefault()
