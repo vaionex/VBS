@@ -3,11 +3,11 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import Link from 'next/link'
-import { logoutUser } from '@/firebase/auth'
 import { Button } from '@/components/UI/button'
 import { useAuth } from '@/hooks/useAuth'
 import { X, AlignJustify } from 'lucide-react'
 import NovuNotificationCenter from '@/components/UI/novu-notification-center'
+import { useRouter } from 'next/navigation'
 
 const navigation = [
   { name: 'About', href: '/about' },
@@ -18,7 +18,13 @@ const navigation = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { authUser, signOut } = useAuth()
+  const { authUser, logoutUser } = useAuth()
+  const { push } = useRouter()
+
+  const handleLogout = async () => {
+    await logoutUser()
+    push('/')
+  }
 
   return (
     <header className="bg-gray-900">
@@ -91,13 +97,7 @@ export function Header() {
               <div className="flex justify-center items-center px-2">
                 <NovuNotificationCenter authUser={authUser} />
               </div>
-              <Button
-                onClick={() => {
-                  signOut()
-                }}
-              >
-                Logout
-              </Button>
+              <Button onClick={handleLogout}>Logout</Button>
             </div>
           )}
         </div>
@@ -165,13 +165,7 @@ export function Header() {
               {authUser && (
                 <div className="flex flex-col">
                   {' '}
-                  <Button
-                    onClick={() => {
-                      logoutUser()
-                    }}
-                  >
-                    Logout
-                  </Button>
+                  <Button onClick={handleLogout}>Logout</Button>
                   <Link href="/settings/profile">Settings</Link>
                 </div>
               )}

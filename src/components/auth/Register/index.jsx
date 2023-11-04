@@ -81,7 +81,7 @@ export default function RegisterComponent() {
     console.log(process.env.NEXT_PUBLIC_BACKEND_PLATFORM)
     try {
       if (process.env.NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase') {
-        const user = await signUpWithSupabase(
+        const user = await registerWithEmailAndPassword(
           email,
           password,
           firstName,

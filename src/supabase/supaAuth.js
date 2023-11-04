@@ -10,10 +10,6 @@ export const useSupabaseAuth = () => {
         setAuthUser(session?.user || null)
       },
     )
-
-    return () => {
-      authListener.unsubscribe()
-    }
   }, [])
 
   return {
@@ -47,22 +43,39 @@ export const registerWithEmailAndPassword = async (
 }
 
 export const signInWithGoogle = async () => {
-  const { user, error } = await supabase.auth.signIn({
-    provider: 'google',
-  })
+  try {
+    const { user, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
+    })
 
-  if (error) throw error
-  return user
+    if (error) throw error
+    return user
+  } catch (error) {
+    console.error('Error signing in with Google:', error)
+    throw error
+  }
 }
 
-export const signInWithEmail = async (email, password) => {
-  const { user, error } = await supabase.auth.signIn({
-    email,
-    password,
-  })
+export const signInWithEmail = async (formData, rememberMe) => {
+  const { email, password } = formData
 
-  if (error) throw error
-  return user
+  try {
+    const { user, session, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+
+    if (error) {
+      throw error
+    }
+    return user
+  } catch (error) {
+    console.error('Error signing in with email and password:', error)
+    throw error
+  }
 }
 
 export const logoutUser = () => supabase.auth.signOut()
