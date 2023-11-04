@@ -32,14 +32,22 @@ export const registerWithEmailAndPassword = async (
   if (error) throw error
 
   if (user) {
-    const { data, error } = await supabase
-      .from('users')
-      .insert([{ id: user.id, first_name: firstName, last_name: lastName }])
+    const { data, error: insertError } = await supabase.from('users').insert([
+      {
+        user_id: user.id,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+      },
+    ])
 
-    if (error) throw error
+    if (insertError) throw insertError
+    return data
+  } else {
+    throw new Error(
+      'User registration completed, but user object is not available.',
+    )
   }
-
-  return user
 }
 
 export const signInWithGoogle = async () => {
