@@ -48,6 +48,7 @@ VBS incorporates several popular libraries and tools:
 
 - [Next.js](https://nextjs.org/)
 - [Firebase](https://firebase.google.com/)
+- [Supabase](https://supabase.com/)
 - [HubSpot API Client](https://developers.hubspot.com/)
 - [Radix UI](https://radix-ui.com/)
 - [Tailwind CSS](https://tailwindcss.com/docs/utility-first)
@@ -175,6 +176,148 @@ Here's a brief on how the project is structured:
 **Utility Functions**: The lib directory holds all utility functions. The cn helper, for instance, is defined in utils.ts.
 
 **Styles**: The styles directory is home to the global CSS. However, it's essential to note that we predominantly use Tailwind classes for styling and theming, keeping direct CSS to a minimum.
+
+## Supabase Integration
+
+This project is set up to support authentication using two different backend platforms: Firebase and Supabase. The context providers `FirebaseAuthProvider` and `SupabaseAuthProvider` abstract the authentication logic for each service, respectively. A CombinedAuthProvider dynamically selects which provider to use based on an environment variable which you need to add `NEXT_PUBLIC_BACKEND_PLATFORM === 'supabase' if you like to use Supabase. This flexibility enables the project to adapt to different backend requirements without significant code changes. The use of React context ensures that authentication state and logic can be easily accessed throughout the application.
+
+As part of our backend stack, we have introduced Supabase to provide scalable backend services such as authentication, real-time databases, auto-generated APIs, and storage. Below are the steps to integrate and use Supabase in your projects.
+
+### Installation Steps
+
+**1. Set Up Environment Variables:**
+
+Include the following Supabase-related environment variables in your `.env.local` or Vercel project settings:
+
+In the Supabase console, go to the 'Settings' section and click on the 'API' tab. In the 'Project API keys' section, you can find the 'anon public' key and the supabase URL.
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+**2. Supabase Client Initialization:**
+
+Ensure that the Supabase client is initialized in your project. You can find the initialization logic in `supabase/app.js`.
+
+**3. Authentication:**
+
+Use the `supabase/supaAuth.js` hook for handling authentication in your application. This includes functionalities such as: sign in, sign up, logout etc.
+
+**4. Database Schema:**
+
+Set up your database schema as per the SQL script provided, which includes creating tables and row-level security policies. For this project we store users first_name, last_name, email, id(uuid), avatar_url under the "profiles". You can name differently. 
+
+In the Supabase console, select the 'SQL Editor' from the menu on the left side to open the SQL Editor. Click on the 'New query' button to create a new SQL script. Write your own SQL commands or paste an existing script. For example, you might be creating a table for user profiles. after runninf the SQL script, oyu will be able to reach `profiles` table on the Table Editor from the menu on the left side.
+
+Here is an example for sql setup:
+
+```
+-- Supabase AI is experimental and may produce incorrect answers
+-- Always verify the output before executing
+
+-- Create a table for public profiles
+create table profiles (
+    id uuid references auth.users on delete cascade not null primary key,
+    updated_at timestamp with time zone,
+    email text unique,
+    first_name text,
+    last_name text,
+    avatar_url text
+  );
+-- Set up Row Level Security (RLS)
+-- See https://supabase.com/docs/guides/auth/row-level-security for more details.
+alter table profiles enable row level security;
+
+create policy "Public profiles are viewable by everyone." on profiles for
+select
+  using (true);
+
+create policy "Users can insert their own profile." on profiles for insert
+with
+  check (auth.uid () = id);
+
+create policy "Users can update own profile." on profiles
+for update
+  using (auth.uid () = id);
+
+-- This trigger automatically creates a profile entry when a new user signs up via Supabase Auth.
+-- See https://supabase.com/docs/guides/auth/managing-user-data#using-triggers for more details.
+create function public.handle_new_user () returns trigger as $$
+begin
+  insert into public.profiles (id, first_name, last_name, email, avatar_url)
+  values (new.id, new.raw_user_meta_data->>'first_name', new.raw_user_meta_data->>'last_name', new.raw_user_meta_data->>'email', new.raw_user_meta_data->>'avatar_url');
+  return new;
+end;
+$$ language plpgsql security definer;
+
+create trigger on_auth_user_created
+after insert on auth.users for each row
+execute procedure public.handle_new_user ();
+
+-- Set up Storage!
+insert into
+  storage.buckets (id, name)
+values
+  ('avatars', 'avatars');
+
+-- Set up access controls for storage.
+-- See https://supabase.com/docs/guides/storage#policy-examples for more details.
+create policy "Avatar images are publicly accessible." on storage.objects for
+select
+  using (bucket_id = 'avatars');
+
+create policy "Anyone can upload an avatar." on storage.objects for insert
+with
+  check (bucket_id = 'avatars');
+```
+
+**5. Storage:**
+
+Initialize the storage client and set up access policies as per your project requirements. For user avatars, we have already set up a bucket named `avatars`.
+
+### Using Supabase in Components
+
+When integrating Supabase for authentication within components, developers can utilize the useAuth hook to access authentication functionalities. If needed, the SupabaseAuthContext can also be directly imported from the authContext, allowing for a more granular control and access to the Supabase auth state and functions. This flexibility ensures that components can interact with the authentication layer in a way that best fits their individual requirements.
+
+
+```javascript
+'use client'
+import { useAuth } from '@/hooks/useAuth'
+
+export default function LoginComponent() {
+  const { authUser, updateUserData, signInWithGoogle, signInWithEmail } =
+    useAuth()
+
+  const handleEmailSignIn = async (e) => {
+
+    await signInWithEmailSupabase(formData, isChecked)
+
+  }
+}
+```
+
+If you wanted to integrate Supabase directly, you could replace useAuth with useSupabaseAuthContext to access Supabase-specific authentication functions. This would involve pulling in the context created earlier and calling methods like signInWithGoogleSupabase or signInWithEmailSupabase instead of their Firebase equivalents.
+
+You could use:
+
+```javascript
+'use client'
+import { useSupabaseAuthContext } from '@/context/authContext' // Import the Supabase auth context
+
+export default function LoginComponent() {
+  const { signInWithGoogle: signInWithGoogleSupabase, signInWithEmail: signInWithEmailSupabase } =
+    useSupabaseAuthContext() // Use Supabase auth context instead of useAuth
+  // ... 
+
+  const handleEmailSignIn = async (e) => {
+    // ... handle email sign in with Supabase
+    await signInWithEmailSupabase(formData, isChecked)
+    // ... 
+  }
+}
+```
+
 
 ## HubSpot Integration
 
