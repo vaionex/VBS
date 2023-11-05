@@ -10,10 +10,6 @@ export const useSupabaseAuth = () => {
         setAuthUser(session?.user || null)
       },
     )
-
-    return () => {
-      authListener.unsubscribe()
-    }
   }, [])
 
   return {
@@ -36,33 +32,58 @@ export const registerWithEmailAndPassword = async (
   if (error) throw error
 
   if (user) {
-    const { data, error } = await supabase
-      .from('users')
-      .insert([{ id: user.id, first_name: firstName, last_name: lastName }])
+    const { data, error: insertError } = await supabase.from('users').insert([
+      {
+        user_id: user.id,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+      },
+    ])
 
-    if (error) throw error
+    if (insertError) throw insertError
+    return data
+  } else {
+    throw new Error(
+      'User registration completed, but user object is not available.',
+    )
   }
-
-  return user
 }
 
 export const signInWithGoogle = async () => {
-  const { user, error } = await supabase.auth.signIn({
-    provider: 'google',
-  })
+  try {
+    const { user, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
+    })
 
-  if (error) throw error
-  return user
+    if (error) throw error
+    return user
+  } catch (error) {
+    console.error('Error signing in with Google:', error)
+    throw error
+  }
 }
 
-export const signInWithEmail = async (email, password) => {
-  const { user, error } = await supabase.auth.signIn({
-    email,
-    password,
-  })
+export const signInWithEmail = async (formData, rememberMe) => {
+  const { email, password } = formData
 
-  if (error) throw error
-  return user
+  try {
+    const { user, session, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+
+    if (error) {
+      throw error
+    }
+    return user
+  } catch (error) {
+    console.error('Error signing in with email and password:', error)
+    throw error
+  }
 }
 
 export const logoutUser = () => supabase.auth.signOut()

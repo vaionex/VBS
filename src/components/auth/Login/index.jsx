@@ -31,13 +31,8 @@ const loginFields = [
 ]
 
 export default function LoginComponent() {
-  const {
-    authUser,
-    updateUserData,
-    signInWithGoogle,
-    signInWithEmail,
-    registerWithEmailAndPassword,
-  } = useAuth()
+  const { authUser, updateUserData, signInWithGoogle, signInWithEmail } =
+    useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
