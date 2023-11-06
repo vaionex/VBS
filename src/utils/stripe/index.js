@@ -11,7 +11,7 @@ import {
 import { firestore } from '@/firebase/firestore'
 import { auth } from '@/firebase/auth'
 import { initializeStripe } from '../initializeStripe'
-
+import axios from 'axios'
 export const getPricingPlans = async () => {
   try {
     // To get plans documents
@@ -159,4 +159,39 @@ export const getCurrentUserSubscriptions = async (uid) => {
     subscriptionDoc.product = productPlanSnapshot.data()
   }
   return subscriptionDoc
+}
+export const getSubscriptionByProductId = async (userId, productId) => {
+  try {
+    const customerRef = doc(firestore, 'customers', userId)
+
+    const subscriptionsRef = collection(customerRef, 'subscriptions')
+
+    const subscriptionsQuery = query(
+      subscriptionsRef,
+      where('product', '==', doc(firestore, 'products', productId)),
+    )
+
+    return await getDocs(subscriptionsQuery)
+      .then((docData) => {
+        const newDocs = []
+        docData.forEach((doc) => {
+          newDocs.push({ id: doc.id, ...doc.data() })
+        })
+        return newDocs
+      })
+      .catch(() => false)
+  } catch (error) {
+    console.error('Error cancelling subscription:', error)
+    return false
+  }
+}
+export const cancelSubscription = async (subscriptionId) => {
+  try {
+    const res = await axios.post('/api/stripe', { subscriptionId })
+    console.log('res ** ', res)
+    return res
+  } catch (err) {
+    console.log(err)
+    throw err // Throw the error to be caught by the caller
+  }
 }
