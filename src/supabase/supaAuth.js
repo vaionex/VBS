@@ -24,25 +24,32 @@ export const registerWithEmailAndPassword = async (
   firstName,
   lastName,
 ) => {
-  const { user, error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
   })
 
-  if (error) throw error
+  if (error) {
+    throw error
+  }
+  const user = data.user
 
   if (user) {
-    const { data, error: insertError } = await supabase.from('users').insert([
-      {
-        user_id: user.id,
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-      },
-    ])
+    const { data: profileData, error: insertError } = await supabase
+      .from('profiles')
+      .insert([
+        {
+          id: user.id,
+          email: email,
+          first_name: firstName,
+          last_name: lastName,
+        },
+      ])
+    if (insertError) {
+      throw insertError
+    }
 
-    if (insertError) throw insertError
-    return data
+    return profileData
   } else {
     throw new Error(
       'User registration completed, but user object is not available.',
