@@ -23,7 +23,7 @@ import {
 import { firebase } from '@/firebase/app'
 import { createUserDocument } from '@/utils/createUserCollection'
 import { getCurrentUserData } from '@/firebase/firestore'
-import { getCurrentUserSubscriptions } from '@/utils/stripe'
+import { getUserCurrentPlan } from '@/utils/stripe'
 
 const formatAuthUser = (user) => ({
   uid: user.uid,
@@ -48,7 +48,7 @@ export const useFirebaseAuth = () => {
 
     setIsLoading(true)
     let userData = await getCurrentUserData(authState.uid)
-    let userSubscription = await getCurrentUserSubscriptions(authState.uid)
+    let userSubscription = await getUserCurrentPlan(authState.uid)
     const formattedUser = formatAuthUser({
       ...authState,
       ...userData,

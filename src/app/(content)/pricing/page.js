@@ -1,7 +1,8 @@
+import React from 'react'
 import PricingComponent from '@/components/Pricing'
-import { getPricingPlans } from '@/utils/stripe'
+import { getProductsWithPlans } from '@/utils/stripe'
 
 export default async function Products() {
-  const plans = await getPricingPlans()
+  const plans = await getProductsWithPlans()
   return <PricingComponent plans={plans} />
 }

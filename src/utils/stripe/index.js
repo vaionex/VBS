@@ -1,162 +1,92 @@
-import {
-  collection,
-  doc,
-  where,
-  query,
-  addDoc,
-  onSnapshot,
-  getDocs,
-  getDoc,
-} from 'firebase/firestore'
-import { firestore } from '@/firebase/firestore'
-import { auth } from '@/firebase/auth'
-import { initializeStripe } from '../initializeStripe'
+import stripe from '../initializeStripe'
 
-export const getPricingPlans = async () => {
+import { loadStripe } from '@stripe/stripe-js'
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+
+export const getProductsWithPlans = async () => {
   try {
-    // To get plans documents
-    const collectionRef = collection(firestore, 'products')
-    const plansDocs = await getDocs(collectionRef)
+    const productIds = [
+      `${process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID}`,
+      `${process.env.NEXT_PUBLIC_STRIPE_PLUS_PRODUCT_ID}`,
+    ]
+
     const plans = []
-    plansDocs.forEach((doc) => {
-      plans.push({ ...doc.data(), id: doc.id })
-    })
 
-    // Free price plan collection ref
-    const freePlanDocumentRef = doc(
-      firestore,
-      'products',
-      process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID,
-    )
-    const freePlanSubCollectionRef = collection(freePlanDocumentRef, 'prices')
+    for (const productId of productIds) {
+      const product = await stripe.products.retrieve(productId)
+      const prices = await stripe.prices.list({ product: productId })
 
-    // Pro price plan collection ref
-    const proPlanDocumentRef = doc(
-      firestore,
-      'products',
-      process.env.NEXT_PUBLIC_STRIPE_PLUS_PRODUCT_ID,
-    )
-    const proPlanSubCollectionRef = collection(proPlanDocumentRef, 'prices')
+      const plan = {
+        ...product,
+        prices: prices.data.map((price) => ({ ...price })),
+      }
 
-    // To fetch prices
-    const [freePricesSnapshot, proPricesSnapshot] = await Promise.all([
-      getDocs(freePlanSubCollectionRef),
-      getDocs(proPlanSubCollectionRef),
-    ])
+      plans.push(plan)
+    }
 
-    const freePlansData = freePricesSnapshot.docs.map((price) => ({
-      id: price.id,
-      ...price.data(),
-    }))
-    const proPlansData = proPricesSnapshot.docs.map((price) => ({
-      id: price.id,
-      ...price.data(),
-    }))
-    const prices = [freePlansData, proPlansData]
-    return plans.map((plan, index) => ({
-      ...plan,
-      prices: prices[index],
-    }))
+    return plans
   } catch (error) {
-    console.error('Error retrieving pricing plans:', error)
+    console.error('Error retrieving products and plans:', error)
     throw error
   }
 }
 
-export const initiateSubscription = async (planProductId, errorHandle) => {
-  const checkoutSessionData = {
-    price: planProductId,
-    success_url: window.location.origin,
-    cancel_url: window.location.origin,
-  }
-
+export const initiateSubscription = async (priceId) => {
+  const stripe = await stripePromise
   try {
-    const docRef = await addDoc(
-      collection(
-        firestore,
-        'customers',
-        auth.currentUser.uid,
-        'checkout_sessions',
-      ),
-      checkoutSessionData,
-    )
-    onSnapshot(docRef, async (snap) => {
-      const { error, url, sessionId } = snap.data()
-      if (sessionId) {
-        // We have a session, let's redirect to Checkout
-        // Init Stripe
-        const stripe = await initializeStripe()
-        stripe.redirectToCheckout({ sessionId })
-      }
-      if (error) {
-        console.error('stripe error occured', error)
-        // Handle the error using the provided errorHandle function or throw an error
-        errorHandle(error?.message)
-      }
-      if (url) {
-        // We have a Stripe Checkout URL, let's redirect.
-        window.location.assign(url)
-      }
+    // Checkout oturumu oluştur
+    const response = await fetch('/api/stripe/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ priceId }),
     })
+
+    const session = await response.json()
+
+    // Stripe Checkout sayfasına yönlendir
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    })
+
+    if (result.error) {
+      alert(result.error.message)
+    }
   } catch (error) {
     console.error('Error initiating subscription:', error)
-    throw error
+    alert('Subscription initiation failed:', error.message)
   }
 }
 
-export const getCurrentUserSubscriptions = async (uid) => {
-  const customerRef = doc(firestore, 'customers', uid)
-  const subscriptionsRef = collection(customerRef, 'subscriptions')
+// export const initiateSubscription = async (planProductId, errorHandle) => {
+//   try {
+//     const checkoutSessionData = {
+//       price: planProductId,
+//       success_url: window.location.origin,
+//       cancel_url: window.location.origin,
+//     }
+//   } catch (error) {
+//     console.error('Error initiating subscription:', error)
+//     throw error
+//   }
+// }
 
-  const subscriptionsQuery = query(
-    subscriptionsRef,
-    where('status', 'in', ['trialing', 'active']),
-  )
+export const getUserCurrentPlan = async (customerId) => {
+  try {
+    const subscriptions = await stripe.subscriptions.list({
+      customer: customerId,
+      status: 'active',
+    })
 
-  const [subscriptionSnapshot, customerSnapshot] = await Promise.all([
-    getDocs(subscriptionsQuery),
-    getDoc(customerRef),
-  ])
-
-  const subscriptionDoc = {
-    uploadCount:
-      customerSnapshot.exists() && customerSnapshot.data()?.uploadCount
-        ? customerSnapshot.data().uploadCount
-        : 0,
-  }
-
-  if (!subscriptionSnapshot.empty) {
-    const subscriptionData = subscriptionSnapshot.docs[0].data()
-
-    const pricePlanRef = subscriptionData.price
-    const pricePlanSnapshot = await getDoc(pricePlanRef)
-
-    const productPlanRef = subscriptionData.product
-    const productPlanSnapshot = await getDoc(productPlanRef)
-
-    subscriptionDoc.pricePlan = pricePlanSnapshot.data()
-    subscriptionDoc.product = productPlanSnapshot.data()
-    subscriptionDoc.priceId = subscriptionData.price.path
-  } else {
-    //free plan
-    const pricePlanRef = doc(
-      firestore,
-      'products',
-      process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID,
-      'prices',
-      process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_PRICE_ID,
+    const currentPlans = subscriptions.data.flatMap((subscription) =>
+      subscription.items.data.map((item) => item.plan),
     )
-    const pricePlanSnapshot = await getDoc(pricePlanRef)
 
-    const productPlanRef = doc(
-      firestore,
-      'products',
-      process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID,
-    )
-    const productPlanSnapshot = await getDoc(productPlanRef)
-
-    subscriptionDoc.pricePlan = pricePlanSnapshot.data()
-    subscriptionDoc.product = productPlanSnapshot.data()
+    return currentPlans
+  } catch (error) {
+    console.error('Error fetching user current plan:', error)
+    throw error
   }
-  return subscriptionDoc
 }
