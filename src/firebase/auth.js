@@ -79,9 +79,15 @@ export const useFirebaseAuth = () => {
   }
 }
 
-export const auth = getAuth(firebase)
+let auth
+if (firebase) {
+  auth = getAuth(firebase)
+}
+
+export { auth }
 
 export const signInWithGoogle = async (authUser, updateUserData) => {
+  if (!auth) return
   const provider = new GoogleAuthProvider()
   try {
     let res
