@@ -34,6 +34,12 @@ const formatAuthUser = (user) => ({
   lastName: user.lastName,
   userSubscription: user?.userSubscription ? user.userSubscription : null,
 })
+let auth
+if (firebase) {
+  auth = getAuth(firebase)
+}
+
+export { auth }
 
 export const useFirebaseAuth = () => {
   const [authUser, setAuthUser] = useState(null)
@@ -60,9 +66,12 @@ export const useFirebaseAuth = () => {
 
   // listen for Firebase state change
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, authStateChanged)
+    let unsubscribe = () => {}
+    if (auth) {
+      unsubscribe = onAuthStateChanged(auth, authStateChanged)
+    }
     return () => unsubscribe()
-  }, [])
+  }, [auth])
 
   const updateUserData = async (newCustomData) => {
     setAuthUser((prev) => ({
@@ -78,13 +87,6 @@ export const useFirebaseAuth = () => {
     updateUserData,
   }
 }
-
-let auth
-if (firebase) {
-  auth = getAuth(firebase)
-}
-
-export { auth }
 
 export const signInWithGoogle = async (authUser, updateUserData) => {
   if (!auth) return

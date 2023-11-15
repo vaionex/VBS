@@ -5,6 +5,9 @@ import { loadStripe } from '@stripe/stripe-js'
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export const getProductsWithPlans = async () => {
+  if (process.env.NEXT_PUBLIC_PAYMENT_PLATFORM !== 'stripe') {
+    return getPlaceholderPlans()
+  }
   try {
     const productIds = [
       `${process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID}`,
@@ -32,10 +35,84 @@ export const getProductsWithPlans = async () => {
   }
 }
 
+const getPlaceholderPlans = () => {
+  const placeholderPlans = [
+    {
+      id: 'placeholder_free',
+      object: 'product',
+      active: true,
+      attributes: [],
+      created: Date.now() / 1000,
+      default_price: 'placeholder_price_free',
+      description: null,
+      features: [],
+      images: [],
+      livemode: false,
+      metadata: {
+        description: 'Free',
+        features: "['Basic features for normal usage']",
+        title: 'Basic',
+        upsell_discount: '0',
+      },
+      name: 'VBS_free',
+      type: 'service',
+      prices: [
+        {
+          id: 'placeholder_price_free',
+          object: 'price',
+          unit_amount: 0,
+          currency: 'usd',
+          interval: 'month',
+          recurring: { interval: 'month' },
+        },
+      ],
+    },
+    {
+      id: 'placeholder_plus',
+      object: 'product',
+      active: true,
+      attributes: [],
+      created: Date.now() / 1000,
+      default_price: 'placeholder_price_plus',
+      description: null,
+      features: [],
+      images: [],
+      livemode: false,
+      metadata: {
+        description: 'Plus',
+        features: "['Advance features']",
+        title: 'Plus Plan',
+        upsell_discount: '60',
+      },
+      name: 'VBS_plus',
+      type: 'service',
+      prices: [
+        {
+          id: 'placeholder_price_plus_monthly',
+          object: 'price',
+          unit_amount: 3000,
+          currency: 'usd',
+          interval: 'month',
+          recurring: { interval: 'month' },
+        },
+        {
+          id: 'placeholder_price_plus_yearly',
+          object: 'price',
+          unit_amount: 30000,
+          currency: 'usd',
+          interval: 'year',
+          recurring: { interval: 'year' },
+        },
+      ],
+    },
+  ]
+
+  return placeholderPlans
+}
+
 export const initiateSubscription = async (priceId) => {
   const stripe = await stripePromise
   try {
-    // Checkout oturumu oluştur
     const response = await fetch('/api/stripe/checkout', {
       method: 'POST',
       headers: {
@@ -46,7 +123,6 @@ export const initiateSubscription = async (priceId) => {
 
     const session = await response.json()
 
-    // Stripe Checkout sayfasına yönlendir
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
     })
