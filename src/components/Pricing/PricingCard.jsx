@@ -89,8 +89,7 @@ export default function PricingCard({
         onClick={() => generateRedirectLink(id, currentPrice?.id)}
         variant={selected ? 'solid' : 'outline'}
         color={selected ? 'white' : 'black'}
-        textSize="text-base"
-        className="mt-8 ring-gray-300 text-black bg-gradient-to-br from-white to-white rounded-full focus-visible:bg-white"
+        className="mt-8 ring-gray-300 text-black bg-gradient-to-br from-white to-white rounded-full focus-visible:bg-white text-base"
         disabled={
           currentPlan === process.env.NEXT_PUBLIC_STRIPE_FREE_PRODUCT_ID
         }
@@ -117,7 +116,7 @@ export default function PricingCard({
         >
           FEATURES
         </p>
-        {stripe_metadata_features.map((plan, index) => (
+        {stripe_metadata_features?.map((plan, index) => (
           <li
             key={`plan_${plan.feature}_${index}`}
             className="flex items-center"

@@ -23,7 +23,7 @@ import {
 import { firebase } from '@/firebase/app'
 import { createUserDocument } from '@/utils/createUserCollection'
 import { getCurrentUserData } from '@/firebase/firestore'
-import { getCurrentUserSubscriptions } from '@/utils/stripe'
+import { getUserCurrentPlan } from '@/utils/stripe'
 
 const formatAuthUser = (user) => ({
   uid: user.uid,
@@ -34,6 +34,12 @@ const formatAuthUser = (user) => ({
   lastName: user.lastName,
   userSubscription: user?.userSubscription ? user.userSubscription : null,
 })
+let auth
+if (firebase) {
+  auth = getAuth(firebase)
+}
+
+export { auth }
 
 export const useFirebaseAuth = () => {
   const [authUser, setAuthUser] = useState(null)
@@ -48,7 +54,7 @@ export const useFirebaseAuth = () => {
 
     setIsLoading(true)
     let userData = await getCurrentUserData(authState.uid)
-    let userSubscription = await getCurrentUserSubscriptions(authState.uid)
+    let userSubscription = await getUserCurrentPlan(authState.uid)
     const formattedUser = formatAuthUser({
       ...authState,
       ...userData,
@@ -60,9 +66,12 @@ export const useFirebaseAuth = () => {
 
   // listen for Firebase state change
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, authStateChanged)
+    let unsubscribe = () => {}
+    if (auth) {
+      unsubscribe = onAuthStateChanged(auth, authStateChanged)
+    }
     return () => unsubscribe()
-  }, [])
+  }, [auth])
 
   const updateUserData = async (newCustomData) => {
     setAuthUser((prev) => ({
@@ -79,9 +88,8 @@ export const useFirebaseAuth = () => {
   }
 }
 
-export const auth = getAuth(firebase)
-
 export const signInWithGoogle = async (authUser, updateUserData) => {
+  if (!auth) return
   const provider = new GoogleAuthProvider()
   try {
     let res

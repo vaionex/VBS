@@ -1,8 +1,12 @@
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-
 import { firebase } from './app'
 
-export const storage = getStorage(firebase)
+let storage
+if (firebase) {
+  storage = getStorage(firebase)
+}
+
+export { storage }
 
 export const uploadProfileImage = async (userId, file) => {
   try {

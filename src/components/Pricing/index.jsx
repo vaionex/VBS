@@ -4,8 +4,7 @@ import { useState } from 'react'
 import PricingCard from './PricingCard'
 import { initiateSubscription } from '@/utils/stripe'
 import { useRouter } from 'next/navigation'
-import { useFirebaseAuthContext } from '@/contexts/authContext'
-import { useFirebaseAuth } from '@/firebase/auth'
+import { useAuth } from '@/hooks/useAuth'
 import { useToast } from '@/components/UI/use-toast'
 
 const EMAIL_SUPPORT = 'Email support'
@@ -31,15 +30,14 @@ const comingSoonFeatures = [
 ]
 
 export default function Products({ plans }) {
-  const { authUser } = useFirebaseAuthContext()
-  const firebaseAuth = useFirebaseAuth()
+  const { authUser } = useAuth()
   const { push } = useRouter()
-
   const [activeTab, setActiveTab] = useState('month')
   const [currentPlan, setCurrentPlan] = useState(plans[0]?.id)
+  // const [currentPlan, setCurrentPlan] = useState('')
   const [loadingStripeCheckout, setloadingStripeCheckout] = useState(false)
-  const selectedPlan =
-    firebaseAuth?.authUser?.userSubscription?.pricePlan?.product
+  const selectedPlan = ''
+
   const onTabChange = (tab) => setActiveTab(tab)
   const { toast } = useToast()
   const generateRedirectLink = async (id, priceId) => {
@@ -72,13 +70,15 @@ export default function Products({ plans }) {
 
   const mappedFeatures = plans.map((plan, index) => {
     const matchedComingSoonFeatures = comingSoonFeatures[index]
-    return JSON.parse(plan.stripe_metadata_features?.replace(/'/g, '"')).map(
-      (feature) =>
+    return plan.stripe_metadata_features
+      ?.replace(/'/g, '"')
+      .map((feature) =>
         matchedComingSoonFeatures?.includes(feature)
           ? { feature: feature, status: 'Coming Soon' }
           : { feature: feature, status: 'Available' },
-    )
+      )
   })
+
   const mappedPlans = plans.map((plan, index) => ({
     ...plan,
     stripe_metadata_features: mappedFeatures[index],
